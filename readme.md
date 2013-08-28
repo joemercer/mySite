@@ -1,11 +1,4 @@
-<<<<<<< HEAD
-mySite2
-=======
 
-My personal website : )
-=======
-### mySite2
+# Blog
 
-My personal website : )
-
-test2
+The default [wintersmith](https://github.com/jnordberg/wintersmith) template

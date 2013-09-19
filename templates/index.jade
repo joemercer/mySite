@@ -11,6 +11,10 @@ block content
           a(href=article.url)= article.title
       section.content
         !{ typogr(article.intro).typogrify() }
+        p HELLO !{article.hasMore}
+        p HELLO2 !{article}
+        p HELLO3
+
         if article.hasMore
           p.more
             a(href=article.url) more

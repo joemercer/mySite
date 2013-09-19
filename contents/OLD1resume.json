@@ -1,0 +1,136 @@
+{
+	"template": "resume.jade",
+  "title": "Joe Mercer - Résumé",
+
+  "meta": {
+  	"lastDateUpdated": "2013-04-01"
+  },
+  "contact": {
+		"name": "Joe Mercer",
+    "email": "jmercer@uwaterloo.ca",
+		"twitter": "@jomrcr"
+  },
+  "summary": {
+    "text": "Summary",
+    "minNumEntries": 1,
+    "maxNumEntries": 2,
+    "entries": [
+    {
+      "text": "Experienced Backbone.js client-side programmer and ASP.NET server programmer",
+      "lastDateUpdated": "2013-09-03",
+      "dateAdded": "2013-09-03",
+      "importance": 200,
+      "tags": ["default", "javascript", "front-end"]
+    },
+    {
+      "text": "Self-motivated, self-starter comfortable working independently or as part of a team; accustomed to taking initiative and managing multiple projects  simultaneously",
+      "lastDateUpdated": "2013-09-03",
+      "dateAdded": "2013-09-03",
+      "importance": 100,
+      "tags": ["default", "personality"]
+    }
+  ]},
+  "skills": {
+    "text": "Technical Skills",
+    "entries": [
+      {
+        "text": "Languages",
+        "entries": ["JavaScript", "C#", "LINQ", "HTML", "CSS"]
+      },
+      {
+        "text": "Frameworks",
+        "entries": ["Backbone", "AngularJS", "Meteor"]
+      }
+    ]
+  },
+  "education": {
+    "text": "Education",
+    "school": "University of Waterloo",
+    "location": "Waterloo, ON",
+    "degree": "Candidate for Bachelor of Mathematics",
+    "program": "Honours Mathematics",
+    "startDate": "September, 2011",
+    "endDate": "present"
+  },
+  "workExperience": {
+    "text": "Experience",
+    "entries": [{
+  		"position": "Front End Engineering Intern",
+      "company": "Bazaarvoice",
+      "location": "Austin, TX",
+      "startDate": "January, 2013",
+      "endDate": "May, 2013",
+      "summary": [
+        "Rewrote UI functionality to meet W3C web accessibility requirements",
+        "Developed features: tag filter, review attribution statement, and others"
+      ]
+		},
+		{
+			"position": "Undergraduate Research Assistant",
+      "company": "University of Waterloo",
+      "location": "Waterloo, ON",
+      "startDate": "September, 2012",
+      "endDate": "January, 2013",
+      "summary": [
+        "Conducted research in the implementation and evaluation of recommendation systems",
+        "Collected and performed QFD (viability) analysis on market research for a music recommendation service"
+      ]
+		}
+  ]},
+  "projects": {
+    "text": "Projects",
+    "entries": [
+      {
+        "name": "Sweet Like The Jam",
+        "startDate": "March, 2012",
+        "endDate": "current",
+        "tags": [],
+        "importance": 100,
+        "summary": [
+          "Developed a static AngularJS application that plays songs recommended by LastFM in an in-page Youtube player",
+          "Hosted the application using Amazon S3"
+        ]
+      },
+      {
+        "name": "Tag Trees",
+        "startDate": "September, 2012",
+        "tags": [],
+        "importance": 100,
+        "summary": [
+          "Developed a C# program that defined hierarchical relationships between song tags by arranging them in a custom \"tree\" structure"
+        ]
+      }
+    ]
+  },
+  "awards": {
+    "text": "Awards",
+    "entries": [
+      {
+        "name": "University of Waterloo President's Scholarship of Distinction",
+        "organization": "University of Waterloo",
+        "location": "Waterloo, ON",
+        "date": "2011",
+        "tags": [],
+        "importance": 100,
+        "summary": [
+          "awarded to students with a minimum 95% entrance average"
+        ]
+      }
+    ]
+  },
+  "technologies": [
+    {
+      "text": "JavaScript",
+      "type": "Language",
+      "tags": ["programming", "languages", "front-end"],
+      "importance": 100,
+      "monthsExperience": 8
+    },
+    {
+      "text": "C#",
+      "type": "Language",
+      "tags": ["programming", "languages"],
+      "monthsExperience": 8
+    }
+  ]
+}

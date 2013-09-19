@@ -1,0 +1,22 @@
+extends layout
+
+block title
+  | #{page.title}
+
+block header
+
+block content
+  - var contact = page.metadata.contact
+  if (env.helpers.filter(contact.entries))
+    div#contact
+      h1 #{contact.fixed.name}
+      ul
+        each handle in contact.entries
+          li #{handle.text}
+
+  - var summary = page.metadata.summary
+  if (env.helpers.filter(summary.entries, summary.minEntries, summary.maxEntries))
+    div#summary
+      h3 #{summary.text}
+
+block footer

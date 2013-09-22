@@ -9,7 +9,26 @@
   "contact": {
     "text": "Contact",
     "fixed": {
-      "name": "Joe Mercer"
+      "name": "Joe Mercer",
+      "tagline": "for you, for the world",
+      "description": "I study Math at the University of Waterloo, I write code for companies (Bazaarvoice, Tagged) and sometimes for myself also. Currently I live in San Francisco, but my whereabouts seem prone to changing frequently",
+
+      "phoneText": "908.989.0807",
+
+      "emailText": "jomrcr@gmail.com",
+      "emailURL": "mailto:jomrcr@gmail.com",
+
+      "twitterText": "@jomrcr",
+      "twitterHandle": "@jomrcr",
+      "twitterURL": "https://twitter.com/jomrcr",
+
+      "gitHubText": "GitHub",
+      "gitHubURL": "https://github.com/joemercer",
+
+      "uWaterloo": {
+        "id": "20408328",
+        "program": "3A Honours Mathematics"
+      }
     },
 
     "minEntries": 1,
@@ -61,19 +80,19 @@
     "text": "Summary",
     "dateAdded": "2013-09-03",
     "lastDateUpdated": "2013-09-03",
-    "tags": ["default"],
-    "importance": 1000,
     "minEntries": 1,
     "maxEntries": 5,
     "entries": [
       {
-        "text": "Experienced Backbone.js client-side programmer and ASP.NET server programmer",
+        "word": "Experienced",
+        "text": "Experienced <u>Backbone.js</u> client-side programmer and ASP.NET server programmer",
         "dateAdded": "2013-09-03",
         "lastDateUpdated": "2013-09-03",
         "tags": ["default", "javascript", "front-end"],
         "importance": 200
       },
       {
+        "word": "Awesome",
         "text": "Self-motivated, self-starter comfortable working independently or as part of a team; accustomed to taking initiative and managing multiple projects simultaneously",
         "lastDateUpdated": "2013-09-03",
         "dateAdded": "2013-09-03",
@@ -81,6 +100,7 @@
         "importance": 100
       },
       {
+        "word": "Fearless",
         "text": "Fearless problem solver willing to tackle intimidating problems by exploring new and creative solutions; highly adaptable in quick-changing technical environments",
         "lastDateUpdated": "2013-09-03",
         "dateAdded": "2013-09-03",
@@ -93,8 +113,6 @@
     "text": "Education",
     "dateAdded": "2013-09-03",
     "lastDateUpdated": "2013-09-03",
-    "tags": ["default"],
-    "importance": 800,
     "minEntries": 1,
     "maxEntries": 2,
     "entries": [
@@ -105,11 +123,12 @@
         "tags": ["default", "academic"],
         "importance": 200,
         "school": "University of Waterloo",
+        "schoolURL": "https://uwaterloo.ca/",
         "location": "Waterloo, ON",
         "degree": "Candidate for Bachelor of Mathematics",
-        "program": "Honours Mathematics",
+        "program": "Computer Science",
         "startDate": "September, 2011",
-        "endDate": "present",
+        "endDate": "Present",
         "entries": []
       }
     ]
@@ -118,11 +137,47 @@
     "text": "Experience",
     "dateAdded": "2013-09-03",
     "lastDateUpdated": "2013-09-03",
-    "tags": ["default"],
-    "importance": 800,
     "minEntries": 1,
     "maxEntries": 4,
     "entries": [
+      {
+        "text": "Tagged",
+        "dateAdded": "2013-09-03",
+        "lastDateUpdated": "2013-09-03",
+        "tags": ["default", "javascript", "front-end"],
+        "importance": 200,
+        "minEntries": 2,
+        "maxEntries": 5,
+        "position": "Software Engineer",
+        "company": "Tagged",
+        "companyURL": "http://about.tagged.com/",
+        "location": "San Francisco, CA",
+        "startDate": "September, 2013",
+        "endDate": "December, 2013",
+        "entries": [
+          {
+            "text": "Rewrote UI functionality to meet W3C web accessibility requirements",
+            "dateAdded": "2013-09-03",
+            "lastDateUpdated": "2013-09-03",
+            "tags": ["default", "javascript", "front-end"],
+            "importance": 200
+          },
+          {
+            "text": "Developed features: tag filter, review attribution statement, and others",
+            "lastDateUpdated": "2013-09-03",
+            "dateAdded": "2013-09-03",
+            "tags": ["default"],
+            "importance": 100
+          },
+          {
+            "text": "Utilized a variety of server and client-side JavaScript technologies including Node.js, Backbone, and Handlebars",
+            "lastDateUpdated": "2013-09-03",
+            "dateAdded": "2013-09-03",
+            "tags": ["default"],
+            "importance": 100
+          }
+        ]
+      },
       {
         "text": "Bazaarvoice",
         "dateAdded": "2013-09-03",
@@ -131,8 +186,9 @@
         "importance": 200,
         "minEntries": 2,
         "maxEntries": 5,
-        "position": "Front End Engineering Intern",
+        "position": "Software Engineer",
         "company": "Bazaarvoice",
+        "companyURL": "http://www.bazaarvoice.com/about/",
         "location": "Austin, TX",
         "startDate": "January, 2013",
         "endDate": "May, 2013",
@@ -177,6 +233,7 @@
         "maxEntries": 5,
         "position": "Undergraduate Research Assistant",
         "company": "University of Waterloo",
+        "companyURL": "https://uwaterloo.ca/",
         "location": "Waterloo, ON",
         "startDate": "September, 2012",
         "endDate": "January, 2013",
@@ -201,7 +258,7 @@
         "text": "NextBestSong",
         "dateAdded": "2013-09-03",
         "lastDateUpdated": "2013-09-03",
-        "tags": ["default", "C#", "back-end"],
+        "tags": ["C#", "back-end"],
         "importance": 200,
         "minEntries": 2,
         "maxEntries": 5,
@@ -245,7 +302,7 @@
         "text": "NextBestSong",
         "dateAdded": "2013-09-03",
         "lastDateUpdated": "2013-09-03",
-        "tags": ["default", "program management", "scrum"],
+        "tags": ["program management", "scrum"],
         "importance": 200,
         "minEntries": 2,
         "maxEntries": 5,
@@ -291,8 +348,6 @@
     "text": "Projects",
     "dateAdded": "2013-09-03",
     "lastDateUpdated": "2013-09-03",
-    "tags": ["default"],
-    "importance": 800,
     "minEntries": 1,
     "maxEntries": 4,
     "entries": [

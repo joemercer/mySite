@@ -1,0 +1,19 @@
+mixin resumeSection(root, type)
+	- var entries = env.helpers.filter(root.entries, root.minEntries, root.maxEntries)
+	if (entries)
+		dt
+			h3.text-muted!= root.text
+		dd
+			each entry in entries
+				- var bullets = env.helpers.filter(entry.entries, entry.minEntries, entry.maxEntries)
+				if (bullets)
+					div
+						case type
+							when "education"
+								mixin educationEntry(entry, bullets)
+							when "experience"
+								mixin experienceEntry(entry, bullets)
+							when "projects"
+								mixin projectEntry(entry, bullets)
+							default
+								h1 ERROR

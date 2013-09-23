@@ -25,7 +25,7 @@
   "paginator": {
     "perPage": 3
   },
-  "filter": {
+  "resume": {
     "tags": ["default"],
     "importance": 0
   }

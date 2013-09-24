@@ -15,9 +15,9 @@ block content
   - var contact = page.metadata.contact
   if (env.helpers.filter(contact.entries))
     div.page-header
-      h1!= contact.fixed.name
+      h1 !{contact.fixed.name}
       div#contact
-        p.lead 
+        p.lead.text-muted 
           a(href="#{contact.fixed.twitterURL}", target="_blank") #{contact.fixed.twitterText} 
           | | #{contact.fixed.phoneText}
       - var summary = page.metadata.summary

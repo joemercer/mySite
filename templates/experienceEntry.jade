@@ -1,7 +1,7 @@
 mixin experienceEntry(root, bullets)
 	h4 !{root.position}, 
-		a(href="!{root.company.URL}", target="_blank") #{root.company}
-	p #{root.startDate} - #{root.endDate} | #{root.location}
+		a(href="#{root.companyURL}", target="_blank") #{root.company}
+	p.text-muted #{root.startDate} - #{root.endDate} | #{root.location}
 	if (bullets.length)
 		ul
 			each bullet in bullets

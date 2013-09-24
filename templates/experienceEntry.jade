@@ -2,6 +2,7 @@ mixin experienceEntry(root, bullets)
 	h4 !{root.position}, 
 		a(href="!{root.company.URL}", target="_blank") #{root.company}
 	p #{root.startDate} - #{root.endDate} | #{root.location}
-	ul
-		each bullet in bullets
-			li !{bullet.text}
+	if (bullets.length)
+		ul
+			each bullet in bullets
+				li !{bullet.text}

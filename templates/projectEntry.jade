@@ -2,6 +2,7 @@ mixin projectEntry(root, bullets)
 	h4 !{root.text}
 		a(href="!{root.schoolURL}", target="_blank") #{root.school}
 	p #{root.startDate} - #{root.endDate} | #{root.location}
-	ul
-		each bullet in bullets
-			li !{bullet.text}
+	if (bullets.length)
+		ul
+			each bullet in bullets
+				li !{bullet.text}

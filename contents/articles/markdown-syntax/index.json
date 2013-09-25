@@ -1,0 +1,9 @@
+{
+  "title": "A Title",
+  "date": "2013-04-01",
+  "template": "article.jade",
+  "author": "baker",
+  "hasMore": true,
+  "intro": "intro text intro text",
+  "content": "content <span class=\"more\"></span> ###text content text"
+}

@@ -1,0 +1,78 @@
+extends layout
+
+block title
+  | #{page.title}
+
+block header
+
+block content
+  - var contact = page.metadata.contact
+  if (env.helpers.filter(contact.entries))
+    div.page-header
+      h1!= contact.fixed.name
+      div#contact
+        p.lead 
+          a(href="#{contact.fixed.twitterURL}", target="_blank") #{contact.fixed.twitterText}
+          |  | 
+          | #{contact.fixed.phoneText}
+      - var summary = page.metadata.summary
+      if (env.helpers.filter(summary.entries, summary.minEntries, summary.maxEntries))
+        div#summary
+          dl.dl-horizontal
+            each bullet in env.helpers.filter(summary.entries, summary.minEntries, summary.maxEntries)
+              dt!= bullet.word
+              dd!= bullet.text
+
+  - var education = page.metadata.education
+  if (env.helpers.filter(education.entries, education.minEntries, education.maxEntries))
+    div#education
+      dl.dl-horizontal
+        dt
+          h3.text-muted!= education.text
+        dd
+          each entry in env.helpers.filter(education.entries, education.minEntries, education.maxEntries)
+            if (env.helpers.filter(entry.entries, entry.minEntries, entry.maxEntries))
+              div.education-entry
+                h4!= entry.degree + ', ' 
+                  a(href="#{entry.schoolURL}", target="_blank") #{entry.school}
+                p
+                  | #{entry.startDate} - #{entry.endDate} | #{entry.location}
+                ul
+                  each bullet in env.helpers.filter(entry.entries, entry.minEntries, entry.maxEntries)
+                    li!= bullet.text
+    hr
+
+  - var experience = page.metadata.experience
+  if (env.helpers.filter(experience.entries, experience.minEntries, experience.maxEntries))
+    div#experience
+      dl.dl-horizontal
+        dt
+          h3.text-muted!= experience.text
+        dd
+          each entry in env.helpers.filter(experience.entries, experience.minEntries, experience.maxEntries)
+            if (env.helpers.filter(entry.entries, entry.minEntries, entry.maxEntries))
+              div.experience-entry
+                h4!= entry.position + ', '
+                  a(href="!{entry.company.URL}", target="_blank") #{entry.company}
+                p #{entry.startDate} - #{entry.endDate} | #{entry.location}
+                ul
+                  each bullet in env.helpers.filter(entry.entries, entry.minEntries, entry.maxEntries)
+                    li!= bullet.text
+    hr
+
+  - var projects = page.metadata.projects
+  if (env.helpers.filter(projects.entries, projects.minEntries, projects.maxEntries))
+    div#projects
+      dl.dl-horizontal
+        dt
+          h3.text-muted!= projects.text
+        dd
+          each entry in env.helpers.filter(projects.entries, projects.minEntries, projects.maxEntries)
+            if (env.helpers.filter(entry.entries, entry.minEntries, entry.maxEntries))
+              div.project-entry
+                h4!= entry.text
+                ul
+                  each bullet in env.helpers.filter(entry.entries, entry.minEntries, entry.maxEntries)
+                    li!= bullet.text
+
+block footer

@@ -1,12 +1,14 @@
 {
   "locals": {
     "url": "http://localhost:8080",
-    "name": "The Wintersmith's blog",
-    "owner": "Someone",
-    "description": "Ramblings of an immor(t)al demigod"
+    "title": "Joe Mercer - Designer and Developer",
+    "name": "Joe Mercer",
+    "owner": "Joe Mercer",
+    "description": "Designer and Developer"
   },
   "plugins": [
-    "./plugins/paginator.coffee"
+    "./plugins/paginator.coffee",
+    "./plugins/filter.js"
   ],
   "require": {
     "moment": "moment",
@@ -22,5 +24,9 @@
   },
   "paginator": {
     "perPage": 3
+  },
+  "filter": {
+    "tags": ["default"],
+    "importance": 0
   }
 }

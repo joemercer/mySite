@@ -154,8 +154,10 @@
         "location": "San Francisco, CA",
         "startDate": "September, 2013",
         "endDate": "December, 2013",
+        "description": "Hi, my name is joe mercer and I worked at Tagged. While I was there I did some ipsum stuff and some programming. You know, all that good stuff. It was sweet.",
         "entries": [
           {
+            "word": "JavaScript",
             "text": "Rewrote UI functionality to meet W3C web accessibility requirements",
             "dateAdded": "2013-09-03",
             "lastDateUpdated": "2013-09-03",
@@ -163,6 +165,7 @@
             "importance": 200
           },
           {
+            "word": "CSS",
             "text": "Developed features: tag filter, review attribution statement, and others",
             "lastDateUpdated": "2013-09-03",
             "dateAdded": "2013-09-03",
@@ -170,6 +173,7 @@
             "importance": 100
           },
           {
+            "word": "Motorcycle",
             "text": "Utilized a variety of server and client-side JavaScript technologies including Node.js, Backbone, and Handlebars",
             "lastDateUpdated": "2013-09-03",
             "dateAdded": "2013-09-03",

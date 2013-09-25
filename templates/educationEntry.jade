@@ -1,0 +1,8 @@
+mixin educationEntry(root, bullets)
+	h4 !{root.degree}, 
+		a(href="!{root.schoolURL}", target="_blank") #{root.school}
+	p.text-muted #{root.startDate} - #{root.endDate} | #{root.location}
+	if (bullets.length)
+		ul
+			each bullet in bullets
+				li !{bullet.text}

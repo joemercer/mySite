@@ -4,7 +4,7 @@ module.exports = function(env, callback){
 
 	env.helpers.filter = function(items, minItems, maxItems){
 
-	  options = env.config.filter || {
+	  options = env.config.resume || {
 	  	'tags': ['default'],
 	  	'importance': 0
 	  };

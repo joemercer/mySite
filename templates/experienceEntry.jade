@@ -1,0 +1,8 @@
+mixin experienceEntry(root, bullets)
+	h4 !{root.position}, 
+		a(href="#{root.companyURL}", target="_blank") #{root.company}
+	p.text-muted #{root.startDate} - #{root.endDate} | #{root.location}
+	if (bullets.length)
+		ul
+			each bullet in bullets
+				li !{bullet.text}

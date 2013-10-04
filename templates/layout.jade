@@ -24,16 +24,23 @@ html(lang='en')
       // !!! TO DELETE
 
       // link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic|Anonymous+Pro:400,700,400italic,700italic|Merriweather:400,700,300')
-      // link(rel='stylesheet', href='/css/main.css')
+      link(rel='stylesheet', href='/css/main.css')
   body(class=bodyclass)
     div#wrap
       header.header.container
         block header
-          h1
-            a(href=locals.url)= locals.name
-            |  - 
-            a(href="http://localhost:8080/resume.html") Resume
-          p.description.lead= locals.description
+          div.page-header
+            h1 !{locals.name}
+
+            small Blog | Resume
+          p HELLO
+          p HELLO
+          div#header
+            h1
+              a(href=locals.url)= locals.name
+              |  - 
+              a(href="http://localhost:8080/resume.html") Resume
+            p.description.lead= locals.description
 
       div#content.container
         block content

@@ -1,32 +1,11 @@
 extends layout
 
+block header
+
 block content
-  include author
-  each article in articles
-    article.article.intro
-      header
-        p.date
-          span= moment(article.date).format('DD. MMMM YYYY')
-        h2
-          a(href=article.url)= article.title
-      section.content
-        !{ typogr(article.intro).typogrify() }
-        p HELLO !{article.hasMore}
-        p HELLO2 !{article}
-        p HELLO3
+  div.feature
+    h1 !{locals.name}
+    h2 !{locals.description}
+  div.about
 
-        if article.hasMore
-          p.more
-            a(href=article.url) more
-
-block prepend footer
-  div.nav
-    if prevPage
-      a(href=prevPage.url) « Newer
-    else
-      a(href='/archive.html') « Archives
-    if nextPage
-      a(href=nextPage.url) Next page »
-
-
-
+block footer

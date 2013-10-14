@@ -1,11 +1,47 @@
-extends layout
+extends baseLayout
 
-block header
-
-block content
-  div.feature
-    h1 !{locals.name}
-    h2 !{locals.description}
-  div.about
-
-block footer
+block body
+  nav.navbar.navbar-default.navbar-fixed-top(role="navigation")
+    div.navbar-header
+      button.navbar-toggle(type="button", data-toggle="collapse", data-target=".navbar-collapse")
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+    div.collapse.navbar-collapse
+      ul.nav.navbar-nav.navbar-right
+        li
+          a Blog
+        li
+          a Resume
+        li
+          a @jomrcr
+  div.splash.row
+  div.diagonal
+    h3 This is a sentence with an inspirational message
+  div.container
+    div#about
+      h2 About
+      div.about.row
+        div.col-md-6
+          h3 Welcome to my site
+          p lorem ipsum ipsum ipsumipsumipsumipsumipsum ipsum ipsum ipsum ipsum ipsum ipsum ipsum ipsum
+        div.col-md-6
+          img.img-responsive.img-rounded(src="../sanFran.jpg", alt"this is some alt test")
+        div.clearfix
+    div#projects
+      h2 Projects
+      div.project2.row
+        div.col-md-6
+          img.img-responsive.img-rounded(src="../sanFran.jpg", alt"this is some alt test")
+        div.col-md-6
+          h3 Project title
+          p lorem ipsum ipsum ipsumipsumipsumipsumipsum ipsum ipsum ipsum ipsum ipsum ipsum ipsum ipsum
+        div.clearfix
+      div.project3.row
+        div.col-md-6
+          h3 Project title
+          p lorem ipsum ipsum ipsumipsumipsumipsumipsum ipsum ipsum ipsum ipsum ipsum ipsum ipsum ipsum
+        div.col-md-6
+          img.img-responsive.img-rounded(src="../sanFran.jpg", alt"this is some alt test")
+        div.clearfix

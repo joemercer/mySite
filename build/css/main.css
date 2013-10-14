@@ -1,0 +1,30 @@
+/* ================================ */
+/* ! Layout for XL desktop version  */
+/* ================================ */
+
+html, body {
+    height: 100%;
+}
+
+.splash {
+  background: #999 url("../sanFran.jpg") no-repeat center center;
+  background-size: 100%; background-size: cover;
+  background-attachment: fixed;
+  height: 100%;
+  margin: 0;
+}
+
+.project1 {
+  height: 1000px;
+  background-color: red;
+}
+
+.project2 {
+  height: 1000px;
+  background-color: blue;
+}
+
+.project3 {
+  height: 1000px;
+  background-color: green;
+}

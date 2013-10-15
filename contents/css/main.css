@@ -1,7 +1,3 @@
-/* ================================ */
-/* ! Layout for XL desktop version  */
-/* ================================ */
-
 html, body {
     height: 100%;
 }
@@ -25,7 +21,7 @@ html, body {
   margin-bottom: 26px;
 }
 
-#project {
+#projects {
 
 }
 

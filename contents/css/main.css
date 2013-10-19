@@ -1,24 +1,37 @@
-html, body {
+/*html, body {
     height: 100%;
+}*/
+
+#content {
+  /*padding-top: 70px;*/
+}
+
+.row {
+  padding-top: 26px;
+  padding-bottom: 26px;
+}
+
+.img-rounded {
+  padding-bottom: 26px;
+}
+
+#splash {
+  padding-top: 70px;
+  padding-bottom: 20%;
 }
 
 .splash {
-  background: #999 url("../sanFran.jpg") no-repeat center center;
-  background-size: 100%; background-size: cover;
-  background-attachment: fixed;
-  height: 100%;
-  margin: 0;
+  background-color: lightblue;
+  padding-top: 5%;
+  padding-bottom: 10%;
 }
 
-#about {
+#name {
 
 }
 
 .about {
   background-color: red;
-  border-bottom: 1px solid black;
-  padding-bottom: 26px;
-  margin-bottom: 26px;
 }
 
 #projects {
@@ -27,26 +40,49 @@ html, body {
 
 .project2 {
   background-color: blue;
-  border-bottom: 1px solid black;
-  padding-bottom: 26px;
-  margin-bottom: 26px;
 }
 
 .project3 {
   background-color: green;
-  border-bottom: 1px solid black;
-  padding-bottom: 26px;
-  margin-bottom: 26px;
 }
 
-.diagonal{
-  background-image:url("../diagonal.png");
-  width:100%;
-  z-index:940;
-  background-repeat:no-repeat;
-  background-position:center top;
-  position:absolute;
-  bottom:0px;
-  height:105px;
-  text-align:center;
+#nav {
+  /*background-color: #f8f8f8;
+  border-color: #e7e7e7;*/
+}
+
+#nav .relative {
+  position: relative;
+}
+
+
+#nav .navbar-nav > li > a {
+  color: #777777;
+}
+
+#nav .navbar-nav > li > a:hover,
+#nav .navbar-nav > li > a:focus {
+  color: #333333;
+  background-color: transparent;
+}
+
+#nav .navbar-toggle {
+  /*border-color: #dddddd;*/
+}
+
+#nav .navbar-toggle:hover,
+#nav .navbar-toggle:focus {
+  background-color: #dddddd;
+}
+
+#nav .navbar-toggle .icon-bar {
+  background-color: #cccccc;
+}
+
+#nav .navbar-link {
+  color: #777777;
+}
+
+#nav .navbar-link:hover {
+  color: #333333;
 }

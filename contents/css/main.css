@@ -2,10 +2,6 @@
     height: 100%;
 }*/
 
-#content {
-  /*padding-top: 70px;*/
-}
-
 .row {
   padding-top: 26px;
   padding-bottom: 26px;
@@ -16,14 +12,22 @@
 }
 
 #splash {
-  padding-top: 70px;
-  padding-bottom: 20%;
+  background-color: lightblue;
+  /*margin-top: 300px;
+  margin-bottom: 20%;*/
+  margin-top: 25vh;
+  margin-bottom: 5vh;
+  padding-top: 10vh;
+  padding-bottom: 5vh;
 }
 
-.splash {
-  background-color: lightblue;
-  padding-top: 5%;
-  padding-bottom: 10%;
+h1 {
+  font-family: 'Quicksand', Arial, serif;
+  font-weight: 400;
+}
+
+h1 > b {
+  font-family: 'Lobster 2';
 }
 
 #name {
@@ -46,43 +50,82 @@
   background-color: green;
 }
 
-#nav {
-  /*background-color: #f8f8f8;
-  border-color: #e7e7e7;*/
+#aim {
+  padding-top: 10%;
+  padding-bottom: 20%;
 }
 
-#nav .relative {
-  position: relative;
+#aim .row {
+  background-color: red;
+  height: 425px;
 }
 
-
-#nav .navbar-nav > li > a {
-  color: #777777;
+nav {
+  width: 100%;
+  z-index: 1030;
+  background-color: white;
+}
+.nav-fixed-top {
+  position: fixed;
+  top: 0;
+  z-index: 1030;
+  border-radius: 0;
+}
+.nav-center {
+  width: 100%;
+  text-align: center;
 }
 
-#nav .navbar-nav > li > a:hover,
-#nav .navbar-nav > li > a:focus {
-  color: #333333;
-  background-color: transparent;
+.nav {
+  margin: 0;
+  display: block;
 }
 
-#nav .navbar-toggle {
-  /*border-color: #dddddd;*/
+.nav > li {
+  display: inline-block;
 }
 
-#nav .navbar-toggle:hover,
-#nav .navbar-toggle:focus {
-  background-color: #dddddd;
+.nav > li > a {
+  font-family: 'Quicksand', Arial, serif;
+  font-weight: 400;
 }
 
-#nav .navbar-toggle .icon-bar {
-  background-color: #cccccc;
+.nav > li > a:hover,
+.nav > li > a:focus {
+  text-decoration: none;
+  background-color: #eeeeee;
 }
 
-#nav .navbar-link {
-  color: #777777;
+@media (min-width: 768px) {
+  nav {
+    /*margin-top: 149px;
+    margin-bottom: 99px;*/
+    margin-top: 15vh;
+    margin-bottom: 5vh;
+    border-top: 1px solid #e9e9e9;
+    border-bottom: 1px solid #e9e9e9;
+  }
+  .nav > li > a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
 }
 
-#nav .navbar-link:hover {
-  color: #333333;
+@media (max-width: 767px) {
+  .nav {
+    background-color: black;
+    opacity: .5;
+  }
+  .nav > li {
+    height: 80px;
+    width: 32.9%;
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+    font-size: 1.5rem;
+    padding-top: 20px;
+    padding-bottom: 12px;
+  }
+  .nav > li:last-child {
+    border-right: none;
+  }
 }

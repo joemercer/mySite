@@ -2,8 +2,15 @@
     height: 100%;
 }*/
 
+@ambient: #F5FAFF;
+@bold: #142850;
+@highlight: #C3E1FF;
+@blue: #8FB1D4;
+@red: #8C001E;
+
+
 body {
-  background-color: #DAD9DE;
+  background-color: @ambient;
 }
 
 .row {
@@ -16,7 +23,7 @@ body {
 }
 
 #splash {
-  background-color: #B0C3E1;
+  background-color: @blue;
   /*margin-top: 300px;
   margin-bottom: 20%;*/
   margin-top: 25vh;
@@ -28,7 +35,7 @@ body {
 h1 {
   font-family: 'Quicksand', sans-serif;
   font-weight: 300;
-  color: #CEEBF6;
+  color: @highlight;
 }
 
 h1 > b {
@@ -36,7 +43,7 @@ h1 > b {
   font-weight: 700;
   font-style: italic;
   font-size: 44px;
-  color: #00134A;
+  color: @bold;
 }
 
 #name {
@@ -44,7 +51,7 @@ h1 > b {
 }
 
 .about {
-  background-color: #A82433;
+  background-color: @red;
 }
 
 #projects {
@@ -52,11 +59,11 @@ h1 > b {
 }
 
 .project2 {
-  background-color: #492760;
+  background-color: @blue;
 }
 
 .project3 {
-  background-color: #492760;
+  background-color: @red;
 }
 
 #aim {
@@ -65,14 +72,14 @@ h1 > b {
 }
 
 #aim .row {
-  background-color: #A82433;
+  background-color: @blue;
   height: 425px;
 }
 
 nav {
   width: 100%;
   z-index: 1030;
-  background-color: #DAD9DE;
+  background-color: @ambient;
 }
 .nav-fixed-top {
   position: fixed;
@@ -97,7 +104,7 @@ nav {
 .nav > li > a {
   font-family: 'Quicksand', sans-serif;
   font-weight: 400;
-  color: #00134A;
+  color: @highlight;
 }
 
 .nav > li > a:hover,
@@ -112,8 +119,8 @@ nav {
     margin-bottom: 99px;*/
     margin-top: 15vh;
     margin-bottom: 5vh;
-    border-top: 1px solid #CEEBF6;
-    border-bottom: 1px solid #CEEBF6;
+    border-top: 1px solid @highlight;
+    border-bottom: 1px solid @highlight;
   }
   .nav > li > a {
     padding-top: 15px;
@@ -123,13 +130,13 @@ nav {
 
 @media (max-width: 767px) {
   .nav {
-    background-color: #A82433;
+    background-color: @ambient;
   }
   .nav > li {
     height: 80px;
     width: 32.9%;
-    border-right: 1px solid #CEEBF6;
-    border-bottom: 1px solid #CEEBF6;
+    border-right: 1px solid @highlight;
+    border-bottom: 1px solid @highlight;
     font-size: 1.5rem;
     padding-top: 20px;
     padding-bottom: 12px;
@@ -138,6 +145,6 @@ nav {
     border-right: none;
   }
   .nav > li > a {
-    color: #CEEBF6;
+    color: @highlight;
   }
 }

@@ -1,16 +1,27 @@
 /*html, body {
     height: 100%;
+
+
 }*/
 
-@ambient: #F5FAFF;
-@bold: #142850;
-@highlight: #C3E1FF;
-@blue: #8FB1D4;
+@white: #FFFFFF;
+@blue: #497AAF;
+@lightblue: #F0F7FF;
+
+@boldBlue: darken(@blue, 50%);
+@boldLightBlue: darken(@lightblue, 10%);
+
+
+
 @red: #8C001E;
+@lightRed: #FFF0F0;
+@grey: #96A6B8;
+@test: #0A1D31;
+@cyan: #00FFFF;
 
 
 body {
-  background-color: @ambient;
+  background-color: @lightblue;
 }
 
 .row {
@@ -27,7 +38,7 @@ body {
   /*margin-top: 300px;
   margin-bottom: 20%;*/
   margin-top: 25vh;
-  margin-bottom: 5vh;
+  margin-bottom: 25vh;
   padding-top: 10vh;
   padding-bottom: 5vh;
 }
@@ -35,15 +46,15 @@ body {
 h1 {
   font-family: 'Quicksand', sans-serif;
   font-weight: 300;
-  color: @highlight;
+  color: @boldLightBlue;
 }
 
 h1 > b {
   font-family: 'Lobster Two', cursive;
   font-weight: 700;
   font-style: italic;
-  font-size: 44px;
-  color: @bold;
+  font-size: 48px;
+  color: @boldBlue;
 }
 
 #name {
@@ -51,7 +62,10 @@ h1 > b {
 }
 
 .about {
-  background-color: @red;
+  background-color: white;
+  border: 1px solid @boldLightBlue;
+  margin-top: 25vh;
+  margin-bottom: 25vh;
 }
 
 #projects {
@@ -59,27 +73,36 @@ h1 > b {
 }
 
 .project2 {
-  background-color: @blue;
+  background-color: @white;
+  margin-top: 25vh;
+  margin-bottom: 25vh;
+  border: 1px solid @boldLightBlue;
 }
 
 .project3 {
-  background-color: @red;
+  background-color: @white;
+  margin-top: 25vh;
+  margin-bottom: 25vh;
+  border: 1px solid @boldLightBlue;
 }
 
 #aim {
   padding-top: 10%;
   padding-bottom: 20%;
+  height: 425px;
+  background-color: @test;
+  margin-top: 25vh;
+  margin-bottom: 25vh;
+  color: @red;
 }
 
 #aim .row {
-  background-color: @blue;
-  height: 425px;
 }
 
 nav {
   width: 100%;
   z-index: 1030;
-  background-color: @ambient;
+  background-color: @lightblue;
 }
 .nav-fixed-top {
   position: fixed;
@@ -104,7 +127,7 @@ nav {
 .nav > li > a {
   font-family: 'Quicksand', sans-serif;
   font-weight: 400;
-  color: @highlight;
+  color: @boldBlue;
 }
 
 .nav > li > a:hover,
@@ -119,8 +142,8 @@ nav {
     margin-bottom: 99px;*/
     margin-top: 15vh;
     margin-bottom: 5vh;
-    border-top: 1px solid @highlight;
-    border-bottom: 1px solid @highlight;
+    /*border-top: 1px solid @lightblue;
+    border-bottom: 1px solid @lightblue;*/
   }
   .nav > li > a {
     padding-top: 15px;
@@ -130,13 +153,13 @@ nav {
 
 @media (max-width: 767px) {
   .nav {
-    background-color: @ambient;
+    background-color: @lightblue;
   }
   .nav > li {
     height: 80px;
     width: 32.9%;
-    border-right: 1px solid @highlight;
-    border-bottom: 1px solid @highlight;
+    border-right: 1px solid @boldBlue;
+    border-bottom: 1px solid @boldBlue;
     font-size: 1.5rem;
     padding-top: 20px;
     padding-bottom: 12px;
@@ -145,6 +168,6 @@ nav {
     border-right: none;
   }
   .nav > li > a {
-    color: @highlight;
+    color: @boldBlue;
   }
 }

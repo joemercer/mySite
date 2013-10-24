@@ -1,78 +1,71 @@
 /*html, body {
     height: 100%;
+
+
 }*/
-
 body {
-  background-color: #DAD9DE;
+  background-color: #f0f7ff;
 }
-
 .row {
   padding-top: 26px;
   padding-bottom: 26px;
 }
-
 .img-rounded {
   padding-bottom: 26px;
 }
-
 #splash {
-  background-color: #B0C3E1;
+  background-color: #497aaf;
   /*margin-top: 300px;
   margin-bottom: 20%;*/
+
   margin-top: 25vh;
-  margin-bottom: 5vh;
+  margin-bottom: 25vh;
   padding-top: 10vh;
   padding-bottom: 5vh;
 }
-
 h1 {
   font-family: 'Quicksand', sans-serif;
   font-weight: 300;
-  color: #CEEBF6;
+  color: #bddcff;
 }
-
 h1 > b {
   font-family: 'Lobster Two', cursive;
   font-weight: 700;
   font-style: italic;
-  font-size: 44px;
-  color: #00134A;
+  font-size: 48px;
+  color: #000000;
 }
-
-#name {
-
-}
-
 .about {
-  background-color: #A82433;
+  background-color: white;
+  border: 1px solid #bddcff;
+  margin-top: 25vh;
+  margin-bottom: 25vh;
 }
-
-#projects {
-
-}
-
 .project2 {
-  background-color: #492760;
+  background-color: #ffffff;
+  margin-top: 25vh;
+  margin-bottom: 25vh;
+  border: 1px solid #bddcff;
 }
-
 .project3 {
-  background-color: #492760;
+  background-color: #ffffff;
+  margin-top: 25vh;
+  margin-bottom: 25vh;
+  border: 1px solid #bddcff;
 }
-
 #aim {
   padding-top: 10%;
   padding-bottom: 20%;
-}
-
-#aim .row {
-  background-color: #A82433;
   height: 425px;
+  background-color: #0a1d31;
+  margin-top: 25vh;
+  margin-bottom: 25vh;
+  color: #8c001e;
 }
-
 nav {
   width: 100%;
   z-index: 1030;
-  background-color: #DAD9DE;
+  background-color: #f0f7ff;
 }
 .nav-fixed-top {
   position: fixed;
@@ -84,52 +77,48 @@ nav {
   width: 100%;
   text-align: center;
 }
-
 .nav {
   margin: 0;
   display: block;
 }
-
 .nav > li {
   display: inline-block;
 }
-
 .nav > li > a {
   font-family: 'Quicksand', sans-serif;
   font-weight: 400;
-  color: #00134A;
+  color: #000000;
 }
-
 .nav > li > a:hover,
 .nav > li > a:focus {
   text-decoration: none;
   font-weight: 700;
 }
-
 @media (min-width: 768px) {
   nav {
     /*margin-top: 149px;
-    margin-bottom: 99px;*/
+      margin-bottom: 99px;*/
+  
     margin-top: 15vh;
     margin-bottom: 5vh;
-    border-top: 1px solid #CEEBF6;
-    border-bottom: 1px solid #CEEBF6;
+    /*border-top: 1px solid @lightblue;
+      border-bottom: 1px solid @lightblue;*/
+  
   }
   .nav > li > a {
     padding-top: 15px;
     padding-bottom: 15px;
   }
 }
-
 @media (max-width: 767px) {
   .nav {
-    background-color: #A82433;
+    background-color: #f0f7ff;
   }
   .nav > li {
     height: 80px;
     width: 32.9%;
-    border-right: 1px solid #CEEBF6;
-    border-bottom: 1px solid #CEEBF6;
+    border-right: 1px solid #000000;
+    border-bottom: 1px solid #000000;
     font-size: 1.5rem;
     padding-top: 20px;
     padding-bottom: 12px;
@@ -138,6 +127,6 @@ nav {
     border-right: none;
   }
   .nav > li > a {
-    color: #CEEBF6;
+    color: #000000;
   }
 }

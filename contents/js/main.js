@@ -1,3 +1,10 @@
+$(function(){
+
+// debugger; //nav bar 87 pixels
+
+});
+
+
 // $(function(){
 
 // 	$(window).scroll(function(){

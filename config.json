@@ -4,7 +4,9 @@
     "title": "Joe Mercer - Designer and Developer",
     "name": "Joe Mercer",
     "owner": "Joe Mercer",
-    "description": "Designer and Developer"
+    "description": "Designer and Developer",
+    "cover": "and joe mercer <br> is my name <br> and coding <br> is my game <br> and getting hired <br> is my aim <br> and dreaming ",
+    "about": "I study mathematics at the University of Waterloo in Canada. When I'm not studying I'm usually asleep, but somtimes in between the two I find some time to run or go to the gym. In high school "
   },
   "plugins": [
     "./plugins/paginator.coffee",

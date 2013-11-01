@@ -1,14 +1,25 @@
 extends baseLayout
 
 block body
-  nav.nav-fixed-top.nav-center(role="navigation")
-    ul.nav
+  nav(role="navigation", data-spy="affix", data-offset-top="50")
+    ul.nav-center
       li
         a Blog
       li
         a Resume
       li
         a @jomrcr
+    ul.nav-right
+      li#index.dropdown
+        a.dropdown-toggle(href="#", data-toggle="dropdown") Index 
+          b.caret
+        ul.nav.dropdown-menu
+          li
+            a(href="#name") Hello
+          li
+            a(href="#projects") Project 1
+          li
+            a(href="#aim") Project 2
   div#splash
     div.row
       div.container
@@ -29,27 +40,53 @@ block body
             |and dreaming
             br
             |is my claim to fame
-  div#name
-    div.about.row
-      div.container
-        div.col-md-6.col-md-push-6
-          img.img-responsive.img-rounded(src="../sanFran.jpg", alt"this is some alt test")
-        div.col-md-6.col-md-pull-6
-          p.lead I study mathematics at the <a>University of Waterloo</a> in Canada. When not studying I'm usually asleep, and it's somewhere in between dreams and reality that I find the time to program. I've worked on several projects and have many more waiting in the backlog. I've also been blessed with the opportunity to write code for <a>Tagged</a> in San Francisco and <a>Bazaarvoice</a> in Austin.
-          p.hide Sometimes I like being active also; in high school I played basketball but since I got to university and in Austin I ran a half marathon. Lately I've been doing 
-          p.hide I'm kind of a music junkie; once upon a time I used to DJ, and recently I've taken to playing the ukulele, but mostly I just listen. Currently the artist I'm obsessed with is <a>Ghost Beach</a>. If you haven't heard of them you should <a>give them a spin</a>
-          p.hide I grew up in Redmond, WA ,and I study in Waterloo, ON but I'm currently living in San Francisco, CA. I've also lived in Austin, TX.
-        div.clearfix
-  div#projects
+  div#name.section.row.carousel.slide(data-interval="false")
+    div.container
+      ol.carousel-indicators
+        li.carousel-indicators-item.active(data-target="#name", data-slide-to="0")
+        li.carousel-indicators-item(data-target="#name", data-slide-to="1")
+        li.carousel-indicators-item(data-target="#name", data-slide-to="2")
+      div.carousel-inner
+        div.item.active
+          div.col-md-6.col-md-push-6
+            img.img-responsive.img-rounded(src="../sanFran.jpg", alt"this is some alt text")
+          div.col-md-6.col-md-pull-6
+            p.lead I study mathematics at the <a>University of Waterloo</a> in Canada. When not studying I'm usually asleep, and it's somewhere in between dreams and reality that I find the time to program. I've worked on several projects and have many more waiting in the backlog. I've also been blessed with the opportunity to write code for <a>Tagged</a> in San Francisco and <a>Bazaarvoice</a> in Austin.
+            p.hide Sometimes I like being active also; in high school I played basketball but since I got to university and in Austin I ran a half marathon. Lately I've been doing 
+            p.hide I'm kind of a music junkie; once upon a time I used to DJ, and recently I've taken to playing the ukulele, but mostly I just listen. Currently the artist I'm obsessed with is <a>Ghost Beach</a>. If you haven't heard of them you should <a>give them a spin</a>
+            p.hide I grew up in Redmond, WA ,and I study in Waterloo, ON but I'm currently living in San Francisco, CA. I've also lived in Austin, TX.
+          div.clearfix
+        div.item
+          div.col-md-6.col-md-push-6
+            img.img-responsive.img-rounded(src="../sanFran.jpg", alt"this is some alt test")
+          div.col-md-6.col-md-pull-6
+            p I'm kind of a music junkie; once upon a time I used to DJ, and recently I've taken to playing the ukulele, but mostly I just listen. Currently the artist I'm obsessed with is <a>Ghost Beach</a>. If you haven't heard of them you should <a>give them a spin</a>
+            p.lead I grew up in Redmond, WA ,and I study in Waterloo, ON but I'm currently living in San Francisco, CA. I've also lived in Austin, TX.
+          div.clearfix
+        div.item
+          div.col-md-6.col-md-push-6
+            img.img-responsive.img-rounded(src="../sanFran.jpg", alt"this is some alt test")
+          div.col-md-6.col-md-pull-6
+            p.lead Sometimes I like being active also; in high school I played basketball but since I got to university and in Austin I ran a half marathon. Lately I've been doing 
+            p.hide I'm kind of a music junkie; once upon a time I used to DJ, and recently I've taken to playing the ukulele, but mostly I just listen. Currently the artist I'm obsessed with is <a>Ghost Beach</a>. If you haven't heard of them you should <a>give them a spin</a>
+            p.hide I grew up in Redmond, WA ,and I study in Waterloo, ON but I'm currently living in San Francisco, CA. I've also lived in Austin, TX.
+          div.clearfix
+      a.left.carousel-control(href="#name", data-slide="prev")
+        span.glyphicon.glyphicon-chevron-left
+      a.right.carousel-control(href="#name", data-slide="next")
+          span.glyphicon.glyphicon-chevron-right
+  div#project.section
     div.row.project2
       div.container
         div.col-md-12
-          h3 me.json
+          h3 
+            b me.json
         div.col-md-6
           img.img-responsive.img-rounded(src="../sanFran.jpg", alt"this is some alt test")
         div.col-md-6
           p.lead Twitter was originally for sharing the things that happened to you in between major moments of your life. They even had a really great video about it. Then Twitter pivoted, and made themselves all about the "online conversation". Now I'm not saying Twitter was wrong to pivot, but I don't think they would have been wrong to not pivot. Introducing, me.json...
         div.clearfix
+  div#thing3.section
     div.row.project3
       div.container
         div.col-md-12
@@ -59,7 +96,7 @@ block body
         div.col-md-6.col-md-pull-6
           p.lead So you're every teenage girl I've ever met in my entire life, and you spend your days in a storm of pubescent emotions, and in order to stay sane you spend your nights writing on your blog. Now Justin Bieber, the sexy bastard that he is, decides to write a new song but discovers that he has nothing meaningful to write about. Enter LyricsHub - a marketplace for lyrics and a collaboration tool for musicians.
         div.clearfix
-  div#aim
+  div#aim.section
     div.row
       div.container
         div.col-sm-8.col-sm-offset-4

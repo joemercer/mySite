@@ -3296,63 +3296,76 @@ td.visible-print {
   }
 }
 nav {
-  height: 50px;
+  position: fixed;
+  top: 0px;
+  height: 200px;
+  padding-top: 65px;
   width: 100%;
   z-index: 1030;
   text-align: center;
   background-color: #f0f7ff;
 }
-nav.affix-top {
+.navbar-custom {
+  width: 100%;
   position: relative;
-  margin-top: 50px;
-  margin-bottom: 50px;
+  height: 70px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin: 0px;
 }
-nav.affix {
-  position: fixed;
-  top: 0px;
-  border-bottom: 1px solid #bddcff;
-  margin-top: 0px;
-  margin-bottom: 0px;
+.navbar-custom ul {
+  padding: 0px;
+  margin: 0px;
 }
-ul li {
+.navbar-custom ul li {
   display: inline-block;
-  padding: 2px 4px;
+  padding: 4px 4px;
   margin: 10px 5px;
 }
-ul li a {
+.navbar-custom ul li a {
   font-weight: 400;
   color: #000000;
 }
-ul li a:hover,
-ul li a:focus {
+.navbar-custom ul li a:hover,
+.navbar-custom ul li a:focus {
   text-decoration: none;
   font-weight: 700;
 }
 .nav-center {
-  display: inline-block;
-  padding: 0px;
-  margin: 0px;
+  position: absolute;
+  left: 25%;
+  width: 50%;
 }
 .nav-right {
-  display: inline-block;
-  position: fixed;
-  right: 10px;
-  padding: 0px;
-  margin: 0px;
+  position: absolute;
+  left: 75%;
+  width: 25%;
 }
 #index ul.nav {
   left: auto;
   right: 0px;
 }
 #splash {
+  position: fixed;
+  top: 0px;
+  width: 100%;
   background-color: #5a7696;
-  padding-top: 100px;
-  padding-bottom: 100px;
-  margin-top: 150px;
+  height: 600px;
+  margin-top: 200px;
   margin-bottom: 150px;
 }
+#splash .container {
+  height: 100%;
+}
+#splash .container .col-md-12 {
+  height: 100%;
+}
 #splash h1 {
+  position: absolute;
+  top: 10%;
+  margin: 0px;
   color: #bddcff;
+  overflow: hidden;
 }
 #splash h1 b {
   font-family: 'Lobster Two', cursive;
@@ -3373,7 +3386,7 @@ h3 b {
 }
 .carousel-control.right,
 .carousel-control.left {
-  background: none;
+  background: transparent;
 }
 li.carousel-indicators-item {
   background-color: #000000;
@@ -3391,4 +3404,8 @@ li.carousel-indicators-item.active {
 }
 .section p {
   color: #000000;
+}
+#name {
+  height: 560px;
+  margin-top: 950px;
 }

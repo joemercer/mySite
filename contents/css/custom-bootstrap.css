@@ -3304,6 +3304,12 @@ nav {
   z-index: 1030;
   text-align: center;
   background-color: #f0f7ff;
+  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#f0f7ff), to(rgba(240, 247, 255, 0.1)));
+  background-image: -webkit-linear-gradient(top, #f0f7ff 0%, rgba(240, 247, 255, 0.1) 100%);
+  background-image: -moz-linear-gradient(top, #f0f7ff 0%, rgba(240, 247, 255, 0.1) 100%);
+  background-image: linear-gradient(to bottom, #f0f7ff 0%, rgba(240, 247, 255, 0.1) 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff0f7ff', endColorstr='#1af0f7ff', GradientType=0);
 }
 .navbar-custom {
   width: 100%;

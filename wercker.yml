@@ -13,3 +13,9 @@ build:
     - script:
         name: wintersmith build
         code: ./node_modules/.bin/wintersmith build -o ./build
+deploy:
+  steps:
+    - lukevivier/gh-pages:
+        token: $GH_TOKEN
+        basedir: build
+        domain: joemercer.com

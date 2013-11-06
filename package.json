@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "wintersmith": "2.0.x",
+    "underscore": "~1.4.4",
     "moment": "2.x",
     "underscore": "1.4.x",
     "typogr": "0.5.x"

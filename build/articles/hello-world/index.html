@@ -5,18 +5,22 @@
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap-->
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <!-- link(href='css/bootstrap.min.css', rel='stylesheet', media='screen')-->
+    <link href="css/custom.css" rel="stylesheet" media="screen">
     <!-- !!! THESE DON'T EXIST!!!-->
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries-->
     <!-- if lt IE 9-->
     <!-- script(src="../../assets/js/html5shiv.js")-->
     <!-- script(src="../../assets/js/respond.min.js")-->
     <link rel="alternate" href="http://localhost:8080/feed.xml" type="application/rss+xml" title="Joe Mercer - Designer and Developer">
-    <link rel="stylesheet" href="/css/main.css">
+    <!-- link(rel='stylesheet', href='/css/main.css')-->
     <link href="http://fonts.googleapis.com/css?family=Amarante" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Lobster+Two:400,400italic" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lobster+Two:400,400italic,700,700italic" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Quicksand:300,400,700" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
   </head>
-  <body>
+  <body data-spy="scroll" data-target="#index">
     <div id="wrap">
       <header class="header container">
         <h1>README</h1>
@@ -26,7 +30,7 @@
       <div id="content" class="container">
         <article class="article">
           <section class="content"><p>Welcome to your new blog! This is the default blog template with <span class="caps">RSS</span>, pagination and an archive. There are other templates available — run <code>wintersmith new --help</code> to list&nbsp;them.</p>
-<h2><em>Repeat after me:</em> This is my blog. There are many like it, but this one is mine. My blog is my best friend. It is my life. I must master it as I must master my life. My blog, without me, is useless. Without my blog, I am&nbsp;useless.</h2>
+<h2 id="_repeat-after-me-_-this-is-my-blog-there-are-many-like-it-but-this-one-is-mine-my-blog-is-my-best-friend-it-is-my-life-i-must-master-it-as-i-must-master-my-life-my-blog-without-me-is-useless-without-my-blog-i-am-useless-"><em>Repeat after me:</em> This is my blog. There are many like it, but this one is mine. My blog is my best friend. It is my life. I must master it as I must master my life. My blog, without me, is useless. Without my blog, I am&nbsp;useless.</h2>
 <p>Good, now, the directory structure of your blog is as&nbsp;follows:</p>
 <pre><code>├── config.json               &lt;- site configuration
 ├── contents
@@ -63,7 +67,7 @@
 └── views
     └── articles.coffee       &lt;- view that lists articles</code></pre>
 <p>Articles are sorted by date and 3 are shown per page, you can configure this and more in config.json. Check paginator.coffee for all options related to pagination, most plugins also have their own&nbsp;options.</p>
-<h3>A typical&nbsp;article</h3>
+<h3 id="a-typical-article">A typical&nbsp;article</h3>
 <pre><code class="lang-markdown"><span class="horizontal_rule">---</span>
 title: Hear me blog
 author: johndoe

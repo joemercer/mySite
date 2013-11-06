@@ -1,0 +1,104 @@
+// Brand colors
+// -------------------------
+
+// @brand-primary:         #497AAF;
+@brand-primary:					#5a7696;
+
+// Scaffolding
+// -------------------------
+
+// @body-bg:               #F0F7FF;
+@body-bg:               saturate(lighten(@brand-primary, 50%), 75%);
+@text-color:            @gray-dark;
+
+// Links
+// -------------------------
+
+@link-color:            @brand-primary;
+@link-hover-color:      darken(@link-color, 50%);
+
+// Typography
+// -------------------------
+
+@font-family-sans-serif:  "Quicksand", Helvetica, Arial, sans-serif;
+@font-family-serif:       Georgia, "Times New Roman", Times, serif;
+@font-family-monospace:   Monaco, Menlo, Consolas, "Courier New", monospace;
+@font-family-base:        @font-family-sans-serif;
+
+@font-size-base:          16px;
+
+@headings-font-family:    @font-family-base;
+@headings-font-weight:    300;
+@headings-line-height:    1.1;
+// @headings-color:          darken(@body-bg, 10%);
+// @headings-color:          saturate(lighten(@brand-primary, 50%), 25%);
+@headings-color:          @brand-primary;
+
+
+// Components
+// -------------------------
+// Based on 14px font-size and 1.428 line-height (~20px to start)
+
+@padding-base-vertical:          6px;
+@padding-base-horizontal:        12px;
+
+@padding-large-vertical:         10px;
+@padding-large-horizontal:       16px;
+
+@padding-small-vertical:         5px;
+@padding-small-horizontal:       10px;
+
+@border-radius-base:             4px;
+@border-radius-large:            6px;
+@border-radius-small:            3px;
+
+@component-active-color:         #fff;
+@component-active-bg:            @brand-primary;
+
+// Dropdowns
+// -------------------------
+
+@dropdown-bg:                    #fff;
+@dropdown-border:                rgba(0,0,0,.15);
+@dropdown-fallback-border:       #ccc;
+@dropdown-divider-bg:            #e5e5e5;
+
+@dropdown-link-color:            @gray-dark;
+@dropdown-link-hover-color:      darken(@gray-dark, 5%);
+@dropdown-link-hover-bg:         #f5f5f5;
+
+@dropdown-link-active-color:     @component-active-color;
+@dropdown-link-active-bg:        @component-active-bg;
+
+@dropdown-link-disabled-color:   @gray-light;
+
+@dropdown-header-color:          @gray-light;
+
+@dropdown-caret-color:           #000;
+
+// Navs
+// -------------------------
+
+@nav-link-padding:                          10px 15px;
+@nav-link-hover-bg:                         @gray-lighter;
+
+@nav-disabled-link-color:                   @gray-light;
+@nav-disabled-link-hover-color:             @gray-light;
+
+@nav-open-link-hover-color:                 #fff;
+@nav-open-caret-border-color:               #fff;
+
+// Carousel
+// ------------------------
+
+@carousel-text-shadow:                        0 1px 2px rgba(0,0,0,.6);
+
+@carousel-control-color:                      #fff;
+@carousel-control-width:                      15%;
+@carousel-control-opacity:                    .5;
+@carousel-control-font-size:                  20px;
+
+@carousel-indicator-active-bg:                #fff;
+@carousel-indicator-border-color:             #fff;
+
+@carousel-caption-color:                      #fff;

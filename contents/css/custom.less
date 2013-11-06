@@ -1,252 +1,55 @@
-// @white: #FFFFFF;
-// @blue: #497AAF;
-// @lightblue: #F0F7FF;
+// Core variables and mixins
+@import "../libs/bootstrap/less/variables.less";
+@import "../libs/bootstrap/less/mixins.less";
 
-// @boldBlue: darken(@blue, 50%);
-// @boldLightBlue: darken(@lightblue, 10%);
+// Custom Variables
+@import "custom-variables.less";
 
+// Reset
+@import "../libs/bootstrap/less/normalize.less";
+@import "../libs/bootstrap/less/print.less";
 
+// Core CSS
+@import "../libs/bootstrap/less/scaffolding.less";
+@import "../libs/bootstrap/less/type.less";
+@import "../libs/bootstrap/less/code.less";
+@import "../libs/bootstrap/less/grid.less";
+// @import "../libs/bootstrap/less/tables.less";
+// @import "../libs/bootstrap/less/forms.less";
+@import "../libs/bootstrap/less/buttons.less";
 
-// @red: #8C001E;
-// @lightRed: #FFF0F0;
-// @grey: #96A6B8;
-// @test: #0A1D31;
-// @cyan: #00FFFF;
+// Components
+@import "../libs/bootstrap/less/component-animations.less";
+@import "../libs/bootstrap/less/glyphicons.less";
+@import "../libs/bootstrap/less/dropdowns.less";
+// @import "../libs/bootstrap/less/button-groups.less";
+// @import "../libs/bootstrap/less/input-groups.less";
+@import "../libs/bootstrap/less/navs.less";
+// @import "../libs/bootstrap/less/navbar.less";
+// @import "../libs/bootstrap/less/breadcrumbs.less";
+// @import "../libs/bootstrap/less/pagination.less";
+// @import "../libs/bootstrap/less/pager.less";
+// @import "../libs/bootstrap/less/labels.less";
+// @import "../libs/bootstrap/less/badges.less";
+// @import "../libs/bootstrap/less/jumbotron.less";
+// @import "../libs/bootstrap/less/thumbnails.less";
+// @import "../libs/bootstrap/less/alerts.less";
+// @import "../libs/bootstrap/less/progress-bars.less";
+// @import "../libs/bootstrap/less/media.less";
+// @import "../libs/bootstrap/less/list-group.less";
+// @import "../libs/bootstrap/less/panels.less";
+// @import "../libs/bootstrap/less/wells.less";
+// @import "../libs/bootstrap/less/close.less";
 
-@nav-content-height: 50px;
-@nav-height: 200px;
+// Components w/ JavaScript
+// @import "../libs/bootstrap/less/modals.less";
+// @import "../libs/bootstrap/less/tooltip.less";
+// @import "../libs/bootstrap/less/popovers.less";
+@import "../libs/bootstrap/less/carousel.less";
 
-nav {
-  position: fixed;
-  top: 0px;
-  height: @nav-height;
-  // padding-top: ((@nav-height - @nav-content-height)/2);
-  // padding-bottom: ((@nav-height - @nav-content-height)/2);
-  padding-top: 65px;
-  width: 100%;
-  z-index: 1030;
-  text-align: center;
-  background-color: @body-bg;
-  #gradient > .vertical(@body-bg, fade(@body-bg, 10%));
+// Utility classes
+@import "../libs/bootstrap/less/utilities.less";
+@import "../libs/bootstrap/less/responsive-utilities.less";
 
-}
-
-.navbar-custom {
-  width: 100%;
-  position: relative;
-  height: 70px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  margin: 0px;
-
-  ul {
-    padding: 0px;
-    margin: 0px;
-    li {
-      display: inline-block;
-      padding: 4px 4px;
-      margin: 10px 5px;
-      a {
-        font-weight: 400;
-        color: darken(@brand-primary, 50%);
-      }
-      a:hover,
-      a:focus {
-        text-decoration: none;
-        font-weight: 700;
-      }
-    }
-  }
-}
-
-.nav-center {
-  position: absolute;
-  left: 25%;
-  width: 50%;
-  //float: left;
-  // margin-left: 25%;
-}
-
-.nav-right {
-  position: absolute;
-  left: 75%;
-  width: 25%;
-  // float: right;
-}
-
-#index {
-  ul.nav {
-    left: auto;
-    right: 0px;
-  }
-}
-
-
-
-// @media (min-width: 768px) {
-//   nav {
-//     /*margin-top: 149px;
-//     margin-bottom: 99px;*/
-//     margin-top: 15vh;
-//     margin-bottom: 5vh;
-//     /*border-top: 1px solid @lightblue;
-//     border-bottom: 1px solid @lightblue;*/
-//   }
-//   .nav > li > a {
-//     padding-top: 15px;
-//     padding-bottom: 15px;
-//   }
-// }
-
-// @media (max-width: 767px) {
-//   .nav {
-//     background-color: @lightblue;
-//   }
-//   .nav > li {
-//     height: 80px;
-//     width: 32.9%;
-//     border-right: 1px solid @boldBlue;
-//     border-bottom: 1px solid @boldBlue;
-//     font-size: 1.5rem;
-//     padding-top: 20px;
-//     padding-bottom: 12px;
-//   }
-//   .nav > li:last-child {
-//     border-right: none;
-//   }
-//   .nav > li > a {
-//     color: @boldBlue;
-//   }
-// }
-
-
-
-// .img-rounded {
-//   padding-bottom: 26px;
-// }
-
-@splash-padding-top: 50px;
-@splash-height: 600px;
-
-#splash {
-  position: fixed;
-  top: 0px;
-  width: 100%;
-  background-color: @brand-primary;
-  // background-color: desaturate(darken(@body-bg, 50%), 75%);
-  height: @splash-height;
-  // padding-top: @splash-padding-top;
-  margin-top: @nav-height;
-  margin-bottom: @name-margin-top;
-
-  .container {
-    height: 100%;
-    .col-md-12 {
-      height: 100%;
-    }
-  }
-
-  h1 {
-    position: absolute;
-    top: 10%;
-    margin: 0px;
-    color: darken(@body-bg, 10%);
-    overflow: hidden;
-
-    b {
-      font-family: 'Lobster Two', cursive;
-      font-weight: 700;
-      font-style: italic;
-      font-size: 48px;
-      // color: darken(@brand-primary, 50%);
-      color: darken(@body-bg, 90%);
-    }
-
-  }
-}
-
-h3 {
-
-  color: darken(@body-bg, 10%);
-
-  b {
-    font-family: 'Lobster Two', cursive;
-    font-weight: 700;
-    font-style: italic;
-    font-size: 48px;
-    color: darken(@brand-primary, 50%);
-  }
-
-}
-
-
-
-.carousel-control.right,
-.carousel-control.left {
-    background: transparent;
-}
-
-li.carousel-indicators-item {
-  background-color: darken(@brand-primary, 50%);
-  &.active {
-    border: 1px solid darken(@brand-primary, 50%);
-  }
-}
-
-.section {
-  background-color: white;
-  border: 1px solid darken(@body-bg, 10%);
-
-  p {
-    color: darken(@brand-primary, 50%);
-  }
-
-
-  // margin-top: 25vh;
-  // margin-bottom: 25vh;
-
-  padding-top: 100px;
-  padding-bottom: 100px;
-  margin-top: 200px;
-  margin-bottom: 200px;
-
-}
-
-@name-margin-top: 150px;
-#name {
-  height: 560px;
-  margin-top: @nav-height + @splash-height + @name-margin-top;
-}
-
-
-
-// #projects {
-
-// }
-
-// .project2 {
-//   background-color: @white;
-//   margin-top: 25vh;
-//   margin-bottom: 25vh;
-//   border: 1px solid @boldLightBlue;
-// }
-
-// .project3 {
-//   background-color: @white;
-//   margin-top: 25vh;
-//   margin-bottom: 25vh;
-//   border: 1px solid @boldLightBlue;
-// }
-
-// #aim {
-//   padding-top: 10%;
-//   padding-bottom: 20%;
-//   height: 425px;
-//   background-color: @test;
-//   margin-top: 25vh;
-//   margin-bottom: 25vh;
-//   color: @red;
-// }
-
-// #aim .row {
-// }
+// Custom CSS
+@import "custom-styles.less";

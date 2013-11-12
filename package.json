@@ -1,10 +1,21 @@
 {
+  "name": "mySite",
+  "version": "0.1.0",
+  "repository": {
+  	"type": "git",
+  	"url" : "https://github.com/joemercer/mySite.git"
+  },
   "dependencies": {
     "wintersmith": "2.0.x",
-    "underscore": "~1.4.4",
-    "moment": "2.x",
     "underscore": "1.4.x",
+    "moment": "2.x",
     "typogr": "0.5.x"
   },
-  "repository": "none"
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-shell": "~0.5.0",
+    "grunt-wintersmith": "0.0.2",
+    "grunt-contrib-uglify": "~0.2.7",
+    "grunt-contrib-less": "~0.8.1"
+  }
 }

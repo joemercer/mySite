@@ -75,7 +75,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
 
   // Default task(s).
-  //grunt.registerTask('default', ['uglify']);
+  grunt.registerTask('default', ['less', 'uglify', 'wintersmith:build']);
 
   // Register tasks
   grunt.registerTask('build', ['less', 'uglify', 'wintersmith:build']);

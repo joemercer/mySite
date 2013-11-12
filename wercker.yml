@@ -8,6 +8,10 @@ build:
     # A step that executes `npm test` command
     - npm-test
 
+    # A step that will run pre-build grunt tasks
+    - grunt:
+        tasks: less uglify
+
     # A custom script step, name value is used in the UI
     # and the code value contains the command that get executed
     - script:

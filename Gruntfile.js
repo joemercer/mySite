@@ -59,13 +59,24 @@ module.exports = function(grunt) {
       },
       production: {
         options: {
-          cleancss: true
+          cleancss: true,
+          report: true
         },
         files: {
           "build/css/custom.min.css": "contents/css/custom.less"
         }
       }
-    }
+    },
+    watch: {
+      js: {
+        files: ['contents/js/main.js'],
+        tasks: ['uglify']
+      },
+      less: {
+        files: ['contents/css/custom.less'],
+        tasks: ['less']
+      }
+    },
   });
 
   // Load the plugin that provides the "uglify" task.
@@ -73,6 +84,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-wintersmith');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Default task(s).
   grunt.registerTask('default', ['less', 'uglify', 'wintersmith:build']);

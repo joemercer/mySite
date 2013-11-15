@@ -1,0 +1,42 @@
+{
+	"template": "baseLayout.jade",
+  "title": "Joe Mercer - Home",
+
+  "headerLinks": {
+    "blog": {
+      "label": "Blog",
+      "url": "#"
+    },
+    "resume": {
+      "label": "Resume",
+      "url": "#"
+    },
+    "twitter": {
+      "label": "@jomrcr",
+      "url": "#"
+    }
+  },
+
+  "scrollLinks": {
+
+  },
+
+  "splash": {
+    "html": "and <b>joe mercer</b> <br>is my name <br>and coding <br>is my game <br>and getting hired <br>is my aim <br>and dreaming <br>is my claim to fame"
+  },
+
+
+  "about": {
+    "sections": {
+      "main": {
+        "html": "I study mathematics at the <a>University of Waterloo</a> in Canada. When not studying I'm usually asleep, and it's somewhere in between dreams and reality that I find the time to program. I've worked on several projects and have many more waiting in the backlog. I've also been blessed with the opportunity to write code for <a>Tagged</a> in San Francisco and <a>Bazaarvoice</a> in Austin."
+      },
+      "sport": {
+        "html": "Sometimes I like being active also; in high school I played basketball but since I got to university and in Austin I ran a half marathon. Lately I've been doing "
+      },
+      "music": {
+        "html": "I'm kind of a music junkie; once upon a time I used to DJ, and recently I've taken to playing the ukulele, but mostly I just listen. Currently the artist I'm obsessed with is <a>Ghost Beach</a>. If you haven't heard of them you should <a>give them a spin</a>"
+      }
+    }
+  }
+}

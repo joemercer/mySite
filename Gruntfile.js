@@ -29,7 +29,7 @@ module.exports = function(grunt) {
             'contents/libs/bootstrap/js/dropdown.js',
             'contents/libs/bootstrap/js/scrollspy.js',
             'contents/libs/bootstrap/js/transition.js',
-            'contents/js/main.js'
+            'contents/js/styles.js'
           ]
         }
       },
@@ -39,12 +39,12 @@ module.exports = function(grunt) {
           mangle: true
         },
         files: {
-          'build/js/main.min.js': [
+          'contents/js/custom.min.js': [
             'contents/libs/bootstrap/js/carousel.js',
             'contents/libs/bootstrap/js/dropdown.js',
             'contents/libs/bootstrap/js/scrollspy.js',
             'contents/libs/bootstrap/js/transition.js',
-            'contents/js/main.js'
+            'contents/js/styles.js'
           ]
         }
       }
@@ -54,7 +54,7 @@ module.exports = function(grunt) {
         options: {
         },
         files: {
-          "build/css/custom.css": "contents/css/custom.less"
+          "contents/css/custom.css": "contents/css/custom.less"
         }
       },
       production: {
@@ -63,17 +63,17 @@ module.exports = function(grunt) {
           report: true
         },
         files: {
-          "build/css/custom.min.css": "contents/css/custom.less"
+          "contents/css/custom.min.css": "contents/css/custom.less"
         }
       }
     },
     watch: {
       js: {
-        files: ['contents/js/main.js'],
+        files: ['contents/js/styles.js'],
         tasks: ['uglify']
       },
       less: {
-        files: ['contents/css/custom.less'],
+        files: ['contents/css/*.less'],
         tasks: ['less']
       }
     },

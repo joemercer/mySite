@@ -6,6 +6,8 @@ block body
   nav(role="navigation")
     div.navbar-custom
       ul.nav-center
+        li.home.pull-left
+          a ?
         li
           a !{index.headerLinks.blog.label}
         li
@@ -58,7 +60,7 @@ block body
           span.glyphicon.glyphicon-chevron-right
   div#project.section
     div.project2
-      div.container
+      div.container.one
         div.col-md-12
           h3 
             b me.json
@@ -66,6 +68,25 @@ block body
           img.img-responsive.img-rounded(src="../sanFran.jpg", alt"this is some alt test")
         div.col-md-6
           p.lead Twitter was originally for sharing the things that happened to you in between major moments of your life. They even had a really great video about it. Then Twitter pivoted, and made themselves all about the "online conversation". Now I'm not saying Twitter was wrong to pivot, but I don't think they would have been wrong to not pivot. Introducing, me.json...
+        div.col-md-12
+          a.pull-left.back
+            span.glyphicon.glyphicon-arrow-left
+          a.pull-right.more
+            span.glyphicon.glyphicon-plus
+        div.clearfix
+      div.container.two.hideme
+        div.col-md-12
+          h3 
+            b me.json
+        div.col-md-6
+          img.img-responsive.img-rounded(src="../sanFran.jpg", alt"this is some alt test")
+        div.col-md-6
+          p.lead Maga maga maga waga waga waga and then there was some more text
+        div.col-md-12
+          a.pull-left.back
+            span.glyphicon.glyphicon-arrow-left
+          a.pull-right.more
+            span.glyphicon.glyphicon-plus
         div.clearfix
   div#thing3.section
     div.project3

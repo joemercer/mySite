@@ -3319,6 +3319,13 @@ nav {
   text-decoration: none;
   font-weight: 700;
 }
+.navbar-custom ul .home {
+  font-family: 'Lobster Two', cursive;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 48px;
+  color: #001124;
+}
 .nav-center {
   position: absolute;
   left: 25%;
@@ -3396,4 +3403,7 @@ li.carousel-indicators-item.active {
 #name {
   height: 560px;
   margin-top: 950px;
+}
+.hideme {
+  display: none;
 }

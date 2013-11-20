@@ -69,4 +69,11 @@ $(function(){
 
 	});
 
+	// fade in more content when plus button is clicked
+	$('.more').click(function(e){
+		// $('.container.one').fadeOut();
+		// $('.project2').slideDown('slow');
+		$('.container.two').fadeIn('slow');
+	});
+
 });

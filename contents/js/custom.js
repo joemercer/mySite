@@ -1,4 +1,4 @@
-/*! mySite 2013-11-14 */
+/*! mySite 2013-11-18 */
 +function($) {
     "use strict";
     var Carousel = function(element, options) {
@@ -263,5 +263,7 @@
                 "padding-top": navPaddingFinal
             }));
         }
+    }), $(".more").click(function() {
+        $(".container.two").fadeIn("slow");
     });
 });

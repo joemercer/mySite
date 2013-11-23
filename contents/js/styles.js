@@ -1,5 +1,18 @@
 $(function(){
 
+	$('.block').click(function(e){
+		// assume this is a small joe
+		var newWidth = $(this).parent().width();
+		$(this).stop().animate({width:newWidth},2000,function(){
+			$(this).addClass('expanded');
+		});
+
+		//$(this).toggleClass('large');
+
+	});
+
+
+
 	var navHeightInitial = $('nav').outerHeight();
 	var navHeightFinal = 70;
 

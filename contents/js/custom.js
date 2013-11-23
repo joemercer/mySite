@@ -1,4 +1,4 @@
-/*! mySite 2013-11-18 */
+/*! mySite 2013-11-23 */
 +function($) {
     "use strict";
     var Carousel = function(element, options) {
@@ -209,6 +209,14 @@
         $.support.transition = transitionEnd();
     });
 }(window.jQuery), $(function() {
+    $(".block").click(function() {
+        var newWidth = $(this).parent().width();
+        $(this).stop().animate({
+            width: newWidth
+        }, 2e3, function() {
+            $(this).addClass("expanded");
+        });
+    });
     {
         var navHeightInitial = $("nav").outerHeight(), navHeightFinal = 70, navPaddingInitial = 65, navPaddingFinal = 0, splashHeight = $("#splash").outerHeight();
         $("#splash h1").outerHeight(), $("#splash").offset().top + splashHeight;

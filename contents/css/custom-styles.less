@@ -88,176 +88,126 @@ nav {
   }
 }
 
+// NEW STUFF
 
-
-// @media (min-width: 768px) {
-//   nav {
-//     /*margin-top: 149px;
-//     margin-bottom: 99px;*/
-//     margin-top: 15vh;
-//     margin-bottom: 5vh;
-//     /*border-top: 1px solid @lightblue;
-//     border-bottom: 1px solid @lightblue;*/
-//   }
-//   .nav > li > a {
-//     padding-top: 15px;
-//     padding-bottom: 15px;
-//   }
-// }
-
-// @media (max-width: 767px) {
-//   .nav {
-//     background-color: @lightblue;
-//   }
-//   .nav > li {
-//     height: 80px;
-//     width: 32.9%;
-//     border-right: 1px solid @boldBlue;
-//     border-bottom: 1px solid @boldBlue;
-//     font-size: 1.5rem;
-//     padding-top: 20px;
-//     padding-bottom: 12px;
-//   }
-//   .nav > li:last-child {
-//     border-right: none;
-//   }
-//   .nav > li > a {
-//     color: @boldBlue;
-//   }
-// }
+// 1140
+// 940
+// 720
+//
+// not used
+@blockBorderWidth: 1px;
 
 
 
-// .img-rounded {
-//   padding-bottom: 26px;
-// }
+@blockMargin: 15px;
 
-@splash-padding-top: 50px;
-@splash-height: 600px;
+.content {
+  margin: 200px auto;
+  background-color: blue;
+}
 
-#splash {
-  position: fixed;
-  top: 0px;
-  width: 100%;
-  background-color: @brand-primary;
-  // background-color: desaturate(darken(@body-bg, 50%), 75%);
-  height: @splash-height;
-  // padding-top: @splash-padding-top;
-  margin-top: @nav-height;
-  margin-bottom: @name-margin-top;
+.block {
+  position: relative;
+  float: left;
+  background: white;
+  margin: @blockMargin;
 
-  .container {
-    height: 100%;
-    .col-md-12 {
-      height: 100%;
-    }
+  .block-content {
+    height: 80%;
   }
 
-  h1 {
+  .block-footer {
     position: absolute;
-    top: 10%;
-    margin: 0px;
-    color: darken(@body-bg, 10%);
-    overflow: hidden;
+    bottom: 0px;
+    width: 100%;
+    height: 54px;
 
-    b {
-      font-family: 'Lobster Two', cursive;
-      font-weight: 700;
-      font-style: italic;
-      font-size: 48px;
-      // color: darken(@brand-primary, 50%);
-      color: darken(@body-bg, 90%);
+
+    .expand {
+      position: absolute;
+      right: 0px;
+      bottom: 0px;
+      font-size: 36px;
+      margin: 0px 12px 12px 0px;
     }
-
   }
 }
 
-h3 {
-
-  color: darken(@body-bg, 10%);
-
-  b {
-    font-family: 'Lobster Two', cursive;
-    font-weight: 700;
-    font-style: italic;
-    font-size: 48px;
-    color: darken(@brand-primary, 50%);
+@xsWidth: 100%;
+@xsNumBlocks: 1;
+@xsMargin: 0px;
+@media (max-width: @screen-xs-max) {
+  .content {
+    width: @xsWidth;
   }
-
-}
-
-
-
-.carousel-control.right,
-.carousel-control.left {
-    background: transparent;
-}
-
-li.carousel-indicators-item {
-  background-color: darken(@brand-primary, 50%);
-  &.active {
-    border: 1px solid darken(@brand-primary, 50%);
+  .block {
+    width: @xsWidth;
+    height: auto;
+    margin: @xsMargin;
+    margin-top: @blockMargin;
+    margin-bottom: @blockMargin;
   }
 }
-
-.section {
-  background-color: white;
-  border: 1px solid darken(@body-bg, 10%);
-
-  p {
-    color: darken(@brand-primary, 50%);
+@smWidth: 720px;
+@smNumBlocks: 2;
+@smMargin: @blockMargin;
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+  .content {
+    width: @smWidth;
   }
-
-
-  // margin-top: 25vh;
-  // margin-bottom: 25vh;
-
-  padding-top: 100px;
-  padding-bottom: 100px;
-  margin-top: 200px;
-  margin-bottom: 200px;
-
+  .block {
+    width: ( @smWidth / @smNumBlocks ) - 2*@smMargin;
+    height: ( @smWidth / @smNumBlocks ) - 2*@smMargin;
+  }
+}
+@mdWidth: 940px;
+@mdNumBlocks: 3;
+@mdMargin: @blockMargin;
+@media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+  .content {
+    width: @mdWidth;
+  }
+  .block {
+    width: ( @mdWidth / @mdNumBlocks ) - 2*@mdMargin;
+    height: @mdWidth / @mdNumBlocks - 2*@mdMargin;
+  }
+}
+@lgWidth: 1140px;
+@lgNumBlocks: 4;
+@lgMargin: @blockMargin;
+@media (min-width: @screen-lg-min) {
+  .content {
+    width: @lgWidth;
+  }
+  .block {
+    width: ( @lgWidth / @lgNumBlocks ) - 2*@lgMargin;
+    height: @lgWidth / @lgNumBlocks - 2*@lgMargin;
+  }
 }
 
-@name-margin-top: 150px;
-#name {
-  height: 560px;
-  margin-top: @nav-height + @splash-height + @name-margin-top;
+.block-preview {
+
+}
+.block-full {
 }
 
-.hideme {
-  display: none;
+// .block {
+//   display: inline-block;
+//   width: 200px;
+//   // min-width: 42px;
+//   height: 200px;
+//   border: 1px solid black;
+//   margin: 15px 0px;
+//   padding: 10px 10px;
+//   background: red;
+//   float: left;
+// }
+.block.expanded {
+  width: 100% !important;
+  height: auto;
+  margin-left: 0px;
+  margin-right: 0px;
 }
 
 
 
-// #projects {
-
-// }
-
-// .project2 {
-//   background-color: @white;
-//   margin-top: 25vh;
-//   margin-bottom: 25vh;
-//   border: 1px solid @boldLightBlue;
-// }
-
-// .project3 {
-//   background-color: @white;
-//   margin-top: 25vh;
-//   margin-bottom: 25vh;
-//   border: 1px solid @boldLightBlue;
-// }
-
-// #aim {
-//   padding-top: 10%;
-//   padding-bottom: 20%;
-//   height: 425px;
-//   background-color: @test;
-//   margin-top: 25vh;
-//   margin-bottom: 25vh;
-//   color: @red;
-// }
-
-// #aim .row {
-// }

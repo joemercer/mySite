@@ -3156,13 +3156,14 @@ nav {
 #splash {
   position: fixed;
   top: 0px;
-  width: 96%;
+  width: 100%;
   left: 50%;
-  margin-left: -48%;
+  margin-left: -50%;
   background-color: #5a7696;
   height: 600px;
   margin-top: 200px;
   margin-bottom: 0px;
+  padding: 0px 20px;
 }
 #splash h1 {
   position: absolute;
@@ -3189,8 +3190,7 @@ h3 b {
   color: #000000;
 }
 .content {
-  margin: 1000px auto;
-  background-color: blue;
+  margin: 900px auto;
 }
 .block {
   position: relative;

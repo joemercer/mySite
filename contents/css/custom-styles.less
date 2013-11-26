@@ -24,7 +24,6 @@ body {
 
 @nav-content-height: 50px;
 @nav-height: 200px;
-
 nav {
   position: fixed;
   top: 0px;
@@ -100,18 +99,21 @@ nav {
 @splash-padding-top: 50px;
 @splash-height: 600px;
 
+@splash-width: 100%;
+
 #splash {
   position: fixed;
   top: 0px;
-  width: 96%;
+  width: @splash-width;
   left: 50%;
-  margin-left: -48%; // half the width
+  margin-left: -1*@splash-width/2; // half the width
   background-color: @brand-primary;
   // background-color: desaturate(darken(@body-bg, 50%), 75%);
   height: @splash-height;
   // padding-top: @splash-padding-top;
-  margin-top: 200px;
+  margin-top: @nav-height;
   margin-bottom: 0px;
+  padding: 0px 20px;
 
   h1 {
     position: absolute;
@@ -146,6 +148,7 @@ h3 {
 
 }
 
+
 // NEW STUFF
 
 // 1140
@@ -156,13 +159,13 @@ h3 {
 // @blockBorderWidth: 1px;
 
 
-
-@blockMargin: 15px;
+@content-margin-top: @nav-height + @splash-height + 100px;
 
 .content {
-  margin: 1000px auto;
-  background-color: blue;
+  margin: @content-margin-top auto;
 }
+
+@blockMargin: 15px;
 
 .block {
   position: relative;

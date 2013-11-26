@@ -1,13 +1,26 @@
 $(function(){
 
-	$('.block').click(function(e){
+	$('.block .expand').click(function(e){
 		// assume this is a small joe
-		var newWidth = $(this).parent().width();
-		$(this).stop().animate({width:newWidth},2000,function(){
+		var $block = $(this).parents('.block');
+
+		var newWidth = $block.parents('.content').width();
+		$block.stop().animate({width:newWidth},2000,function(){
 			$(this).addClass('expanded');
 		});
 
+		$block.find('.block-preview').toggleClass('hide');
+		$block.find('.block-full').toggleClass('hide');
+
+
 		//$(this).toggleClass('large');
+
+		// 1. animate removing margin
+		// 2. animate width expanding
+		// 3. animate height expanding
+		// 4. spin plus(while happening)
+		// 5. switch plus to minus
+		// 6. spin minus
 
 	});
 

@@ -3,33 +3,31 @@ extends baseLayout
 block body
   - var index = contents['index.json'].metadata;
   - var me = contents.authors['baker.json'].metadata;
-  div
+  div.container
     nav(role="navigation")
       div.navbar-custom
         ul.nav-center
-          li.home.pull-left
-            a ?
           li
             a !{index.headerLinks.blog.label}
           li
             a !{index.headerLinks.resume.label}
           li
             a !{index.headerLinks.twitter.label}
-        ul.nav-right
-          li#index.dropdown
-            a.dropdown-toggle(href="#", data-toggle="dropdown") Index 
-              b.caret
-            ul.nav.dropdown-menu
-              li
-                a(href="#name") Hello
-              li
-                a(href="#projects") Project 1
-              li
-                a(href="#aim") Project 2
+    div#splash
+      h1 HELLO
     div.content
-      div#splash
-        h1 !{index.splash.html}
-      div.block A lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+      div.block
+        div.block-content
+          div.block-preview Hey, my name is Joe Mercer.
+      div.block
+        div.block-header
+        div.block-content
+          div.block-preview
+            | Hey, my name is Joe Mercer.
+          div.block-full.hide
+            | Hey, my name is Joe Mercer. I grew up in Redmond, WA but currently I study Mathematics at the University of Waterloo.
+        div.block-footer
+          span.glyphicon.glyphicon-plus.expand
       div.block
         div.block-header
         div.block-content
@@ -39,7 +37,7 @@ block body
             | even more text that would be shown in the expanded version of this crazy ass block
         div.block-footer
           span.glyphicon.glyphicon-plus.expand
-      div.block C
+      div.block !{index.about.sections.main.html}
       div.block.expanded D
       div.block A
       div.block B

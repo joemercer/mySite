@@ -217,12 +217,14 @@ h3 {
     width: @smWidth;
   }
   .block {
-    width: ( @smWidth / @smNumBlocks ) - 2*@smMargin;
+    @width: (@smWidth / @smNumBlocks) - 2*@smMargin;
+    width: @width;
     height: ( @smWidth / @smNumBlocks ) - 2*@smMargin;
   }
+
 }
 @mdWidth: 940px;
-@mdNumBlocks: 3;
+@mdNumBlocks: 2;
 @mdMargin: @blockMargin;
 @media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
   .content {
@@ -234,7 +236,7 @@ h3 {
   }
 }
 @lgWidth: 1140px;
-@lgNumBlocks: 4;
+@lgNumBlocks: 3;
 @lgMargin: @blockMargin;
 @media (min-width: @screen-lg-min) {
   .content {
@@ -246,11 +248,10 @@ h3 {
   }
 }
 
-.block-preview {
 
-}
-.block-full {
-}
+
+
+
 
 // .block {
 //   display: inline-block;
@@ -268,6 +269,28 @@ h3 {
   height: auto; //but we should give this a max height
   margin-left: 0px;
   margin-right: 0px;
+
+  // min-height: 500px;
+
+}
+
+
+
+#about {
+
+  .block-preview {
+
+    &.small {
+      font-size: 49px;
+    }
+    &.medium {
+      font-size: 68px;
+    }
+    &.large {
+      font-size: 52px;
+    }
+  }
+
 }
 
 

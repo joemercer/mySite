@@ -3240,8 +3240,8 @@ h3 b {
     width: 940px;
   }
   .block {
-    width: 283.3333333333333px;
-    height: 283.3333333333333px;
+    width: 440px;
+    height: 440px;
   }
 }
 @media (min-width: 1200px) {
@@ -3249,8 +3249,8 @@ h3 b {
     width: 1140px;
   }
   .block {
-    width: 255px;
-    height: 255px;
+    width: 350px;
+    height: 350px;
   }
 }
 .block.expanded {
@@ -3258,4 +3258,13 @@ h3 b {
   height: auto;
   margin-left: 0px;
   margin-right: 0px;
+}
+#about .block-preview.small {
+  font-size: 49px;
+}
+#about .block-preview.medium {
+  font-size: 68px;
+}
+#about .block-preview.large {
+  font-size: 52px;
 }

@@ -1,4 +1,4 @@
-/*! mySite 2013-11-24 */
+/*! mySite 2013-12-01 */
 +function($) {
     "use strict";
     var Carousel = function(element, options) {
@@ -208,14 +208,59 @@
     }, $(function() {
         $.support.transition = transitionEnd();
     });
-}(window.jQuery), $(function() {
-    $(".block .expand").click(function() {
-        var $block = $(this).parents(".block"), newWidth = $block.parents(".content").width();
-        $block.stop().animate({
+}(window.jQuery), $.fn.animateRotate = function(angle, duration, easing, complete) {
+    var args = $.speed(duration, easing, complete), step = args.step;
+    return this.each(function(i, e) {
+        args.step = function(now) {
+            return $.style(e, "transform", "rotate(" + now + "deg)"), step ? step.apply(this, arguments) : void 0;
+        }, $({
+            deg: 0
+        }).animate({
+            deg: angle
+        }, args);
+    });
+};
+
+var LARGE_MAX = 1200, MEDIUM_MAX = 992, SMALL_MAX = 768, $blocks, $blockPreviews, $blockExpands;
+
+$(function() {
+    "use strict";
+    $blocks = $(".block"), $blockPreviews = $blocks.find(".block-preview"), $blockExpands = $blocks.find(".expand");
+    var $window = $(window);
+    $window.resize(function() {
+        var width = $window.width();
+        width >= LARGE_MAX ? $blockPreviews.removeClass("medium").removeClass("small").addClass("large") : width >= MEDIUM_MAX && LARGE_MAX > width ? $blockPreviews.removeClass("large").removeClass("small").addClass("medium") : width >= SMALL_MAX && MEDIUM_MAX > width ? $blockPreviews.removeClass("large").removeClass("medium").addClass("small") : SMALL_MAX > width && $blockPreviews.removeClass("large").removeClass("medium").removeClass("small");
+    }), $window.resize();
+    var BLOCK_CONTENT_PADDING = 20, BLOCK_FOOTER_HEIGHT = 54, EXPAND_FADE_DURATION = 3e3, BLOCK_EXPANDED_MARGIN = 0, EXPAND_WIDTH_DURATION = 2e3, EXPAND_HEIGHT_DURATION = 2e3, EXPAND_ROTATE_DEGREES = 3600, EXPAND_ROTATE_DURATION = 2e3, EXPAND_SCROLL_DURATION = 2e3;
+    $blockExpands.click(function(e) {
+        var $expandTarget = $(e.target), $block = $expandTarget.parents(".block"), $blockPreview = $block.find(".block-preview"), $blockFull = $block.find(".block-full");
+        $block.find(".block-preview").fadeOut(EXPAND_FADE_DURATION / 2, function() {
+            $blockPreview.toggleClass("hide"), $blockFull.fadeIn(EXPAND_FADE_DURATION / 2).toggleClass("hide");
+        });
+        var newWidth = $block.parents(".content").width();
+        $block.animate({
+            "margin-left": BLOCK_EXPANDED_MARGIN,
+            "margin-right": BLOCK_EXPANDED_MARGIN,
             width: newWidth
-        }, 2e3, function() {
-            $(this).addClass("expanded");
-        }), $block.find(".block-preview").toggleClass("hide"), $block.find(".block-full").toggleClass("hide");
+        }, EXPAND_WIDTH_DURATION, function() {
+            $block.animate({
+                height: BLOCK_FOOTER_HEIGHT + 2 * BLOCK_CONTENT_PADDING + $blockFull.height()
+            }, EXPAND_HEIGHT_DURATION, function() {
+                $block.addClass("expanded");
+            });
+        }), $expandTarget.animateRotate(EXPAND_ROTATE_DEGREES / 2, EXPAND_ROTATE_DURATION / 2, void 0, function() {
+            $expandTarget.removeClass("glyphicon-plus").addClass("glyphicon-minus").animateRotate(EXPAND_ROTATE_DEGREES / 2, EXPAND_ROTATE_DURATION / 2);
+        });
+        var indexOfBlock = $blocks.index($block);
+        if (0 !== indexOfBlock) {
+            var previousBlockPositionLeft = $blocks.eq(indexOfBlock - 1).position().left, thisBlockPositionLeft = $block.position().left;
+            if (thisBlockPositionLeft > previousBlockPositionLeft) {
+                var newScrollTop = $window.scrollTop() + $block.outerHeight(!0);
+                $("html, body").animate({
+                    scrollTop: newScrollTop
+                }, EXPAND_SCROLL_DURATION);
+            }
+        }
     });
     {
         var navHeightInitial = $("nav").outerHeight(), navHeightFinal = 70, navPaddingInitial = 65, navPaddingFinal = 0, splashHeight = $("#splash").outerHeight();
@@ -235,9 +280,7 @@
                 var opacity = 1 - Math.min(scrolled / splashHeight, 1);
                 $("#splash").css({
                     opacity: opacity
-                });
-                var opacity = 1 - Math.min(scrolled / splashHeight, 1);
-                $("#splash h1").css({
+                }), opacity = 1 - Math.min(scrolled / splashHeight, 1), $("#splash h1").css({
                     opacity: opacity
                 });
                 var height = Math.max(splashHeight - scrolled, 0);
@@ -251,15 +294,14 @@
             }), $("#splash").css({
                 height: 0
             }));
-            var start = end, end = start + navHeightInitial - navHeightFinal;
-            if (start > scrolled) $("nav").css({
+            if (start = end, end = start + navHeightInitial - navHeightFinal, start > scrolled) $("nav").css({
                 height: navHeightInitial
             }), $("nav").css({
                 "padding-top": navPaddingInitial
             }); else if (scrolled >= start && end >= scrolled) {
-                var relScroll = scrolled - start, height = Math.max(navHeightInitial - relScroll, navHeightFinal);
+                var relScroll = scrolled - start, newHeight = Math.max(navHeightInitial - relScroll, navHeightFinal);
                 $("nav").css({
-                    height: height
+                    height: newHeight
                 });
                 var padding = Math.max(navPaddingInitial - relScroll, navPaddingFinal);
                 $("nav").css({

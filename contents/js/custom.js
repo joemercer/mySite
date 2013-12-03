@@ -265,7 +265,7 @@ $(function() {
         var width = $window.width();
         width >= LARGE_MAX ? $blockPreviews.removeClass("medium").removeClass("small").addClass("large") : width >= MEDIUM_MAX && LARGE_MAX > width ? $blockPreviews.removeClass("large").removeClass("small").addClass("medium") : width >= SMALL_MAX && MEDIUM_MAX > width ? $blockPreviews.removeClass("large").removeClass("medium").addClass("small") : SMALL_MAX > width && $blockPreviews.removeClass("large").removeClass("medium").removeClass("small");
     }), $window.resize();
-    var EXPAND_FADE_DURATION = 3e3, BLOCK_EXPANDED_MARGIN = 0, EXPAND_WIDTH_DURATION = 2e3, EXPAND_HEIGHT_DURATION = 2e3, EXPAND_ROTATE_DEGREES = 3600, EXPAND_ROTATE_DURATION = 2e3, EXPAND_SCROLL_DURATION = 2e3, EXPAND_SCROLL_TOP_OFFSET = .33;
+    var BLOCK_EXPANDED_MARGIN = 0, EXPAND_ROTATE_DEGREES = 3600, EXPAND_SCROLL_TOP_OFFSET = .33, EXPAND_FADE_DURATION = 3e3, EXPAND_SIZE_DURATION = 4e3, EXPAND_WIDTH_DURATION = EXPAND_SIZE_DURATION / 2, EXPAND_HEIGHT_DURATION = EXPAND_SIZE_DURATION / 2, EXPAND_ROTATE_DURATION = 2e3, EXPAND_SCROLL_DURATION = 2e3, SHRINK_FADE_DURATION = 3e3, SHRINK_SIZE_DURATION = 4e3, SHRINK_WIDTH_DURATION = SHRINK_SIZE_DURATION / 2, SHRINK_HEIGHT_DURATION = SHRINK_SIZE_DURATION / 2, SHRINK_ROTATE_DURATION = 2e3, SHRINK_SCROLL_DURATION = 2e3;
     $changeBlockSize.click(function(e) {
         var newScrollTop, $target = $(e.target), $block = $target.parents(".block"), $blockPreview = $block.find(".block-preview"), $blockFull = $block.find(".block-full"), $blockFooter = $block.find(".block-footer");
         if ($target.hasClass("expand")) {
@@ -291,24 +291,24 @@ $(function() {
             }, EXPAND_SCROLL_DURATION);
         }
         if ($target.hasClass("shrink")) {
-            $blockFull.fadeOut(EXPAND_FADE_DURATION / 2, function() {
-                $blockFull.toggleClass("hide"), $blockPreview.fadeIn(EXPAND_FADE_DURATION / 2).toggleClass("hide");
+            $blockFull.fadeOut(SHRINK_FADE_DURATION / 2, function() {
+                $blockFull.toggleClass("hide"), $blockPreview.fadeIn(SHRINK_FADE_DURATION / 2).toggleClass("hide");
             }), $block.animate({
                 height: getBlockOuterHeight()
-            }, EXPAND_HEIGHT_DURATION, function() {
+            }, SHRINK_HEIGHT_DURATION, function() {
                 $block.animate({
                     "margin-left": getBlockMargin(),
                     "margin-right": getBlockMargin(),
                     width: getBlockOuterWidth()
-                }, EXPAND_WIDTH_DURATION);
-            }).removeClass("expanded"), $target.animateRotate(EXPAND_ROTATE_DEGREES / 2, EXPAND_ROTATE_DURATION / 2, void 0, function() {
+                }, SHRINK_WIDTH_DURATION);
+            }).removeClass("expanded"), $target.animateRotate(SHRINK_ROTATE_DEGREES / 2, SHRINK_ROTATE_DURATION / 2, void 0, function() {
                 $target.removeClass("shrink").removeClass("glyphicon-minus").addClass("expand").addClass("glyphicon-plus").animateRotate(EXPAND_ROTATE_DEGREES / 2, EXPAND_ROTATE_DURATION / 2);
             });
             var previousBlockPositionRight = getPrevBlock($block).position().left + getPrevBlock($block).width(), thisBlockPositionRight = $block.position().left + $block.width();
-            newScrollTop = thisBlockPositionRight > previousBlockPositionRight ? getBlockOnPrevRow($block).offset().top - $window.height() * EXPAND_SCROLL_TOP_OFFSET : getBlockOnNextRow($block).offset().top - $window.height() * EXPAND_SCROLL_TOP_OFFSET, 
+            newScrollTop = thisBlockPositionRight > previousBlockPositionRight ? getBlockOnPrevRow($block).offset().top - $window.height() * SHRINK_SCROLL_TOP_OFFSET : getBlockOnNextRow($block).offset().top - $window.height() * SHRINK_SCROLL_TOP_OFFSET, 
             $("html, body").animate({
                 scrollTop: newScrollTop
-            }, EXPAND_SCROLL_DURATION);
+            }, SHRINK_SCROLL_DURATION);
         }
     });
     {

@@ -128,16 +128,29 @@ $(function(){
 
 
 
+	var BLOCK_EXPANDED_MARGIN = 0;
 
+	var EXPAND_ROTATE_DEGREES = 3600; //degrees
+	var EXPAND_SCROLL_TOP_OFFSET = 0.33; //percent of window
+
+	// !!! THIS NEEDS TO BE HOOKED INTO EVERYTHING
+	var CHANGE_SIZE_DURATION = 3000;
+	// additionally we can add in like FadeInDuration seperate from fadeOutDuration
+	// and have FADE_DURATION just refer to how long the whole thing should take
 
 	var EXPAND_FADE_DURATION = 3000; // has to be enough that we fadeIn before changing the height
-	var BLOCK_EXPANDED_MARGIN = 0;
-	var EXPAND_WIDTH_DURATION = 2000;
-	var EXPAND_HEIGHT_DURATION = 2000;
-	var EXPAND_ROTATE_DEGREES = 3600; //degrees
+	var EXPAND_SIZE_DURATION = 4000;
+	var EXPAND_WIDTH_DURATION = EXPAND_SIZE_DURATION/2;
+	var EXPAND_HEIGHT_DURATION = EXPAND_SIZE_DURATION/2;
 	var EXPAND_ROTATE_DURATION = 2000;
 	var EXPAND_SCROLL_DURATION = 2000;
-	var EXPAND_SCROLL_TOP_OFFSET = 0.33; //percent of window
+
+	var SHRINK_FADE_DURATION = 3000; // has to be enough that we fadeIn before changing the height
+	var SHRINK_SIZE_DURATION = 4000;
+	var SHRINK_WIDTH_DURATION = SHRINK_SIZE_DURATION/2;
+	var SHRINK_HEIGHT_DURATION = SHRINK_SIZE_DURATION/2;
+	var SHRINK_ROTATE_DURATION = 2000;
+	var SHRINK_SCROLL_DURATION = 2000;
 
 	$changeBlockSize.click(function(e){
 		var $target = $(e.target);
@@ -195,25 +208,27 @@ $(function(){
 		// shrink the block
 		if ($target.hasClass('shrink')) {
 			// fadeOut the block-full
-			$blockFull.fadeOut(EXPAND_FADE_DURATION/2, function(){
+			$blockFull.fadeOut(SHRINK_FADE_DURATION/2, function(){
 				$blockFull.toggleClass('hide');
 				// fadeIn the block-preview
-				$blockPreview.fadeIn(EXPAND_FADE_DURATION/2).toggleClass('hide');
+				$blockPreview.fadeIn(SHRINK_FADE_DURATION/2).toggleClass('hide');
 			});
 
 			// animate the block shrinking
 			// first animate the height
-			$block.animate({height:getBlockOuterHeight()},EXPAND_HEIGHT_DURATION,function(){
+			$block.animate({
+				height:getBlockOuterHeight()
+			},SHRINK_HEIGHT_DURATION,function(){
 				// then animate the width
 				$block.animate({
 					'margin-left':getBlockMargin(),
 					'margin-right':getBlockMargin(),
 					width:getBlockOuterWidth()
-				},EXPAND_WIDTH_DURATION);
+				},SHRINK_WIDTH_DURATION);
 			}).removeClass('expanded');
 
 			// switch the plus to a minus
-			$target.animateRotate(EXPAND_ROTATE_DEGREES/2, EXPAND_ROTATE_DURATION/2, undefined, function(){
+			$target.animateRotate(SHRINK_ROTATE_DEGREES/2, SHRINK_ROTATE_DURATION/2, undefined, function(){
 				$target.removeClass('shrink').removeClass('glyphicon-minus').addClass('expand').addClass('glyphicon-plus')
 					.animateRotate(EXPAND_ROTATE_DEGREES/2, EXPAND_ROTATE_DURATION/2);
 			});
@@ -222,14 +237,14 @@ $(function(){
 			var previousBlockPositionRight = getPrevBlock($block).position().left + getPrevBlock($block).width();
 			var thisBlockPositionRight = $block.position().left + $block.width();
 			if (previousBlockPositionRight < thisBlockPositionRight) { // => block reduction will reduce number of rows
-				newScrollTop = getBlockOnPrevRow($block).offset().top - ($window.height()*EXPAND_SCROLL_TOP_OFFSET);
+				newScrollTop = getBlockOnPrevRow($block).offset().top - ($window.height()*SHRINK_SCROLL_TOP_OFFSET);
 			}
 			else { // => block reduction will not reduce number of rows
-				newScrollTop = getBlockOnNextRow($block).offset().top - ($window.height()*EXPAND_SCROLL_TOP_OFFSET);
+				newScrollTop = getBlockOnNextRow($block).offset().top - ($window.height()*SHRINK_SCROLL_TOP_OFFSET);
 			}
 			$('html, body').animate({
 				scrollTop: newScrollTop
-			}, EXPAND_SCROLL_DURATION);
+			}, SHRINK_SCROLL_DURATION);
 
 		}
 	});
@@ -239,6 +254,7 @@ $(function(){
 
 
 
+	// scroll away the splash and scroll up the nav
 	var navHeightInitial = $('nav').outerHeight();
 	var navHeightFinal = 70;
 

@@ -265,6 +265,12 @@ $(function(){
 	var splashHeaderHeight = $('#splash h1').outerHeight();
 	var splashTopOffset = $('#splash').offset().top + splashHeight;
 
+	var inPreSplash = false;
+	var inPostSplash = false;
+
+	var inPreNav = false;
+	var inPostNav = false;
+
 	$(window).scroll(function(){
 
 		var scrolled = $(this).scrollTop();
@@ -274,10 +280,12 @@ $(function(){
 		// Fade out the splash
 		var start = 0;
 		var end = start + splashHeight;
-		if (scrolled < start) {
+		if (!inPreSplash && scrolled < start) {
+			console.log('preSplash');
 			$("#splash").css({opacity:1});
 			$("#splash h1").css({opacity:1});
 			$("#splash").css({height:600});
+			inPreSplash = true;
 		}
 		else if (scrolled >= start && scrolled <= end) {
 
@@ -292,19 +300,26 @@ $(function(){
 			// reduce height
 			var height = Math.max(splashHeight - scrolled, 0);
 			$("#splash").css({height:height});
+
+			// reset pre and post triggers
+			inPreSplash = false;
+			inPostSplash = false;
 		}
-		else if (scrolled > end) {
+		else if (!inPostSplash && scrolled > end) {
+			console.log('postSplash');
 			$("#splash").css({opacity:0});
 			$("#splash h1").css({opacity:0});
 			$("#splash").css({height:0});
+			inPostSplash = true;
 		}
 
 		// Shorten the nav
 		start = end;
 		end = start + navHeightInitial - navHeightFinal;
-		if (scrolled < start) {
+		if (!inPreNav && scrolled < start) {
 			$('nav').css({height:navHeightInitial});
 			$('nav').css({'padding-top':navPaddingInitial});
+			inPreNav = true;
 		}
 		else if (scrolled >= start && scrolled <= end) {
 			var relScroll = scrolled - start;
@@ -316,10 +331,15 @@ $(function(){
 			// reduce the padding of the nav
 			var padding = Math.max(navPaddingInitial - relScroll, navPaddingFinal);
 			$('nav').css({'padding-top':padding});
+
+			// reset pre and post triggers
+			inPreNav = false;
+			inPostNav = false;
 		}
-		else if (scrolled > end) {
+		else if (!inPostNav && scrolled > end) {
 			$('nav').css({height:navHeightFinal});
 			$('nav').css({'padding-top':navPaddingFinal});
+			inPostNav = true;
 		}
 
 	});

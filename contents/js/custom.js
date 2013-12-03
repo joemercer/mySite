@@ -311,21 +311,19 @@ $(function() {
             }, SHRINK_SCROLL_DURATION);
         }
     });
-    {
-        var navHeightInitial = $("nav").outerHeight(), navHeightFinal = 70, navPaddingInitial = 65, navPaddingFinal = 0, splashHeight = $("#splash").outerHeight();
-        $("#splash h1").outerHeight(), $("#splash").offset().top + splashHeight;
-    }
+    var navHeightInitial = $("nav").outerHeight(), navHeightFinal = 70, navPaddingInitial = 65, navPaddingFinal = 0, splashHeight = $("#splash").outerHeight(), inPreSplash = ($("#splash h1").outerHeight(), 
+    $("#splash").offset().top + splashHeight, !1), inPostSplash = !1, inPreNav = !1, inPostNav = !1;
     $(window).scroll(function() {
         var scrolled = $(this).scrollTop();
         if (console.log("scroll at", scrolled), !(0 > scrolled)) {
             var start = 0, end = start + splashHeight;
-            if (start > scrolled) $("#splash").css({
+            if (!inPreSplash && start > scrolled) console.log("preSplash"), $("#splash").css({
                 opacity: 1
             }), $("#splash h1").css({
                 opacity: 1
             }), $("#splash").css({
                 height: 600
-            }); else if (scrolled >= start && end >= scrolled) {
+            }), inPreSplash = !0; else if (scrolled >= start && end >= scrolled) {
                 var opacity = 1 - Math.min(scrolled / splashHeight, 1);
                 $("#splash").css({
                     opacity: opacity
@@ -335,19 +333,19 @@ $(function() {
                 var height = Math.max(splashHeight - scrolled, 0);
                 $("#splash").css({
                     height: height
-                });
-            } else scrolled > end && ($("#splash").css({
+                }), inPreSplash = !1, inPostSplash = !1;
+            } else !inPostSplash && scrolled > end && (console.log("postSplash"), $("#splash").css({
                 opacity: 0
             }), $("#splash h1").css({
                 opacity: 0
             }), $("#splash").css({
                 height: 0
-            }));
-            if (start = end, end = start + navHeightInitial - navHeightFinal, start > scrolled) $("nav").css({
+            }), inPostSplash = !0);
+            if (start = end, end = start + navHeightInitial - navHeightFinal, !inPreNav && start > scrolled) $("nav").css({
                 height: navHeightInitial
             }), $("nav").css({
                 "padding-top": navPaddingInitial
-            }); else if (scrolled >= start && end >= scrolled) {
+            }), inPreNav = !0; else if (scrolled >= start && end >= scrolled) {
                 var relScroll = scrolled - start, newHeight = Math.max(navHeightInitial - relScroll, navHeightFinal);
                 $("nav").css({
                     height: newHeight
@@ -355,12 +353,12 @@ $(function() {
                 var padding = Math.max(navPaddingInitial - relScroll, navPaddingFinal);
                 $("nav").css({
                     "padding-top": padding
-                });
-            } else scrolled > end && ($("nav").css({
+                }), inPreNav = !1, inPostNav = !1;
+            } else !inPostNav && scrolled > end && ($("nav").css({
                 height: navHeightFinal
             }), $("nav").css({
                 "padding-top": navPaddingFinal
-            }));
+            }), inPostNav = !0);
         }
     }), $(".more").click(function() {
         $(".container.two").fadeIn("slow");

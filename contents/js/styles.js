@@ -1,5 +1,3 @@
-// Chris fleharty cfleharty@lwsd.org 3:33 PM
-
 $.fn.animateRotate = function(angle, duration, easing, complete) {
     var args = $.speed(duration, easing, complete);
     var step = args.step;
@@ -22,7 +20,17 @@ var SMALL_MAX = 768;
 // cache the commonly accessed elements
 var $blocks;
 var $blockPreviews;
-var $blockExpands;
+var $changeBlockSize;
+
+var getNextBlock;
+var getPrevBlock;
+var getBlockOnNextRow;
+var getBlockOnPrevRow;
+var getBlockOuterHeight;
+var getBlockOuterWidth;
+var getBlockMargin;
+
+// Chris fleharty cfleharty@lwsd.org 3:33 PM
 
 $(function(){
 	"use strict";
@@ -30,7 +38,68 @@ $(function(){
 	// cache the blocks
 	$blocks = $('.block');
 	$blockPreviews = $blocks.find('.block-preview');
-	$blockExpands = $blocks.find('.expand');
+	$changeBlockSize = $blocks.find('.change-size');
+
+	// helper methods for accessing the blocks
+	var indexOfBlock;
+	var counter;
+	getNextBlock = function($block){
+		indexOfBlock = $blocks.index($block);
+		if (indexOfBlock === -1) return $block;
+		var indexOfNextBlock = indexOfBlock + 1;
+		if (indexOfNextBlock === $blocks.length) return $block;
+		return $blocks.eq(indexOfNextBlock);
+	};
+	getPrevBlock = function($block){
+		indexOfBlock = $blocks.index($block);
+		if (indexOfBlock === -1) return $block;
+		var indexOfPrevBlock = indexOfBlock - 1;
+		if (indexOfPrevBlock === -1) return $block;
+		return $blocks.eq(indexOfPrevBlock);
+	};
+	getBlockOnNextRow = function($block){
+		indexOfBlock = $blocks.index($block);
+		if (indexOfBlock === -1) return $block;
+
+		var $nextBlock = getNextBlock($block);
+		if ($nextBlock === $block) return $block;
+		var thisBlockOffsetTop = $block.offset().top;
+		counter = 1;
+		while($nextBlock.offset().top === thisBlockOffsetTop){
+			counter = counter + 1;
+			$nextBlock = $blocks.eq(indexOfBlock+counter);
+			if ($nextBlock === $block) return $block;
+		}
+		return $nextBlock;
+	};
+	getBlockOnPrevRow = function($block){
+		indexOfBlock = $blocks.index($block);
+		if (indexOfBlock === -1) return $block;
+
+		var $prevBlock = getPrevBlock($block);
+		if ($prevBlock === $block) return $block;
+		var thisBlockOffsetTop = $block.offset().top;
+		counter = 1;
+		while($prevBlock.offset().top === thisBlockOffsetTop){
+			counter = counter - 1;
+			$prevBlock = $blocks.eq(indexOfBlock+counter);
+			if ($prevBlock === $block) return $block;
+		}
+		return $prevBlock;
+	};
+	getBlockOuterHeight = function(includeMargin){
+		return $blocks.last().outerHeight(!!includeMargin);
+	};
+	getBlockOuterWidth = function(includeMargin){
+		return $blocks.last().outerWidth(!!includeMargin);
+	};
+	var _blockMargin;
+	getBlockMargin = function(){
+		if (_blockMargin) return _blockMargin;
+		_blockMargin = parseInt($blocks.last().css('marginBottom'), 10);
+		return _blockMargin;
+	};
+
 
 
 
@@ -56,15 +125,10 @@ $(function(){
 	$window.resize();
 
 
-	// !!! this needs a switch based on whether we're expanded or not
 
-	// On clicking .expand, expand the block
-	// On clicking .shrink, shrink the block
 
-	// constants for expanding blocks
-	var BLOCK_MARGIN = 15; // could be calculated on load
-	var BLOCK_CONTENT_PADDING = 20; // could be calculated on load // could change based on each block / be found automatically
-	var BLOCK_FOOTER_HEIGHT = 54; // could be calculated on load
+
+
 
 	var EXPAND_FADE_DURATION = 3000; // has to be enough that we fadeIn before changing the height
 	var BLOCK_EXPANDED_MARGIN = 0;
@@ -73,51 +137,105 @@ $(function(){
 	var EXPAND_ROTATE_DEGREES = 3600; //degrees
 	var EXPAND_ROTATE_DURATION = 2000;
 	var EXPAND_SCROLL_DURATION = 2000;
+	var EXPAND_SCROLL_TOP_OFFSET = 0.33; //percent of window
 
-	// on clicking the block expands
-	$blockExpands.click(function(e){
-		var $expandTarget = $(e.target);
-		var $block = $expandTarget.parents('.block');
+	$changeBlockSize.click(function(e){
+		var $target = $(e.target);
+		var $block = $target.parents('.block');
 		var $blockPreview = $block.find('.block-preview');
 		var $blockFull = $block.find('.block-full');
+		var $blockFooter = $block.find('.block-footer');
 
-		// fadeOut the block-preview
-		$block.find('.block-preview').fadeOut(EXPAND_FADE_DURATION/2, function(){
-			$blockPreview.toggleClass('hide');
-			// fadeIn the block-full
-			$blockFull.fadeIn(EXPAND_FADE_DURATION/2).toggleClass('hide');
-		});
+		var newScrollTop;
 
-		// animate the block expanding
-		// first animate the width
-		var newWidth = $block.parents('.content').width();
-		$block.animate({'margin-left':BLOCK_EXPANDED_MARGIN, 'margin-right':BLOCK_EXPANDED_MARGIN, width:newWidth},EXPAND_WIDTH_DURATION,function(){
-			// then animate the height
-			$block.animate({height:BLOCK_FOOTER_HEIGHT+(BLOCK_CONTENT_PADDING*2)+$blockFull.height()},EXPAND_HEIGHT_DURATION,function(){
-				$block.addClass('expanded');
+		// expand the block
+		if ($target.hasClass('expand')) {
+			// fadeOut the block-preview
+			$blockPreview.fadeOut(EXPAND_FADE_DURATION/2, function(){
+				$blockPreview.toggleClass('hide');
+				// fadeIn the block-full
+				$blockFull.fadeIn(EXPAND_FADE_DURATION/2).toggleClass('hide');
 			});
-		});
 
-		// switch the plus to a minus
-		$expandTarget.animateRotate(EXPAND_ROTATE_DEGREES/2, EXPAND_ROTATE_DURATION/2, undefined, function(){
-			$expandTarget.removeClass('glyphicon-plus').addClass('glyphicon-minus')
-				.animateRotate(EXPAND_ROTATE_DEGREES/2, EXPAND_ROTATE_DURATION/2);
-		});
+			// animate the block expanding
+			// first animate the width
+			$block.animate({
+				'margin-left': BLOCK_EXPANDED_MARGIN,
+				'margin-right': BLOCK_EXPANDED_MARGIN,
+				width: $block.parents('.content').width()
+			},EXPAND_WIDTH_DURATION,function(){
+				// then animate the height
+				$block.animate({
+					height:$blockFull.outerHeight(true) + $blockFooter.outerHeight(true)
+				},EXPAND_HEIGHT_DURATION,function(){
+					$block.addClass('expanded');
+				});
+			});
 
-		// scroll the window to keep the expanded block in line
-		var indexOfBlock = $blocks.index($block);
-		if (indexOfBlock !== 0) {
-			var previousBlockPositionLeft = $blocks.eq(indexOfBlock-1).position().left;
+			// switch the plus to a minus and spin it
+			$target.animateRotate(EXPAND_ROTATE_DEGREES/2, EXPAND_ROTATE_DURATION/2, undefined, function(){
+				$target.removeClass('expand').removeClass('glyphicon-plus').addClass('shrink').addClass('glyphicon-minus')
+					.animateRotate(EXPAND_ROTATE_DEGREES/2, EXPAND_ROTATE_DURATION/2);
+			});
+
+			// scroll the window to keep the expanded block 33% down from the top of the window
+			var previousBlockPositionLeft = getPrevBlock($block).position().left;
 			var thisBlockPositionLeft = $block.position().left;
-			if (previousBlockPositionLeft < thisBlockPositionLeft) {
-				var newScrollTop = $window.scrollTop() + $block.outerHeight(true);
-				$('html, body').animate({
-					scrollTop: newScrollTop
-				}, EXPAND_SCROLL_DURATION);
+			if (previousBlockPositionLeft < thisBlockPositionLeft) { // => block expansion will overflow into next row
+				newScrollTop = getBlockOnNextRow($block).offset().top - ($window.height()*EXPAND_SCROLL_TOP_OFFSET); 
 			}
-		}
+			else { // => block expansion will not overflow into next row
+				newScrollTop = $block.offset().top - ($window.height()*EXPAND_SCROLL_TOP_OFFSET);
+			}
+			$('html, body').animate({
+				scrollTop: newScrollTop
+			}, EXPAND_SCROLL_DURATION);
 
+		}
+		// shrink the block
+		if ($target.hasClass('shrink')) {
+			// fadeOut the block-full
+			$blockFull.fadeOut(EXPAND_FADE_DURATION/2, function(){
+				$blockFull.toggleClass('hide');
+				// fadeIn the block-preview
+				$blockPreview.fadeIn(EXPAND_FADE_DURATION/2).toggleClass('hide');
+			});
+
+			// animate the block shrinking
+			// first animate the height
+			$block.animate({height:getBlockOuterHeight()},EXPAND_HEIGHT_DURATION,function(){
+				// then animate the width
+				$block.animate({
+					'margin-left':getBlockMargin(),
+					'margin-right':getBlockMargin(),
+					width:getBlockOuterWidth()
+				},EXPAND_WIDTH_DURATION);
+			}).removeClass('expanded');
+
+			// switch the plus to a minus
+			$target.animateRotate(EXPAND_ROTATE_DEGREES/2, EXPAND_ROTATE_DURATION/2, undefined, function(){
+				$target.removeClass('shrink').removeClass('glyphicon-minus').addClass('expand').addClass('glyphicon-plus')
+					.animateRotate(EXPAND_ROTATE_DEGREES/2, EXPAND_ROTATE_DURATION/2);
+			});
+
+			// scroll the window to keep the shrunk block 33% down from the top of the window
+			var previousBlockPositionRight = getPrevBlock($block).position().left + getPrevBlock($block).width();
+			var thisBlockPositionRight = $block.position().left + $block.width();
+			if (previousBlockPositionRight < thisBlockPositionRight) { // => block reduction will reduce number of rows
+				newScrollTop = getBlockOnPrevRow($block).offset().top - ($window.height()*EXPAND_SCROLL_TOP_OFFSET);
+			}
+			else { // => block reduction will not reduce number of rows
+				newScrollTop = getBlockOnNextRow($block).offset().top - ($window.height()*EXPAND_SCROLL_TOP_OFFSET);
+			}
+			$('html, body').animate({
+				scrollTop: newScrollTop
+			}, EXPAND_SCROLL_DURATION);
+
+		}
 	});
+
+
+
 
 
 

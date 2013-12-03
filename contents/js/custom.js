@@ -1,4 +1,4 @@
-/*! mySite 2013-12-01 */
+/*! mySite 2013-12-02 */
 +function($) {
     "use strict";
     var Carousel = function(element, options) {
@@ -221,45 +221,94 @@
     });
 };
 
-var LARGE_MAX = 1200, MEDIUM_MAX = 992, SMALL_MAX = 768, $blocks, $blockPreviews, $blockExpands;
+var LARGE_MAX = 1200, MEDIUM_MAX = 992, SMALL_MAX = 768, $blocks, $blockPreviews, $changeBlockSize, getNextBlock, getPrevBlock, getBlockOnNextRow, getBlockOnPrevRow, getBlockOuterHeight, getBlockOuterWidth, getBlockMargin;
 
 $(function() {
     "use strict";
-    $blocks = $(".block"), $blockPreviews = $blocks.find(".block-preview"), $blockExpands = $blocks.find(".expand");
+    $blocks = $(".block"), $blockPreviews = $blocks.find(".block-preview"), $changeBlockSize = $blocks.find(".change-size");
+    var indexOfBlock, counter;
+    getNextBlock = function($block) {
+        if (indexOfBlock = $blocks.index($block), -1 === indexOfBlock) return $block;
+        var indexOfNextBlock = indexOfBlock + 1;
+        return indexOfNextBlock === $blocks.length ? $block : $blocks.eq(indexOfNextBlock);
+    }, getPrevBlock = function($block) {
+        if (indexOfBlock = $blocks.index($block), -1 === indexOfBlock) return $block;
+        var indexOfPrevBlock = indexOfBlock - 1;
+        return -1 === indexOfPrevBlock ? $block : $blocks.eq(indexOfPrevBlock);
+    }, getBlockOnNextRow = function($block) {
+        if (indexOfBlock = $blocks.index($block), -1 === indexOfBlock) return $block;
+        var $nextBlock = getNextBlock($block);
+        if ($nextBlock === $block) return $block;
+        var thisBlockOffsetTop = $block.offset().top;
+        for (counter = 1; $nextBlock.offset().top === thisBlockOffsetTop; ) if (counter += 1, 
+        $nextBlock = $blocks.eq(indexOfBlock + counter), $nextBlock === $block) return $block;
+        return $nextBlock;
+    }, getBlockOnPrevRow = function($block) {
+        if (indexOfBlock = $blocks.index($block), -1 === indexOfBlock) return $block;
+        var $prevBlock = getPrevBlock($block);
+        if ($prevBlock === $block) return $block;
+        var thisBlockOffsetTop = $block.offset().top;
+        for (counter = 1; $prevBlock.offset().top === thisBlockOffsetTop; ) if (counter -= 1, 
+        $prevBlock = $blocks.eq(indexOfBlock + counter), $prevBlock === $block) return $block;
+        return $prevBlock;
+    }, getBlockOuterHeight = function(includeMargin) {
+        return $blocks.last().outerHeight(!!includeMargin);
+    }, getBlockOuterWidth = function(includeMargin) {
+        return $blocks.last().outerWidth(!!includeMargin);
+    };
+    var _blockMargin;
+    getBlockMargin = function() {
+        return _blockMargin ? _blockMargin : _blockMargin = parseInt($blocks.last().css("marginBottom"), 10);
+    };
     var $window = $(window);
     $window.resize(function() {
         var width = $window.width();
         width >= LARGE_MAX ? $blockPreviews.removeClass("medium").removeClass("small").addClass("large") : width >= MEDIUM_MAX && LARGE_MAX > width ? $blockPreviews.removeClass("large").removeClass("small").addClass("medium") : width >= SMALL_MAX && MEDIUM_MAX > width ? $blockPreviews.removeClass("large").removeClass("medium").addClass("small") : SMALL_MAX > width && $blockPreviews.removeClass("large").removeClass("medium").removeClass("small");
     }), $window.resize();
-    var BLOCK_CONTENT_PADDING = 20, BLOCK_FOOTER_HEIGHT = 54, EXPAND_FADE_DURATION = 3e3, BLOCK_EXPANDED_MARGIN = 0, EXPAND_WIDTH_DURATION = 2e3, EXPAND_HEIGHT_DURATION = 2e3, EXPAND_ROTATE_DEGREES = 3600, EXPAND_ROTATE_DURATION = 2e3, EXPAND_SCROLL_DURATION = 2e3;
-    $blockExpands.click(function(e) {
-        var $expandTarget = $(e.target), $block = $expandTarget.parents(".block"), $blockPreview = $block.find(".block-preview"), $blockFull = $block.find(".block-full");
-        $block.find(".block-preview").fadeOut(EXPAND_FADE_DURATION / 2, function() {
-            $blockPreview.toggleClass("hide"), $blockFull.fadeIn(EXPAND_FADE_DURATION / 2).toggleClass("hide");
-        });
-        var newWidth = $block.parents(".content").width();
-        $block.animate({
-            "margin-left": BLOCK_EXPANDED_MARGIN,
-            "margin-right": BLOCK_EXPANDED_MARGIN,
-            width: newWidth
-        }, EXPAND_WIDTH_DURATION, function() {
-            $block.animate({
-                height: BLOCK_FOOTER_HEIGHT + 2 * BLOCK_CONTENT_PADDING + $blockFull.height()
-            }, EXPAND_HEIGHT_DURATION, function() {
-                $block.addClass("expanded");
+    var EXPAND_FADE_DURATION = 3e3, BLOCK_EXPANDED_MARGIN = 0, EXPAND_WIDTH_DURATION = 2e3, EXPAND_HEIGHT_DURATION = 2e3, EXPAND_ROTATE_DEGREES = 3600, EXPAND_ROTATE_DURATION = 2e3, EXPAND_SCROLL_DURATION = 2e3, EXPAND_SCROLL_TOP_OFFSET = .33;
+    $changeBlockSize.click(function(e) {
+        var newScrollTop, $target = $(e.target), $block = $target.parents(".block"), $blockPreview = $block.find(".block-preview"), $blockFull = $block.find(".block-full"), $blockFooter = $block.find(".block-footer");
+        if ($target.hasClass("expand")) {
+            $blockPreview.fadeOut(EXPAND_FADE_DURATION / 2, function() {
+                $blockPreview.toggleClass("hide"), $blockFull.fadeIn(EXPAND_FADE_DURATION / 2).toggleClass("hide");
+            }), $block.animate({
+                "margin-left": BLOCK_EXPANDED_MARGIN,
+                "margin-right": BLOCK_EXPANDED_MARGIN,
+                width: $block.parents(".content").width()
+            }, EXPAND_WIDTH_DURATION, function() {
+                $block.animate({
+                    height: $blockFull.outerHeight(!0) + $blockFooter.outerHeight(!0)
+                }, EXPAND_HEIGHT_DURATION, function() {
+                    $block.addClass("expanded");
+                });
+            }), $target.animateRotate(EXPAND_ROTATE_DEGREES / 2, EXPAND_ROTATE_DURATION / 2, void 0, function() {
+                $target.removeClass("expand").removeClass("glyphicon-plus").addClass("shrink").addClass("glyphicon-minus").animateRotate(EXPAND_ROTATE_DEGREES / 2, EXPAND_ROTATE_DURATION / 2);
             });
-        }), $expandTarget.animateRotate(EXPAND_ROTATE_DEGREES / 2, EXPAND_ROTATE_DURATION / 2, void 0, function() {
-            $expandTarget.removeClass("glyphicon-plus").addClass("glyphicon-minus").animateRotate(EXPAND_ROTATE_DEGREES / 2, EXPAND_ROTATE_DURATION / 2);
-        });
-        var indexOfBlock = $blocks.index($block);
-        if (0 !== indexOfBlock) {
-            var previousBlockPositionLeft = $blocks.eq(indexOfBlock - 1).position().left, thisBlockPositionLeft = $block.position().left;
-            if (thisBlockPositionLeft > previousBlockPositionLeft) {
-                var newScrollTop = $window.scrollTop() + $block.outerHeight(!0);
-                $("html, body").animate({
-                    scrollTop: newScrollTop
-                }, EXPAND_SCROLL_DURATION);
-            }
+            var previousBlockPositionLeft = getPrevBlock($block).position().left, thisBlockPositionLeft = $block.position().left;
+            newScrollTop = thisBlockPositionLeft > previousBlockPositionLeft ? getBlockOnNextRow($block).offset().top - $window.height() * EXPAND_SCROLL_TOP_OFFSET : $block.offset().top - $window.height() * EXPAND_SCROLL_TOP_OFFSET, 
+            $("html, body").animate({
+                scrollTop: newScrollTop
+            }, EXPAND_SCROLL_DURATION);
+        }
+        if ($target.hasClass("shrink")) {
+            $blockFull.fadeOut(EXPAND_FADE_DURATION / 2, function() {
+                $blockFull.toggleClass("hide"), $blockPreview.fadeIn(EXPAND_FADE_DURATION / 2).toggleClass("hide");
+            }), $block.animate({
+                height: getBlockOuterHeight()
+            }, EXPAND_HEIGHT_DURATION, function() {
+                $block.animate({
+                    "margin-left": getBlockMargin(),
+                    "margin-right": getBlockMargin(),
+                    width: getBlockOuterWidth()
+                }, EXPAND_WIDTH_DURATION);
+            }).removeClass("expanded"), $target.animateRotate(EXPAND_ROTATE_DEGREES / 2, EXPAND_ROTATE_DURATION / 2, void 0, function() {
+                $target.removeClass("shrink").removeClass("glyphicon-minus").addClass("expand").addClass("glyphicon-plus").animateRotate(EXPAND_ROTATE_DEGREES / 2, EXPAND_ROTATE_DURATION / 2);
+            });
+            var previousBlockPositionRight = getPrevBlock($block).position().left + getPrevBlock($block).width(), thisBlockPositionRight = $block.position().left + $block.width();
+            newScrollTop = thisBlockPositionRight > previousBlockPositionRight ? getBlockOnPrevRow($block).offset().top - $window.height() * EXPAND_SCROLL_TOP_OFFSET : getBlockOnNextRow($block).offset().top - $window.height() * EXPAND_SCROLL_TOP_OFFSET, 
+            $("html, body").animate({
+                scrollTop: newScrollTop
+            }, EXPAND_SCROLL_DURATION);
         }
     });
     {

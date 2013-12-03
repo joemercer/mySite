@@ -173,8 +173,14 @@ h3 {
   background: white;
   margin: @blockMargin;
 
-  .block-content {
-    padding: 20px;
+  // .block-content {
+  //   padding: 20px;
+  // }
+  .block-preview {
+    margin: 20px;
+  }
+  .block-full {
+    margin: 20px;
   }
 
   .block-footer {
@@ -184,7 +190,7 @@ h3 {
     height: 54px;
 
 
-    .expand {
+    .change-size {
       position: absolute;
       right: 0px;
       bottom: 0px;
@@ -251,19 +257,6 @@ h3 {
 
 
 
-
-
-// .block {
-//   display: inline-block;
-//   width: 200px;
-//   // min-width: 42px;
-//   height: 200px;
-//   border: 1px solid black;
-//   margin: 15px 0px;
-//   padding: 10px 10px;
-//   background: red;
-//   float: left;
-// }
 .block.expanded {
   width: 100% !important;
   height: auto; //but we should give this a max height
@@ -272,6 +265,10 @@ h3 {
 
   // min-height: 500px;
 
+}
+
+.block.transparent {
+  opacity: 0;
 }
 
 

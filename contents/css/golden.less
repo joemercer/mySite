@@ -8,6 +8,10 @@
 // http://www.hongkiat.com/blog/golden-ratio-in-moden-designs/
 // http://www.smashingmagazine.com/2010/02/09/applying-mathematics-to-web-design/
 
+// TODO::
+// - .golden-content-1,2,3 with divs sized for multiples of ideal line width
+// - integrate CPL into ideal content width
+
 // !!! I'll just compile a version that uses values for 
 // everything.
 // then push that to github. 
@@ -513,17 +517,17 @@
 
 
 
-// Golden Container
+// Golden content
 // golden width container based on golden font size and golden line height
 
 
 
 //
-// Variables for the golden container
+// Variables for the golden content
 // --------------------------------------------------
 
 // 
-// Mixin for the golden container
+// Mixin for the golden content
 // --------------------------------------------------
 
 .pull-center() {
@@ -570,12 +574,18 @@
 }
 
 //
-// Create the golden container
+// Create the golden content
 // --------------------------------------------------
 
 .golden-content {
   .make-golden-content(@golden-font-size-base; @golden-line-height-computed);
 }
+
+
+
+
+
+// Golden Mixins
 
 
 
@@ -704,110 +714,3 @@
 .golden-fadein-small(@color) {
   .fadein(@color; percentage(@golden-small));
 }
-
-
-
-
-
-
-
-// !!! TODO
-
-
-
-
-
-
-// then add an option to center both large width and large height
-// then add a three column option
-
-
-//START
-// @golden-window-base-height: 1000px;
-
-// .make-golden-grid-rows() {
-
-//   .row-golden-large {
-//     height: @golden-window-base-height * @golden-large;
-//     height: 100vh * @golden-large;
-//     background-color: green;
-//   }
-
-//   .row-golden-small {
-//     height: @golden-window-base-height * @golden-small;
-//     height: 100vh * @golden-small * @golden-small;
-//     background-color: red;
-//   }
-
-// }
-
-// .make-golden-grid-rows();
-//END
-
-
-
-
-
-  // OR
-  // set width based on some multiple of ideal line length
-  // choose height based on this
-  // center
-
-
-
-
-//.golden-content-container
-
-// content width 
-// 1. sets content width to being some good golden ratio amount
-// based on font size, container, etc
-// 2. chooses the correct number of columns for the text based on ratio
-// 3. centers the text? (or pulls left or right)
-
-
-// TWO OPTIONS
-// 2. Choose content width by increments of golden-width
-// center and let margins stay as usual
-// use media queries to gracefully degrade (ie, reset media queries based on number of columns)
-
-//.golden-content is a container with ideal line width
-
-// .golden-content-1,2,3 is a container with 1*,2*,3* ideal line width
-// and is centered : )
-// .golden-container is a sets media queries that change number of columns based on media queries 
-
-
-
-// @grid-columns: 3;
-// @golden-width: 50px;
-
-
-
-// .make-grid-columns() {
-//   // Common styles for all sizes of grid columns, widths 1-12
-//   .col(@index) when (@index = 1) { // initial
-//     @item: ~".col-xs-@{index}, .col-sm-@{index}, .col-md-@{index}, .col-lg-@{index}";
-//     .col(@index + 1, @item);
-//   }
-//   .col(@index, @list) when (@index =< @grid-columns) { // general; "=<" isn't a typo
-//     @item: ~".col-xs-@{index}, .col-sm-@{index}, .col-md-@{index}, .col-lg-@{index}";
-//     .col(@index + 1, ~"@{list}, @{item}");
-//   }
-//   .col(@index, @list) when (@index > @grid-columns) { // terminal
-//     @{list} {
-//       position: relative;
-//       // Prevent columns from collapsing when empty
-//       min-height: 1px;
-//       // Inner gutter via padding
-//       padding-left:  (@grid-gutter-width / 2);
-//       padding-right: (@grid-gutter-width / 2);
-//     }
-//   }
-//   .col(1); // kickstart it
-// }
-
-
-
-
-
-

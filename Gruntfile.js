@@ -55,7 +55,8 @@ module.exports = function(grunt) {
         options: {
         },
         files: {
-          "contents/css/custom.css": "contents/css/custom.less"
+          'contents/css/custom.css': 'contents/css/custom.less'// ,
+          // "contents/css/golden.css": "contents/css/golden.less"
         }
       },
       production: {
@@ -64,7 +65,7 @@ module.exports = function(grunt) {
           report: true
         },
         files: {
-          "contents/css/custom.min.css": "contents/css/custom.less"
+          'contents/css/custom.min.css': 'contents/css/custom.less'
         }
       }
     },

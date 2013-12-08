@@ -21,6 +21,7 @@ var SMALL_MAX = 768;
 var $blocks;
 var $blockPreviews;
 var $changeBlockSize;
+var $scrollBlockAway;
 
 var getNextBlock;
 var getPrevBlock;
@@ -39,6 +40,7 @@ $(function(){
 	$blocks = $('.block');
 	$blockPreviews = $blocks.find('.block-preview');
 	$changeBlockSize = $blocks.find('.change-size');
+	$scrollBlockAway = $blocks.filter('.scroll-away');
 
 	// helper methods for accessing the blocks
 	var indexOfBlock;
@@ -131,7 +133,9 @@ $(function(){
 	var BLOCK_EXPANDED_MARGIN = 0;
 
 	var EXPAND_ROTATE_DEGREES = 3600; //degrees
+	var SHRINK_ROTATE_DEGREES = 3600; //degrees
 	var EXPAND_SCROLL_TOP_OFFSET = 0.33; //percent of window
+	var SHRINK_SCROLL_TOP_OFFSET = 0.33; //percent of window
 
 	// !!! THIS NEEDS TO BE HOOKED INTO EVERYTHING
 	var CHANGE_SIZE_DURATION = 3000;
@@ -271,8 +275,9 @@ $(function(){
 	var inPreNav = false;
 	var inPostNav = false;
 
-	$(window).scroll(function(){
+	$window.scroll(function(){
 
+		// !!! $(this) === $window ???
 		var scrolled = $(this).scrollTop();
 		console.log('scroll at', scrolled);
 		if (scrolled < 0) return;
@@ -297,6 +302,8 @@ $(function(){
 			opacity = 1 - Math.min(scrolled / splashHeight, 1);
 			$("#splash h1").css({opacity:opacity});
 
+			// !!! should be relScroll not scrolled
+			// scrolled will not work if element is below top
 			// reduce height
 			var height = Math.max(splashHeight - scrolled, 0);
 			$("#splash").css({height:height});
@@ -342,13 +349,69 @@ $(function(){
 			inPostNav = true;
 		}
 
+
+		// scroll away the scroll-away blocks
+		// assumptions: effect duration is based on the size of the block
+		// !!! think i need to calculate start dynamically : ()
+		// !!! on resize perhaps I need to recalculate the current positions for everything
+		$scrollBlockAway.each(function(index, el){
+			var $el = $(el);
+			var $target = $el.find('.scroll-away-target');
+			var relScroll = scrolled - $el.data('start');
+
+			if (relScroll < 0){
+				// before effect
+				$target.css({height:$el.height()});
+				$target.css({opacity:1});
+			}
+			else if (relScroll > $el.height()){
+				// after effect
+				$target.css({height:0});
+				$target.css({opacity:0});
+			}
+			else {
+				// effect
+
+				// reduce height proportional to relScroll
+				var height = $el.height() - relScroll;
+				$target.css({height:height});
+
+				// reduce opacity proportional to relScroll
+				var opacity = 1 - (relScroll / $el.height());
+				$target.css({opacity:opacity});
+			}
+
+		});
+
+		// set up the scrollAway blocks by caching some data
+		$scrollBlockAway.each(function(index, el){
+			var $el = $(el);
+			var start = $el.position().top + ($el.height() / 2) - ($window.height() / 2);
+			$el.data('start', start);
+		});
+
+
+
+		// for each block that has a .scrollAway class
+		// if window.scrollTop + window.height === block.position().top + block.height => block is fully in the visible window
+		// relScroll = (block.position().top + block.height) - (window.scrollTop + window.height)
+		// reduce height and opacity based on ratio to window size
+
+		// if less than force to be full stats
+		// if more than force to be null stats
+
+		// #scrollAwayBlue {
+			// background-color: red;
+		// }
+
+		// .scrollAwayTarget {
+			// weight: 100%
+			// height: 100%
+		// }
+
 	});
 
-	// fade in more content when plus button is clicked
-	$('.more').click(function(e){
-		// $('.container.one').fadeOut();
-		// $('.project2').slideDown('slow');
-		$('.container.two').fadeIn('slow');
-	});
+
+	
 
 });

@@ -206,6 +206,8 @@ h3 {
 @media (max-width: @screen-xs-max) {
   .content {
     width: @xsWidth;
+
+    font-size: 1.25rem; font-size: 20px; 
   }
   .block {
     width: @xsWidth;
@@ -268,11 +270,23 @@ h3 {
 }
 
 .block.transparent {
-  opacity: 0;
+  // opacity: 0;
+  background: transparent;
+}
+
+.block.scroll-away {
+  .scroll-away-target {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    background-color: red;
+  }
 }
 
 
-
+// I should have size classes for the block fulls as well
+// that way I can do multi column stuff
 #about {
 
   .block-preview {

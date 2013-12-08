@@ -3093,6 +3093,276 @@ td.visible-print {
     display: none !important;
   }
 }
+.col-xs-golden-large,
+.col-sm-golden-large,
+.col-md-golden-large,
+.col-lg-golden-large,
+.col-xs-golden-small,
+.col-sm-golden-small,
+.col-md-golden-small,
+.col-lg-golden-small {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+  float: left;
+}
+.col-xs-golden-large {
+  width: 61.803398874989476%;
+}
+.col-xs-golden-small {
+  width: 38.196601125010524%;
+}
+.col-xs-pull-golden-large {
+  right: 61.803398874989476%;
+}
+.col-xs-pull-golden-small {
+  right: 38.196601125010524%;
+}
+.col-xs-push-golden-large {
+  left: 61.803398874989476%;
+}
+.col-xs-push-golden-small {
+  left: 38.196601125010524%;
+}
+.col-xs-offset-golden-large {
+  margin-left: 61.803398874989476%;
+}
+.col-xs-offset-golden-small {
+  margin-left: 38.196601125010524%;
+}
+@media (min-width: 768px) {
+  .col-sm-golden-large {
+    width: 61.803398874989476%;
+  }
+  .col-sm-golden-small {
+    width: 38.196601125010524%;
+  }
+  .col-sm-pull-golden-large {
+    right: 61.803398874989476%;
+  }
+  .col-sm-pull-golden-small {
+    right: 38.196601125010524%;
+  }
+  .col-sm-push-golden-large {
+    left: 61.803398874989476%;
+  }
+  .col-sm-push-golden-small {
+    left: 38.196601125010524%;
+  }
+  .col-sm-offset-golden-large {
+    margin-left: 61.803398874989476%;
+  }
+  .col-sm-offset-golden-small {
+    margin-left: 38.196601125010524%;
+  }
+}
+@media (min-width: 992px) {
+  .col-md-golden-large {
+    width: 61.803398874989476%;
+  }
+  .col-md-golden-small {
+    width: 38.196601125010524%;
+  }
+  .col-md-pull-golden-large {
+    right: 61.803398874989476%;
+  }
+  .col-md-pull-golden-small {
+    right: 38.196601125010524%;
+  }
+  .col-md-push-golden-large {
+    left: 61.803398874989476%;
+  }
+  .col-md-push-golden-small {
+    left: 38.196601125010524%;
+  }
+  .col-md-offset-golden-large {
+    margin-left: 61.803398874989476%;
+  }
+  .col-md-offset-golden-small {
+    margin-left: 38.196601125010524%;
+  }
+}
+@media (min-width: 1200px) {
+  .col-lg-golden-large {
+    width: 61.803398874989476%;
+  }
+  .col-lg-golden-small {
+    width: 38.196601125010524%;
+  }
+  .col-lg-pull-golden-large {
+    right: 61.803398874989476%;
+  }
+  .col-lg-pull-golden-small {
+    right: 38.196601125010524%;
+  }
+  .col-lg-push-golden-large {
+    left: 61.803398874989476%;
+  }
+  .col-lg-push-golden-small {
+    left: 38.196601125010524%;
+  }
+  .col-lg-offset-golden-large {
+    margin-left: 61.803398874989476%;
+  }
+  .col-lg-offset-golden-small {
+    margin-left: 38.196601125010524%;
+  }
+}
+.golden-typography {
+  font-size: 16px;
+  line-height: 1.618033988749895;
+}
+.golden-typography hr {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+.golden-typography p {
+  margin: 0 0 12.5px;
+}
+.golden-typography .lead {
+  margin-bottom: 25px;
+  font-size: 20px;
+  line-height: 1.618033988749895;
+}
+@media (min-width: 768px) {
+  .golden-typography .lead {
+    font-size: 25.88854381999832px;
+  }
+}
+.golden-typography small,
+.golden-typography .small {
+  font-size: 61.803398874989476%;
+}
+.golden-typography h1,
+.golden-typography h2,
+.golden-typography h3,
+.golden-typography h4,
+.golden-typography h5,
+.golden-typography h6,
+.golden-typography .h1,
+.golden-typography .h2,
+.golden-typography .h3,
+.golden-typography .h4,
+.golden-typography .h5,
+.golden-typography .h6 {
+  line-height: 1.1618033988749894;
+}
+.golden-typography h1 small,
+.golden-typography h2 small,
+.golden-typography h3 small,
+.golden-typography h4 small,
+.golden-typography h5 small,
+.golden-typography h6 small,
+.golden-typography .h1 small,
+.golden-typography .h2 small,
+.golden-typography .h3 small,
+.golden-typography .h4 small,
+.golden-typography .h5 small,
+.golden-typography .h6 small,
+.golden-typography h1 .small,
+.golden-typography h2 .small,
+.golden-typography h3 .small,
+.golden-typography h4 .small,
+.golden-typography h5 .small,
+.golden-typography h6 .small,
+.golden-typography .h1 .small,
+.golden-typography .h2 .small,
+.golden-typography .h3 .small,
+.golden-typography .h4 .small,
+.golden-typography .h5 .small,
+.golden-typography .h6 .small {
+  line-height: 1;
+}
+.golden-typography h1,
+.golden-typography h2,
+.golden-typography h3 {
+  margin-top: 25px;
+  margin-bottom: 12.5px;
+}
+.golden-typography h1 small,
+.golden-typography h2 small,
+.golden-typography h3 small,
+.golden-typography h1 .small,
+.golden-typography h2 .small,
+.golden-typography h3 .small {
+  font-size: 61.803398874989476%;
+}
+.golden-typography h4,
+.golden-typography h5,
+.golden-typography h6 {
+  margin-top: 12.5px;
+  margin-bottom: 12.5px;
+}
+.golden-typography h4 small,
+.golden-typography h5 small,
+.golden-typography h6 small,
+.golden-typography h4 .small,
+.golden-typography h5 .small,
+.golden-typography h6 .small {
+  font-size: 61.803398874989476%;
+}
+.golden-typography h1,
+.golden-typography .h1 {
+  font-size: 78px;
+}
+.golden-typography h2,
+.golden-typography .h2 {
+  font-size: 51px;
+}
+.golden-typography h3,
+.golden-typography .h3 {
+  font-size: 26px;
+}
+.golden-typography h4,
+.golden-typography .h4 {
+  font-size: 20px;
+}
+.golden-typography h5,
+.golden-typography .h5 {
+  font-size: 16px;
+}
+.golden-typography h6,
+.golden-typography .h6 {
+  font-size: 12px;
+}
+.golden-typography .page-header {
+  padding-bottom: 11.5px;
+  margin: 50px 0 25px;
+}
+.golden-typography ul,
+.golden-typography ol {
+  margin-top: 0;
+  margin-bottom: 12.5px;
+}
+.golden-typography ul ul,
+.golden-typography ol ul,
+.golden-typography ul ol,
+.golden-typography ol ol {
+  margin-bottom: 0;
+}
+.golden-typography dl {
+  margin-bottom: 25px;
+}
+.golden-typography dt,
+.golden-typography dd {
+  line-height: 1.618033988749895;
+}
+.golden-typography blockquote {
+  padding: 12.5px 25px;
+  margin: 0 0 25px;
+}
+.golden-typography blockquote p {
+  font-size: 20px;
+  line-height: 1.618033988749895;
+}
+.golden-typography blockquote small {
+  line-height: 1.618033988749895;
+}
+.golden-typography address {
+  margin-bottom: 25px;
+  line-height: 1.618033988749895;
+}
 body {
   background-color: #f0f7ff;
 }
@@ -3220,6 +3490,8 @@ h3 b {
 @media (max-width: 767px) {
   .content {
     width: 100%;
+    font-size: 1.25rem;
+    font-size: 20px;
   }
   .block {
     width: 100%;
@@ -3263,7 +3535,14 @@ h3 b {
   margin-right: 0px;
 }
 .block.transparent {
-  opacity: 0;
+  background: transparent;
+}
+.block.scroll-away .scroll-away-target {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  background-color: red;
 }
 #about .block-preview.small {
   font-size: 49px;

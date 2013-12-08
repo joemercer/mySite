@@ -1,4 +1,4 @@
-/*! mySite 2013-12-02 */
+/*! mySite 2013-12-03 */
 +function($) {
     "use strict";
     var Carousel = function(element, options) {
@@ -221,11 +221,12 @@
     });
 };
 
-var LARGE_MAX = 1200, MEDIUM_MAX = 992, SMALL_MAX = 768, $blocks, $blockPreviews, $changeBlockSize, getNextBlock, getPrevBlock, getBlockOnNextRow, getBlockOnPrevRow, getBlockOuterHeight, getBlockOuterWidth, getBlockMargin;
+var LARGE_MAX = 1200, MEDIUM_MAX = 992, SMALL_MAX = 768, $blocks, $blockPreviews, $changeBlockSize, $scrollBlockAway, getNextBlock, getPrevBlock, getBlockOnNextRow, getBlockOnPrevRow, getBlockOuterHeight, getBlockOuterWidth, getBlockMargin;
 
 $(function() {
     "use strict";
-    $blocks = $(".block"), $blockPreviews = $blocks.find(".block-preview"), $changeBlockSize = $blocks.find(".change-size");
+    $blocks = $(".block"), $blockPreviews = $blocks.find(".block-preview"), $changeBlockSize = $blocks.find(".change-size"), 
+    $scrollBlockAway = $blocks.filter(".scroll-away");
     var indexOfBlock, counter;
     getNextBlock = function($block) {
         if (indexOfBlock = $blocks.index($block), -1 === indexOfBlock) return $block;
@@ -265,7 +266,7 @@ $(function() {
         var width = $window.width();
         width >= LARGE_MAX ? $blockPreviews.removeClass("medium").removeClass("small").addClass("large") : width >= MEDIUM_MAX && LARGE_MAX > width ? $blockPreviews.removeClass("large").removeClass("small").addClass("medium") : width >= SMALL_MAX && MEDIUM_MAX > width ? $blockPreviews.removeClass("large").removeClass("medium").addClass("small") : SMALL_MAX > width && $blockPreviews.removeClass("large").removeClass("medium").removeClass("small");
     }), $window.resize();
-    var BLOCK_EXPANDED_MARGIN = 0, EXPAND_ROTATE_DEGREES = 3600, EXPAND_SCROLL_TOP_OFFSET = .33, EXPAND_FADE_DURATION = 3e3, EXPAND_SIZE_DURATION = 4e3, EXPAND_WIDTH_DURATION = EXPAND_SIZE_DURATION / 2, EXPAND_HEIGHT_DURATION = EXPAND_SIZE_DURATION / 2, EXPAND_ROTATE_DURATION = 2e3, EXPAND_SCROLL_DURATION = 2e3, SHRINK_FADE_DURATION = 3e3, SHRINK_SIZE_DURATION = 4e3, SHRINK_WIDTH_DURATION = SHRINK_SIZE_DURATION / 2, SHRINK_HEIGHT_DURATION = SHRINK_SIZE_DURATION / 2, SHRINK_ROTATE_DURATION = 2e3, SHRINK_SCROLL_DURATION = 2e3;
+    var BLOCK_EXPANDED_MARGIN = 0, EXPAND_ROTATE_DEGREES = 3600, SHRINK_ROTATE_DEGREES = 3600, EXPAND_SCROLL_TOP_OFFSET = .33, SHRINK_SCROLL_TOP_OFFSET = .33, EXPAND_FADE_DURATION = 3e3, EXPAND_SIZE_DURATION = 4e3, EXPAND_WIDTH_DURATION = EXPAND_SIZE_DURATION / 2, EXPAND_HEIGHT_DURATION = EXPAND_SIZE_DURATION / 2, EXPAND_ROTATE_DURATION = 2e3, EXPAND_SCROLL_DURATION = 2e3, SHRINK_FADE_DURATION = 3e3, SHRINK_SIZE_DURATION = 4e3, SHRINK_WIDTH_DURATION = SHRINK_SIZE_DURATION / 2, SHRINK_HEIGHT_DURATION = SHRINK_SIZE_DURATION / 2, SHRINK_ROTATE_DURATION = 2e3, SHRINK_SCROLL_DURATION = 2e3;
     $changeBlockSize.click(function(e) {
         var newScrollTop, $target = $(e.target), $block = $target.parents(".block"), $blockPreview = $block.find(".block-preview"), $blockFull = $block.find(".block-full"), $blockFooter = $block.find(".block-footer");
         if ($target.hasClass("expand")) {
@@ -313,7 +314,7 @@ $(function() {
     });
     var navHeightInitial = $("nav").outerHeight(), navHeightFinal = 70, navPaddingInitial = 65, navPaddingFinal = 0, splashHeight = $("#splash").outerHeight(), inPreSplash = ($("#splash h1").outerHeight(), 
     $("#splash").offset().top + splashHeight, !1), inPostSplash = !1, inPreNav = !1, inPostNav = !1;
-    $(window).scroll(function() {
+    $window.scroll(function() {
         var scrolled = $(this).scrollTop();
         if (console.log("scroll at", scrolled), !(0 > scrolled)) {
             var start = 0, end = start + splashHeight;
@@ -359,8 +360,30 @@ $(function() {
             }), $("nav").css({
                 "padding-top": navPaddingFinal
             }), inPostNav = !0);
+            $scrollBlockAway.each(function(index, el) {
+                var $el = $(el), $target = $el.find(".scroll-away-target"), relScroll = scrolled - $el.data("start");
+                if (0 > relScroll) $target.css({
+                    height: $el.height()
+                }), $target.css({
+                    opacity: 1
+                }); else if (relScroll > $el.height()) $target.css({
+                    height: 0
+                }), $target.css({
+                    opacity: 0
+                }); else {
+                    var height = $el.height() - relScroll;
+                    $target.css({
+                        height: height
+                    });
+                    var opacity = 1 - relScroll / $el.height();
+                    $target.css({
+                        opacity: opacity
+                    });
+                }
+            }), $scrollBlockAway.each(function(index, el) {
+                var $el = $(el), start = $el.position().top + $el.height() / 2 - $window.height() / 2;
+                $el.data("start", start);
+            });
         }
-    }), $(".more").click(function() {
-        $(".container.two").fadeIn("slow");
     });
 });

@@ -1,0 +1,351 @@
+// Golden Bootstrap 3
+
+// has a dependency on bootstrap/less/variables.less
+
+// inspired by https://github.com/phildionne/golden-bootstrap
+
+// !!! I'll just compile a version that uses values for 
+// everything.
+// then push that to github. 
+
+// @import "../libs/bootstrap/less/variables.less";
+
+//
+// Golden Bootstrap Variables
+// --------------------------------------------------
+
+@golden-ratio:           1.6180339887498948482;
+@golden-large:           1/@golden-ratio;
+@golden-small:           1-@golden-large;
+
+
+
+// Golden Grid
+
+// 
+// Mixins for the golden grid
+// --------------------------------------------------
+
+// Common styles for all sizes of golden grid columns, large and small
+// including a float left
+.make-golden-grid-columns() {
+  .col-xs-golden-large,
+  .col-sm-golden-large,
+  .col-md-golden-large,
+  .col-lg-golden-large,
+  .col-xs-golden-small,
+  .col-sm-golden-small,
+  .col-md-golden-small,
+  .col-lg-golden-small
+  {
+    position: relative;
+    // Prevent columns from collapsing when empty
+    min-height: 1px;
+    // Inner gutter via padding
+    padding-left:  (@grid-gutter-width / 2);
+    padding-right: (@grid-gutter-width / 2);
+    // Add a float left to every column
+    float: left;
+  }
+}
+
+.calc-golden-grid(@index, @class, @type) when (@type = width) {
+  .col-@{class}-@{index} {
+    width: percentage(@@index);
+  }
+}
+.calc-golden-grid(@index, @class, @type) when (@type = push) {
+  .col-@{class}-push-@{index} {
+    left: percentage(@@index);
+  }
+}
+.calc-golden-grid(@index, @class, @type) when (@type = pull) {
+  .col-@{class}-pull-@{index} {
+    right: percentage(@@index);
+  }
+}
+.calc-golden-grid(@index, @class, @type) when (@type = offset) {
+  .col-@{class}-offset-@{index} {
+    margin-left: percentage(@@index);
+  }
+}
+
+.make-golden-grid(@class, @type) {
+  .calc-golden-grid(golden-large, @class, @type);
+  .calc-golden-grid(golden-small, @class, @type);
+}
+
+
+
+//
+// Create the golden grid
+// --------------------------------------------------
+
+.make-golden-grid-columns();
+
+// Extra small grid
+//
+// Grid classes for extra small devices like smartphones. No offset, push, or
+// pull classes are present here due to the size of the target.
+
+.make-golden-grid(xs, width);
+.make-golden-grid(xs, pull);
+.make-golden-grid(xs, push);
+.make-golden-grid(xs, offset);
+
+
+// Small grid
+//
+// Columns, offsets, pushes, and pulls for the small device range, from phones
+// to tablets.
+
+@media (min-width: @screen-sm-min) {
+  .make-golden-grid(sm, width);
+  .make-golden-grid(sm, pull);
+  .make-golden-grid(sm, push);
+  .make-golden-grid(sm, offset);
+}
+
+
+// Medium grid
+//
+// Columns, offsets, pushes, and pulls for the desktop device range.
+
+@media (min-width: @screen-md-min) {
+  .make-golden-grid(md, width);
+  .make-golden-grid(md, pull);
+  .make-golden-grid(md, push);
+  .make-golden-grid(md, offset);
+}
+
+
+// Large grid
+//
+// Columns, offsets, pushes, and pulls for the large desktop device range.
+
+@media (min-width: @screen-lg-min) {
+  .make-golden-grid(lg, width);
+  .make-golden-grid(lg, pull);
+  .make-golden-grid(lg, push);
+  .make-golden-grid(lg, offset);
+}
+
+
+// !!!  golden vertical stuff using
+// vh's? or percents I guess would work also
+// .golden-rectangle
+  // has 1.6 ratio between height and width
+//.golden-other shapes perhaps??? for cropping images? like
+//.golden-circle
+
+
+
+// Golden Typography
+
+
+
+//
+// Variables for golden typography
+// --------------------------------------------------
+
+// examples based on an @font-size-base of 14px
+@golden-font-size-base: @font-size-base; // 14px
+@golden-font-size-large: ceil(2 * @golden-font-size-base * @golden-large); // ~18px
+@golden-font-size-small: floor(2 * @golden-font-size-base * @golden-small); // ~10px
+
+@golden-font-size-h1: ceil(@golden-font-size-base * (@golden-ratio * 3)); // ~60px
+@golden-font-size-h2: floor(@golden-font-size-base * (@golden-ratio * 2)); // ~36px
+@golden-font-size-h3: ceil(@golden-font-size-base * @golden-ratio); // ~23px
+@golden-font-size-h4: @golden-font-size-large; // ~18px
+@golden-font-size-h5: @golden-font-size-base; // 14px
+@golden-font-size-h6: @golden-font-size-small; // ~10px
+
+@golden-line-height-base: @golden-ratio; // ~1.61
+@golden-line-height-computed: floor(@golden-font-size-base * @golden-line-height-base); // ~22px
+
+@golden-headings-line-height: 1 + (@golden-ratio / 10); // ~1.161
+
+// 
+// Mixin for golden typography
+// --------------------------------------------------
+
+.make-golden-typography() {
+
+  // from scaffolding.less
+
+  // Body reset
+  // -------------------------
+
+  // reset the root element
+  font-size: @golden-font-size-base;
+  line-height: @golden-line-height-base;
+
+  // Horizontal rules
+  // -------------------------
+
+  hr {
+    margin-top:    @golden-line-height-computed;
+    margin-bottom: @golden-line-height-computed;
+  }
+
+  // from type.less
+
+  // Body text
+  // -------------------------
+  p {
+    margin: 0 0 (@golden-line-height-computed / 2);
+  }
+  .lead {
+    margin-bottom: @golden-line-height-computed;
+    // font-size: floor(@font-size-base * 1.15);
+    font-size: floor(@golden-font-size-large);
+    // line-height: 1.4;
+    line-height: @golden-ratio;
+
+    @media (min-width: @screen-sm-min) {
+      // font-size: (@font-size-base * 1.5);
+      font-size: (@golden-font-size-base * @golden-ratio);
+    }
+  }
+
+  // Emphasis & misc
+  // -------------------------
+
+  // Ex: 14px base font * 85% = about 12px
+  // Ex: 14px base font * @golden-large = about 9px
+  small,
+  .small  {
+    // font-size: 85%;
+    font-size: percentage(@golden-large);
+  }
+
+  // Headings
+  // -------------------------
+
+  h1, h2, h3, h4, h5, h6,
+  .h1, .h2, .h3, .h4, .h5, .h6 {
+    line-height: @golden-headings-line-height;
+
+    small,
+    .small {
+      line-height: 1;
+    }
+  }
+
+  h1,
+  h2,
+  h3 {
+    margin-top: @golden-line-height-computed;
+    margin-bottom: (@golden-line-height-computed / 2);
+
+    small,
+    .small {
+      // font-size: 65%;
+      font-size: percentage(@golden-large);
+    }
+  }
+  h4,
+  h5,
+  h6 {
+    margin-top: (@golden-line-height-computed / 2);
+    margin-bottom: (@golden-line-height-computed / 2);
+
+    small,
+    .small {
+      // font-size: 75%;
+      font-size: percentage(@golden-large);
+    }
+  }
+
+  h1, .h1 { font-size: @golden-font-size-h1; }
+  h2, .h2 { font-size: @golden-font-size-h2; }
+  h3, .h3 { font-size: @golden-font-size-h3; }
+  h4, .h4 { font-size: @golden-font-size-h4; }
+  h5, .h5 { font-size: @golden-font-size-h5; }
+  h6, .h6 { font-size: @golden-font-size-h6; }
+
+  // Page header
+  // -------------------------
+
+  .page-header {
+    padding-bottom: ((@golden-line-height-computed / 2) - 1);
+    margin: (@golden-line-height-computed * 2) 0 @golden-line-height-computed;
+  }
+
+
+
+  // Lists
+  // --------------------------------------------------
+
+  // Unordered and Ordered lists
+  ul,
+  ol {
+    margin-top: 0;
+    margin-bottom: (@golden-line-height-computed / 2);
+    ul,
+    ol {
+      margin-bottom: 0;
+    }
+  }
+
+  // Description Lists
+  dl {
+    margin-bottom: @golden-line-height-computed;
+  }
+  dt,
+  dd {
+    line-height: @golden-line-height-base;
+  }
+
+  // Blockquotes
+  blockquote {
+    padding: (@golden-line-height-computed / 2) @golden-line-height-computed;
+    margin: 0 0 @golden-line-height-computed;
+    p {
+      // font-size: (@font-size-base * 1.25);
+      font-size: (@golden-font-size-large);
+      // line-height: 1.25;
+      line-height: @golden-ratio;
+    }
+    small {
+      line-height: @golden-line-height-base;
+    }
+  }
+
+  // Addresses
+  address {
+    margin-bottom: @golden-line-height-computed;
+    line-height: @golden-line-height-base;
+  }
+
+}
+
+//
+// Create the golden grid
+// --------------------------------------------------
+
+// Anything under a root element with the .golden-bootstrap class
+.golden-typography {
+  .make-golden-typography();
+}
+
+// Any single element with the .golden-bootstrap class
+
+
+
+
+
+
+
+
+
+
+// content width 
+// 1. sets content width to being some good golden ratio amount
+// based on font size, container, etc
+// 2. chooses the correct number of columns for the text based on ratio
+// 3. centers the text? (or pulls left or right)
+.golden-content() {
+
+}
+

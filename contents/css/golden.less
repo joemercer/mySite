@@ -2,7 +2,11 @@
 
 // has a dependency on bootstrap/less/variables.less
 
-// inspired by https://github.com/phildionne/golden-bootstrap
+// inspired by:
+// https://github.com/phildionne/golden-bootstrap
+// http://www.pearsonified.com/2011/12/golden-ratio-typography.php
+// http://www.hongkiat.com/blog/golden-ratio-in-moden-designs/
+// http://www.smashingmagazine.com/2010/02/09/applying-mathematics-to-web-design/
 
 // !!! I'll just compile a version that uses values for 
 // everything.
@@ -20,14 +24,12 @@
 
 
 
-// Golden Grid
+// Golden Grid Columns
 
 // 
-// Mixins for the golden grid
+// Mixins for the golden grid columns
 // --------------------------------------------------
 
-// Common styles for all sizes of golden grid columns, large and small
-// including a float left
 .make-golden-grid-columns() {
   .col-xs-golden-large,
   .col-sm-golden-large,
@@ -47,35 +49,80 @@
     // Add a float left to every column
     float: left;
   }
-}
 
-.calc-golden-grid(@index, @class, @type) when (@type = width) {
-  .col-@{class}-@{index} {
-    width: percentage(@@index);
-  }
-}
-.calc-golden-grid(@index, @class, @type) when (@type = push) {
-  .col-@{class}-push-@{index} {
-    left: percentage(@@index);
-  }
-}
-.calc-golden-grid(@index, @class, @type) when (@type = pull) {
-  .col-@{class}-pull-@{index} {
-    right: percentage(@@index);
-  }
-}
-.calc-golden-grid(@index, @class, @type) when (@type = offset) {
-  .col-@{class}-offset-@{index} {
-    margin-left: percentage(@@index);
-  }
-}
+  // Extra small grid
+  //
+  // Grid classes for extra small devices like smartphones. No offset, push, or
+  // pull classes are present here due to the size of the target.
 
-.make-golden-grid(@class, @type) {
-  .calc-golden-grid(golden-large, @class, @type);
-  .calc-golden-grid(golden-small, @class, @type);
-}
+  .make-golden-col(xs, width);
+  .make-golden-col(xs, pull);
+  .make-golden-col(xs, push);
+  .make-golden-col(xs, offset);
 
 
+  // Small grid
+  //
+  // Columns, offsets, pushes, and pulls for the small device range, from phones
+  // to tablets.
+
+  @media (min-width: @screen-sm-min) {
+    .make-golden-col(sm, width);
+    .make-golden-col(sm, pull);
+    .make-golden-col(sm, push);
+    .make-golden-col(sm, offset);
+  }
+
+
+  // Medium grid
+  //
+  // Columns, offsets, pushes, and pulls for the desktop device range.
+
+  @media (min-width: @screen-md-min) {
+    .make-golden-col(md, width);
+    .make-golden-col(md, pull);
+    .make-golden-col(md, push);
+    .make-golden-col(md, offset);
+  }
+
+
+  // Large grid
+  //
+  // Columns, offsets, pushes, and pulls for the large desktop device range.
+
+  @media (min-width: @screen-lg-min) {
+    .make-golden-col(lg, width);
+    .make-golden-col(lg, pull);
+    .make-golden-col(lg, push);
+    .make-golden-col(lg, offset);
+  }
+}
+
+.make-golden-col(@class, @type) {
+  .calc-golden-col(golden-large, @class, @type);
+  .calc-golden-col(golden-small, @class, @type);
+}
+
+.calc-golden-col(@gold, @class, @type) when (@type = width) {
+  .col-@{class}-@{gold} {
+    width: percentage(@@gold);
+  }
+}
+.calc-golden-col(@gold, @class, @type) when (@type = push) {
+  .col-@{class}-push-@{gold} {
+    left: percentage(@@gold);
+  }
+}
+.calc-golden-col(@gold, @class, @type) when (@type = pull) {
+  .col-@{class}-pull-@{gold} {
+    right: percentage(@@gold);
+  }
+}
+.calc-golden-col(@gold, @class, @type) when (@type = offset) {
+  .col-@{class}-offset-@{gold} {
+    margin-left: percentage(@@gold);
+  }
+}
 
 //
 // Create the golden grid
@@ -83,60 +130,213 @@
 
 .make-golden-grid-columns();
 
-// Extra small grid
-//
-// Grid classes for extra small devices like smartphones. No offset, push, or
-// pull classes are present here due to the size of the target.
-
-.make-golden-grid(xs, width);
-.make-golden-grid(xs, pull);
-.make-golden-grid(xs, push);
-.make-golden-grid(xs, offset);
 
 
-// Small grid
-//
-// Columns, offsets, pushes, and pulls for the small device range, from phones
-// to tablets.
 
-@media (min-width: @screen-sm-min) {
-  .make-golden-grid(sm, width);
-  .make-golden-grid(sm, pull);
-  .make-golden-grid(sm, push);
-  .make-golden-grid(sm, offset);
+
+// Golden Grid Rows
+
+
+
+// 
+// Mixins for the golden grid columns
+// --------------------------------------------------
+
+.make-golden-grid-rows() {
+  .row-golden-large,
+  .row-golden-small
+  {
+    &:before,
+    &.row:after {
+      content: " ";
+      /* 1 */
+      display: table;
+      /* 2 */
+    }
+    &:after {
+      clear: both;
+    }
+  }
+
+  .make-golden-row(height);
+  .make-golden-row(pull);
+  .make-golden-row(push);
+  .make-golden-row(offset);
+}
+
+.make-golden-row(@type) {
+  .calc-golden-row(golden-large, @type);
+  .calc-golden-row(golden-small, @type);
 }
 
 
-// Medium grid
-//
-// Columns, offsets, pushes, and pulls for the desktop device range.
+.calc-golden-row(@gold, @type) when (@type = height) {
+  .row-@{gold} {
+    height: percentage(@@gold);
+  }
+}
+.calc-golden-row(@gold, @type) when (@type = push) {
+  .row-push-@{gold} {
+    top: percentage(@@gold);
+  }
+}
+.calc-golden-row(@gold, @type) when (@type = pull) {
+  .row-pull-@{gold} {
+    bottom: percentage(@@gold);
+  }
+}
+.calc-golden-row(@gold, @type) when (@type = offset) {
+  .row-offset-@{gold} {
+    margin-top: percentage(@@gold);
+  }
+}
 
-@media (min-width: @screen-md-min) {
-  .make-golden-grid(md, width);
-  .make-golden-grid(md, pull);
-  .make-golden-grid(md, push);
-  .make-golden-grid(md, offset);
+//
+// Create the golden grid rows
+// --------------------------------------------------
+
+.make-golden-grid-rows();
+
+
+
+
+
+// Golden container
+// creates a centered container with golden margin ratios
+
+
+
+
+// 
+// Mixins for the golden containers
+// --------------------------------------------------
+
+
+
+.make-golden-containers() {
+
+  .container-golden,
+  .container-margin-golden-large,
+  .container-margin-golden-small,
+  .container-margin-half-golden-large,
+  .container-margin-half-golden-small {
+
+    margin-right: auto;
+    margin-left: auto;
+
+    &:before,
+    &:after {
+      content: " ";
+      /* 1 */
+      display: table;
+      /* 2 */
+    }
+
+    &:after {
+      clear: both;
+    }
+  }
+
+  // general golden container with breakpoints for different sized devices
+
+  // for xs screens, overridden by media queries
+  .container-golden {
+    width: 100%;
+    background-color: purple;
+  }
+
+  @media (min-width: @screen-sm-min) {
+    .container-golden {
+      .make-container-margin-half-golden-small();
+    }
+  }
+
+  @media (min-width: @screen-md-min) {
+    .container-golden {
+      .make-container-margin-half-golden-large();
+    }
+  }
+
+  @media (min-width: @screen-lg-min) {
+    .container-golden {
+      .make-container-margin-golden-small();
+    }
+  }
+
+  // golden containers with specific margins
+  // TODO:: add xs,sm,md,lg classes so that these can be easily personalized with responsive behavior
+
+  .container-margin-golden-large {
+    .make-container-margin-golden-large();
+  }
+
+  .container-margin-golden-small {
+    .make-container-margin-golden-small();
+  }
+
+  .container-margin-half-golden-large {
+    .make-container-margin-half-golden-large();
+  }
+
+  .container-margin-half-golden-small {
+    .make-container-margin-half-golden-small();
+  }
+
+}
+
+.make-container-margin-golden-large() {
+  width: percentage(1 / (1 + (2 * @golden-ratio)));
+}
+
+.make-container-margin-golden-small() {
+  width: percentage(1 / (1 + (2 / @golden-ratio)));
+}
+
+.make-container-margin-half-golden-large() {
+  width: percentage(@golden-small);
+}
+
+.make-container-margin-half-golden-small() {
+  width: percentage(@golden-large);
+}
+
+//
+// Create the golden containers
+// --------------------------------------------------
+
+.make-golden-containers();
+
+
+
+
+
+
+
+
+
+// and add a class to existing that just straight up center it 
+// so
+// DONE but we could have a helpful class to do it in one
+// instead of needing two classes
+.col-sm-golden-large.pull-center {
+  // centers a golden large
+  // which means that each side is half a golden small
+  // : )
+}
+
+.row-golden-large.pull-center {
+  // WONT WORK
+  // expected: centers a large golden row with the top and bottom each being half a golden small
 }
 
 
-// Large grid
-//
-// Columns, offsets, pushes, and pulls for the large desktop device range.
-
-@media (min-width: @screen-lg-min) {
-  .make-golden-grid(lg, width);
-  .make-golden-grid(lg, pull);
-  .make-golden-grid(lg, push);
-  .make-golden-grid(lg, offset);
-}
 
 
-// !!!  golden vertical stuff using
-// vh's? or percents I guess would work also
-// .golden-rectangle
-  // has 1.6 ratio between height and width
-//.golden-other shapes perhaps??? for cropping images? like
-//.golden-circle
+
+
+// old
+
+
 
 
 
@@ -321,7 +521,7 @@
 }
 
 //
-// Create the golden grid
+// Create golden typography
 // --------------------------------------------------
 
 // Anything under a root element with the .golden-bootstrap class
@@ -329,7 +529,209 @@
   .make-golden-typography();
 }
 
-// Any single element with the .golden-bootstrap class
+
+
+
+// Golden Container
+// golden width container based on golden font size and golden line height
+
+
+
+//
+// Variables for the golden container
+// --------------------------------------------------
+
+// 
+// Mixin for the golden container
+// --------------------------------------------------
+
+.pull-center() {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.columns(@num) {
+  -moz-column-count: @num;
+  -webkit-column-count: @num;
+  column-count: @num;
+}
+.columns(@num; @width; @gap) {
+  -moz-column-count: @num;
+  -webkit-column-count: @num;
+  column-count: @num;
+  -moz-column-width: @width;
+  -webkit-column-width: @width;
+  column-width: @width;
+  -moz-column-gap: @gap;
+  -webkit-column-gap: @gap;
+  column-gap: @gap;
+}
+
+.make-golden-content(@font-size, @line-height) {
+
+  @golden-width: (pow((@font-size * @golden-ratio), 2)) * (1 + (2 * @golden-ratio * ((@line-height / @font-size) - @golden-ratio)));
+  width: @golden-width;
+
+  &.pull-center {
+    .pull-center();
+  }
+
+  &.two-columns {
+    width: 100%;
+    .columns(2; @golden-width; @golden-line-height-computed);
+  }
+
+  &.three-columns {
+    width: 100%;
+    .columns(3; @golden-width; @golden-line-height-computed);
+  }
+
+}
+
+//
+// Create the golden container
+// --------------------------------------------------
+
+.golden-content {
+  .make-golden-content(@golden-font-size-base; @golden-line-height-computed);
+}
+
+
+
+
+
+// Golden Rectangle
+
+//
+// Variables for the golden rectangle
+// --------------------------------------------------
+
+// 
+// Mixins for the golden rectangle
+// --------------------------------------------------
+
+.make-golden-rectangle(width; @width; @widthBackup) {
+  width: @widthBackup; width: @width;
+  height: @widthBackup * @golden-large; height: @width * @golden-large;
+}
+.make-golden-rectangle(height; @height; @heightBackup) {
+  width: @heightBackup * @golden-large; width: @height * @golden-large;
+  height: @heightBackup; height: @height;
+}
+
+.make-golden-rectangle(width; @width) {
+  width: @width;
+  height: @width * @golden-large;
+}
+.make-golden-rectangle(height; @height) {
+  width: @height * @golden-large;
+  height: @height;
+}
+.make-golden-rectangle(@width) {
+  .make-golden-rectangle(width; @width);
+}
+
+//
+// Create a golden rectangle
+// !!! this isn't very helpful though : (
+// --------------------------------------------------
+
+.golden-rectangle {
+  .make-golden-rectangle(25vh);
+  background-color: purple;
+}
+
+
+
+// Golden Image
+
+//
+// Variables for the golden image
+// --------------------------------------------------
+
+// 
+// Mixins for the golden image
+// --------------------------------------------------
+
+.make-golden-image(width; @width; @left; @top) {
+  
+  .make-golden-rectangle(width; @width);
+  overflow: hidden;
+  display: inline-block;
+
+  img {
+    position: relative;
+    top: @top;
+    left: @left;
+  }
+
+}
+
+//
+// Create a golden image
+// !!! this isn't very helpful though : (
+// --------------------------------------------------
+
+.golden-image {
+    .make-golden-image(width; 200px; -68px; -11px);
+}
+
+
+
+
+// Golden Image
+
+//
+// Variables for the golden image
+// --------------------------------------------------
+
+// 
+// Mixins for the golden image
+// --------------------------------------------------
+
+// lighten
+.golden-lighten-large(@color) {
+  .lighten(@color; percentage(@golden-large));
+}
+.golden-lighten-small(@color) {
+  .lighten(@color; percentage(@golden-small));
+}
+
+// darken
+.golden-darken-large(@color) {
+  .darken(@color; percentage(@golden-large));
+}
+.golden-darken-small(@color) {
+  .darken(@color; percentage(@golden-small));
+}
+
+// fadeout
+.golden-fadeout-large(@color) {
+  .fadeout(@color; percentage(@golden-large));
+}
+.golden-fadeout-small(@color) {
+  .fadeout(@color; percentage(@golden-small));
+}
+
+// fadein
+.golden-fadein-large(@color) {
+  .fadein(@color; percentage(@golden-large));
+}
+.golden-fadein-small(@color) {
+  .fadein(@color; percentage(@golden-small));
+}
+
+
+
+
+
+
+
+// !!! TODO
+
+// golden margins for content
+
+// apply golden ratio to an individual element
 
 
 
@@ -339,13 +741,115 @@
 
 
 
+
+
+
+// then add an option to center both large width and large height
+// then add a three column option
+
+// golden vertical sections (nav, content, footer && nav, content) perhaps with vh
+
+//START
+// @golden-window-base-height: 1000px;
+
+// .make-golden-grid-rows() {
+
+//   .row-golden-large {
+//     height: @golden-window-base-height * @golden-large;
+//     height: 100vh * @golden-large;
+//     background-color: green;
+//   }
+
+//   .row-golden-small {
+//     height: @golden-window-base-height * @golden-small;
+//     height: 100vh * @golden-small * @golden-small;
+//     background-color: red;
+//   }
+
+// }
+
+// .make-golden-grid-rows();
+//END
+
+
+
+
+
+.golden-container {
+  // centers a content div with margins based on golden ratio
+
+  // you know that there is a minimum 
+  // choose the height and set it as 100vh side
+  // set a width based on this
+  // center
+
+  // OR
+  // set width based on some multiple of ideal line length
+  // choose height based on this
+  // center
+}
+
+
+
+
+
+//.golden-content-container
 
 // content width 
 // 1. sets content width to being some good golden ratio amount
 // based on font size, container, etc
 // 2. chooses the correct number of columns for the text based on ratio
 // 3. centers the text? (or pulls left or right)
-.golden-content() {
 
-}
+
+// TWO OPTIONS
+// 1. Choose margins, and content based on golden ratio
+// then fill content however you choose
+// 2. Choose content width by increments of golden-width
+// center and let margins stay as usual
+// use media queries to gracefully degrade (ie, reset media queries based on number of columns)
+
+//1 .golden-container is a centered container with width based on golden ratio to margins
+// and has media queries perhaps to degrade for xs
+
+//.golden-content is a container with ideal line width
+
+// .golden-content-1,2,3 is a container with 1*,2*,3* ideal line width
+// and is centered : )
+// .golden-container is a sets media queries that change number of columns based on media queries 
+
+
+
+// @grid-columns: 3;
+// @golden-width: 50px;
+
+
+
+// .make-grid-columns() {
+//   // Common styles for all sizes of grid columns, widths 1-12
+//   .col(@index) when (@index = 1) { // initial
+//     @item: ~".col-xs-@{index}, .col-sm-@{index}, .col-md-@{index}, .col-lg-@{index}";
+//     .col(@index + 1, @item);
+//   }
+//   .col(@index, @list) when (@index =< @grid-columns) { // general; "=<" isn't a typo
+//     @item: ~".col-xs-@{index}, .col-sm-@{index}, .col-md-@{index}, .col-lg-@{index}";
+//     .col(@index + 1, ~"@{list}, @{item}");
+//   }
+//   .col(@index, @list) when (@index > @grid-columns) { // terminal
+//     @{list} {
+//       position: relative;
+//       // Prevent columns from collapsing when empty
+//       min-height: 1px;
+//       // Inner gutter via padding
+//       padding-left:  (@grid-gutter-width / 2);
+//       padding-right: (@grid-gutter-width / 2);
+//     }
+//   }
+//   .col(1); // kickstart it
+// }
+
+
+
+
+
 

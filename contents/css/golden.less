@@ -28,7 +28,18 @@
 
 
 
+// --------------------------------------------------
 // Golden Grid Columns
+// - Bootstrap 3 style columns with golden proportions
+// --------------------------------------------------
+
+
+
+//
+// Create the golden grid
+// --------------------------------------------------
+
+.make-golden-grid-columns();
 
 // 
 // Mixins for the golden grid columns
@@ -133,19 +144,20 @@
   }
 }
 
-//
-// Create the golden grid
+
+
+// --------------------------------------------------
+// Golden Grid Rows
+// - Bootstrap 3 inspired rows with golden proportions
 // --------------------------------------------------
 
-.make-golden-grid-columns();
 
 
+//
+// Create the golden grid rows
+// --------------------------------------------------
 
-
-
-// Golden Grid Rows
-
-
+.make-golden-grid-rows();
 
 // 
 // Mixins for the golden grid columns
@@ -207,27 +219,24 @@
   }
 }
 
-//
-// Create the golden grid rows
+
+
+// --------------------------------------------------
+// Golden Container
+// - Boostrap style container centered with golden proportion margins
 // --------------------------------------------------
 
-.make-golden-grid-rows();
 
 
+//
+// Create the golden containers
+// --------------------------------------------------
 
-
-
-// Golden container
-// creates a centered container with golden margin ratios
-
-
-
+.make-golden-containers();
 
 // 
 // Mixins for the golden containers
 // --------------------------------------------------
-
-
 
 .make-golden-containers() {
 
@@ -315,17 +324,12 @@
   width: percentage(@golden-large);
 }
 
-//
-// Create the golden containers
+
+
 // --------------------------------------------------
-
-.make-golden-containers();
-
-
-
-
-
 // Golden Typography
+// - Bootstrap inspired typography with golden proportions
+// --------------------------------------------------
 
 
 
@@ -349,6 +353,15 @@
 @golden-line-height-computed: floor(@golden-font-size-base * @golden-line-height-base); // ~22px
 
 @golden-headings-line-height: 1 + (@golden-ratio / 10); // ~1.161
+
+//
+// Create golden typography
+// --------------------------------------------------
+
+.golden-typography {
+  // anything under a root element with the .golden-typographyclass will have golden typography
+  .make-golden-typography();
+}
 
 // 
 // Mixin for golden typography
@@ -457,8 +470,6 @@
     margin: (@golden-line-height-computed * 2) 0 @golden-line-height-computed;
   }
 
-
-
   // Lists
   // --------------------------------------------------
 
@@ -505,29 +516,26 @@
 
 }
 
-//
-// Create golden typography
+
+
+// --------------------------------------------------
+// Golden Content
+// - Container with ideal width based on font-size and line height
+// - http://www.pearsonified.com/2011/12/golden-ratio-typography.php
 // --------------------------------------------------
 
-// Anything under a root element with the .golden-bootstrap class
-.golden-typography {
-  .make-golden-typography();
+
+
+//
+// Create golden content
+// --------------------------------------------------
+
+.golden-content {
+  .make-golden-content(@golden-font-size-base; @golden-line-height-computed);
 }
 
-
-
-
-// Golden content
-// golden width container based on golden font size and golden line height
-
-
-
-//
-// Variables for the golden content
-// --------------------------------------------------
-
 // 
-// Mixin for the golden content
+// Mixin for golden content
 // --------------------------------------------------
 
 .pull-center() {
@@ -573,31 +581,35 @@
 
 }
 
-//
-// Create the golden content
+
+
 // --------------------------------------------------
-
-.golden-content {
-  .make-golden-content(@golden-font-size-base; @golden-line-height-computed);
-}
-
-
-
-
-
 // Golden Mixins
-
-
+// - Some helpful mixins for utilizing the golden ratio
+// --------------------------------------------------
 
 
 
 // Golden Rectangle
+// --------------------------------------------------
 
+// Example usage:
 
+// // golden rectangle based on a width of 25px
+// .golden-rectangle-ex1 {
+//   .make-golden-rectangle(25px);
+// }
 
+// // golden rectangle based on a height of 25px
+// .golden-rectangle-ex2 {
+//   .make-golden-rectangle(height; 25px);
+// }
 
-//
-// Variables for the golden rectangle
+// // golden rectangle based on a width of 25vh with a fallback of 200px
+// .golden-rectangle-ex3 {
+//   .make-golden-rectangle(width; 25vh; 200px);
+// }
+
 // --------------------------------------------------
 
 // 
@@ -625,22 +637,29 @@
   .make-golden-rectangle(width; @width);
 }
 
-//
-// Create a golden rectangle
-// !!! this isn't very helpful though : (
-// --------------------------------------------------
-
-.golden-rectangle {
-  .make-golden-rectangle(25vh);
-  background-color: purple;
-}
-
 
 
 // Golden Image
+// - wrap your img in a div.golden-image to give it a golden crop
+// --------------------------------------------------
 
-//
-// Variables for the golden image
+// Example usage:
+
+// // golden image based on a width of 200px and the image centered with a left alignment of -68px and top alignment of -11px
+// .golden-image-ex1 {
+//     .make-golden-image(width; 200px; -68px; -11px);
+// }
+
+// // golden image based on a height of 200px and the image centered with a left alignment of -68px and top alignment of -11px
+// .golden-image-ex2 {
+//     .make-golden-image(height; 200px; -68px; -11px);
+// }
+
+// // golden image based on a width of 200px and the image centered with a left alignment of -68px and top alignment of -11px
+// .golden-image-ex3 {
+//     .make-golden-image(200px; -68px; -11px);
+// }
+
 // --------------------------------------------------
 
 // 
@@ -658,25 +677,47 @@
     top: @top;
     left: @left;
   }
-
 }
+.make-golden-image(height; @height; @left; @top) {
+  
+  .make-golden-rectangle(height; @height);
+  overflow: hidden;
+  display: inline-block;
 
-//
-// Create a golden image
-// !!! this isn't very helpful though : (
-// --------------------------------------------------
+  img {
+    position: relative;
+    top: @top;
+    left: @left;
+  }
+}
+.make-golden-image(@width; @left; @top) {
+  
+  .make-golden-rectangle(width; @height);
+  overflow: hidden;
+  display: inline-block;
 
-.golden-image {
-    .make-golden-image(width; 200px; -68px; -11px);
+  img {
+    position: relative;
+    top: @top;
+    left: @left;
+  }
 }
 
 
 
 
 // Golden Colors
+// --------------------------------------------------
 
-//
-// Variables for golden colors
+// Example usage:
+
+// a lighter shade of purple that is has golden proportions with the original
+// @color: .golden-lighten-large(purple);
+
+// two new shades of purple with golden proportions
+// @color1: .golden-lighten-small(purple);
+// @color2: .golden-darken-large(purple);
+
 // --------------------------------------------------
 
 // 

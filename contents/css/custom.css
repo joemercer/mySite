@@ -3508,22 +3508,6 @@ td.visible-print {
   -webkit-column-gap: 22px;
   column-gap: 22px;
 }
-.golden-rectangle {
-  width: 25vh;
-  height: 15.450849718747369vh;
-  background-color: purple;
-}
-.golden-image {
-  width: 200px;
-  height: 123.60679774997895px;
-  overflow: hidden;
-  display: inline-block;
-}
-.golden-image img {
-  position: relative;
-  top: -11px;
-  left: -68px;
-}
 body {
   background-color: #f0f7ff;
 }

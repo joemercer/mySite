@@ -48,6 +48,11 @@
     padding-right: (@grid-gutter-width / 2);
     // Add a float left to every column
     float: left;
+
+    &.pull-center {
+      .pull-center();
+    }
+
   }
 
   // Extra small grid
@@ -162,6 +167,7 @@
   .make-golden-row(pull);
   .make-golden-row(push);
   .make-golden-row(offset);
+  .make-golden-row(center);
 }
 
 .make-golden-row(@type) {
@@ -188,6 +194,12 @@
 .calc-golden-row(@gold, @type) when (@type = offset) {
   .row-offset-@{gold} {
     margin-top: percentage(@@gold);
+  }
+}
+.calc-golden-row(@gold, @type) when (@type = center) {
+  .row-center-@{gold} {
+    // ??? should this be margin-top or top?
+    margin-top: percentage((1 - @@gold) / 2);
   }
 }
 
@@ -242,7 +254,6 @@
   // for xs screens, overridden by media queries
   .container-golden {
     width: 100%;
-    background-color: purple;
   }
 
   @media (min-width: @screen-sm-min) {
@@ -305,36 +316,6 @@
 // --------------------------------------------------
 
 .make-golden-containers();
-
-
-
-
-
-
-
-
-
-// and add a class to existing that just straight up center it 
-// so
-// DONE but we could have a helpful class to do it in one
-// instead of needing two classes
-.col-sm-golden-large.pull-center {
-  // centers a golden large
-  // which means that each side is half a golden small
-  // : )
-}
-
-.row-golden-large.pull-center {
-  // WONT WORK
-  // expected: centers a large golden row with the top and bottom each being half a golden small
-}
-
-
-
-
-
-
-// old
 
 
 
@@ -602,6 +583,9 @@
 
 // Golden Rectangle
 
+
+
+
 //
 // Variables for the golden rectangle
 // --------------------------------------------------
@@ -679,14 +663,14 @@
 
 
 
-// Golden Image
+// Golden Colors
 
 //
-// Variables for the golden image
+// Variables for golden colors
 // --------------------------------------------------
 
 // 
-// Mixins for the golden image
+// Mixins for golden colors
 // --------------------------------------------------
 
 // lighten
@@ -729,16 +713,6 @@
 
 // !!! TODO
 
-// golden margins for content
-
-// apply golden ratio to an individual element
-
-
-
-
-
-
-
 
 
 
@@ -747,7 +721,6 @@
 // then add an option to center both large width and large height
 // then add a three column option
 
-// golden vertical sections (nav, content, footer && nav, content) perhaps with vh
 
 //START
 // @golden-window-base-height: 1000px;
@@ -775,20 +748,10 @@
 
 
 
-.golden-container {
-  // centers a content div with margins based on golden ratio
-
-  // you know that there is a minimum 
-  // choose the height and set it as 100vh side
-  // set a width based on this
-  // center
-
   // OR
   // set width based on some multiple of ideal line length
   // choose height based on this
   // center
-}
-
 
 
 
@@ -803,14 +766,9 @@
 
 
 // TWO OPTIONS
-// 1. Choose margins, and content based on golden ratio
-// then fill content however you choose
 // 2. Choose content width by increments of golden-width
 // center and let margins stay as usual
 // use media queries to gracefully degrade (ie, reset media queries based on number of columns)
-
-//1 .golden-container is a centered container with width based on golden ratio to margins
-// and has media queries perhaps to degrade for xs
 
 //.golden-content is a container with ideal line width
 

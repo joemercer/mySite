@@ -3107,6 +3107,17 @@ td.visible-print {
   padding-right: 15px;
   float: left;
 }
+.col-xs-golden-large.pull-center,
+.col-sm-golden-large.pull-center,
+.col-md-golden-large.pull-center,
+.col-lg-golden-large.pull-center,
+.col-xs-golden-small.pull-center,
+.col-sm-golden-small.pull-center,
+.col-md-golden-small.pull-center,
+.col-lg-golden-small.pull-center {
+  margin-left: auto;
+  margin-right: auto;
+}
 .col-xs-golden-large {
   width: 61.803398874989476%;
 }
@@ -3246,6 +3257,12 @@ td.visible-print {
 .row-offset-golden-small {
   margin-top: 38.196601125010524%;
 }
+.row-center-golden-large {
+  margin-top: 19.098300562505262%;
+}
+.row-center-golden-small {
+  margin-top: 30.901699437494738%;
+}
 .container-golden,
 .container-margin-golden-large,
 .container-margin-golden-small,
@@ -3278,7 +3295,6 @@ td.visible-print {
 }
 .container-golden {
   width: 100%;
-  background-color: purple;
 }
 @media (min-width: 768px) {
   .container-golden {

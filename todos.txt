@@ -1,0 +1,31 @@
+# TODO
+_____
+
+- figure out data model
+- connect twitter
+- connect resume
+- start making blog
+
+_____
+
+# BACKLOG
+_____
+
+- get pictures from merisa
+- compile assets only in wercker task
+- use different assets (non-minified vs minified) in dev vs prod
+
+_____
+
+# DONE
+_____
+
+- none
+
+_____
+
+# IDEAS
+_____
+
+- blog
+- resume

@@ -1,4 +1,4 @@
-/*! mySite 2013-11-14 */
+/*! mySite 2014-01-03 */
 +function($) {
     "use strict";
     var Carousel = function(element, options) {
@@ -208,60 +208,182 @@
     }, $(function() {
         $.support.transition = transitionEnd();
     });
-}(window.jQuery), $(function() {
-    {
-        var navHeightInitial = $("nav").outerHeight(), navHeightFinal = 70, navPaddingInitial = 65, navPaddingFinal = 0, splashHeight = $("#splash").outerHeight();
-        $("#splash h1").outerHeight(), $("#splash").offset().top + splashHeight;
-    }
-    $(window).scroll(function() {
+}(window.jQuery), $.fn.animateRotate = function(angle, duration, easing, complete) {
+    var args = $.speed(duration, easing, complete), step = args.step;
+    return this.each(function(i, e) {
+        args.step = function(now) {
+            return $.style(e, "transform", "rotate(" + now + "deg)"), step ? step.apply(this, arguments) : void 0;
+        }, $({
+            deg: 0
+        }).animate({
+            deg: angle
+        }, args);
+    });
+};
+
+var LARGE_MAX = 1200, MEDIUM_MAX = 992, SMALL_MAX = 768, $blocks, $blockPreviews, $changeBlockSize, $scrollBlockAway, getNextBlock, getPrevBlock, getBlockOnNextRow, getBlockOnPrevRow, getBlockOuterHeight, getBlockOuterWidth, getBlockMargin;
+
+$(function() {
+    "use strict";
+    $blocks = $(".block"), $blockPreviews = $blocks.find(".block-preview"), $changeBlockSize = $blocks.find(".change-size"), 
+    $scrollBlockAway = $blocks.filter(".scroll-away");
+    var indexOfBlock, counter;
+    getNextBlock = function($block) {
+        if (indexOfBlock = $blocks.index($block), -1 === indexOfBlock) return $block;
+        var indexOfNextBlock = indexOfBlock + 1;
+        return indexOfNextBlock === $blocks.length ? $block : $blocks.eq(indexOfNextBlock);
+    }, getPrevBlock = function($block) {
+        if (indexOfBlock = $blocks.index($block), -1 === indexOfBlock) return $block;
+        var indexOfPrevBlock = indexOfBlock - 1;
+        return -1 === indexOfPrevBlock ? $block : $blocks.eq(indexOfPrevBlock);
+    }, getBlockOnNextRow = function($block) {
+        if (indexOfBlock = $blocks.index($block), -1 === indexOfBlock) return $block;
+        var $nextBlock = getNextBlock($block);
+        if ($nextBlock === $block) return $block;
+        var thisBlockOffsetTop = $block.offset().top;
+        for (counter = 1; $nextBlock.offset().top === thisBlockOffsetTop; ) if (counter += 1, 
+        $nextBlock = $blocks.eq(indexOfBlock + counter), $nextBlock === $block) return $block;
+        return $nextBlock;
+    }, getBlockOnPrevRow = function($block) {
+        if (indexOfBlock = $blocks.index($block), -1 === indexOfBlock) return $block;
+        var $prevBlock = getPrevBlock($block);
+        if ($prevBlock === $block) return $block;
+        var thisBlockOffsetTop = $block.offset().top;
+        for (counter = 1; $prevBlock.offset().top === thisBlockOffsetTop; ) if (counter -= 1, 
+        $prevBlock = $blocks.eq(indexOfBlock + counter), $prevBlock === $block) return $block;
+        return $prevBlock;
+    }, getBlockOuterHeight = function(includeMargin) {
+        return $blocks.last().outerHeight(!!includeMargin);
+    }, getBlockOuterWidth = function(includeMargin) {
+        return $blocks.last().outerWidth(!!includeMargin);
+    };
+    var _blockMargin;
+    getBlockMargin = function() {
+        return _blockMargin ? _blockMargin : _blockMargin = parseInt($blocks.last().css("marginBottom"), 10);
+    };
+    var $window = $(window);
+    $window.resize(function() {
+        var width = $window.width();
+        width >= LARGE_MAX ? $blockPreviews.removeClass("medium").removeClass("small").addClass("large") : width >= MEDIUM_MAX && LARGE_MAX > width ? $blockPreviews.removeClass("large").removeClass("small").addClass("medium") : width >= SMALL_MAX && MEDIUM_MAX > width ? $blockPreviews.removeClass("large").removeClass("medium").addClass("small") : SMALL_MAX > width && $blockPreviews.removeClass("large").removeClass("medium").removeClass("small");
+    }), $window.resize();
+    var BLOCK_EXPANDED_MARGIN = 0, EXPAND_ROTATE_DEGREES = 3600, SHRINK_ROTATE_DEGREES = 3600, EXPAND_SCROLL_TOP_OFFSET = .33, SHRINK_SCROLL_TOP_OFFSET = .33, EXPAND_FADE_DURATION = 3e3, EXPAND_SIZE_DURATION = 4e3, EXPAND_WIDTH_DURATION = EXPAND_SIZE_DURATION / 2, EXPAND_HEIGHT_DURATION = EXPAND_SIZE_DURATION / 2, EXPAND_ROTATE_DURATION = 2e3, EXPAND_SCROLL_DURATION = 2e3, SHRINK_FADE_DURATION = 3e3, SHRINK_SIZE_DURATION = 4e3, SHRINK_WIDTH_DURATION = SHRINK_SIZE_DURATION / 2, SHRINK_HEIGHT_DURATION = SHRINK_SIZE_DURATION / 2, SHRINK_ROTATE_DURATION = 2e3, SHRINK_SCROLL_DURATION = 2e3;
+    $changeBlockSize.click(function(e) {
+        var newScrollTop, $target = $(e.target), $block = $target.parents(".block"), $blockPreview = $block.find(".block-preview"), $blockFull = $block.find(".block-full"), $blockFooter = $block.find(".block-footer");
+        if ($target.hasClass("expand")) {
+            $blockPreview.fadeOut(EXPAND_FADE_DURATION / 2, function() {
+                $blockPreview.toggleClass("hide"), $blockFull.fadeIn(EXPAND_FADE_DURATION / 2).toggleClass("hide");
+            }), $block.animate({
+                "margin-left": BLOCK_EXPANDED_MARGIN,
+                "margin-right": BLOCK_EXPANDED_MARGIN,
+                width: $block.parents(".content").width()
+            }, EXPAND_WIDTH_DURATION, function() {
+                $block.animate({
+                    height: $blockFull.outerHeight(!0) + $blockFooter.outerHeight(!0)
+                }, EXPAND_HEIGHT_DURATION, function() {
+                    $block.addClass("expanded");
+                });
+            }), $target.animateRotate(EXPAND_ROTATE_DEGREES / 2, EXPAND_ROTATE_DURATION / 2, void 0, function() {
+                $target.removeClass("expand").removeClass("glyphicon-plus").addClass("shrink").addClass("glyphicon-minus").animateRotate(EXPAND_ROTATE_DEGREES / 2, EXPAND_ROTATE_DURATION / 2);
+            });
+            var previousBlockPositionLeft = getPrevBlock($block).position().left, thisBlockPositionLeft = $block.position().left;
+            newScrollTop = thisBlockPositionLeft > previousBlockPositionLeft ? getBlockOnNextRow($block).offset().top - $window.height() * EXPAND_SCROLL_TOP_OFFSET : $block.offset().top - $window.height() * EXPAND_SCROLL_TOP_OFFSET, 
+            $("html, body").animate({
+                scrollTop: newScrollTop
+            }, EXPAND_SCROLL_DURATION);
+        }
+        if ($target.hasClass("shrink")) {
+            $blockFull.fadeOut(SHRINK_FADE_DURATION / 2, function() {
+                $blockFull.toggleClass("hide"), $blockPreview.fadeIn(SHRINK_FADE_DURATION / 2).toggleClass("hide");
+            }), $block.animate({
+                height: getBlockOuterHeight()
+            }, SHRINK_HEIGHT_DURATION, function() {
+                $block.animate({
+                    "margin-left": getBlockMargin(),
+                    "margin-right": getBlockMargin(),
+                    width: getBlockOuterWidth()
+                }, SHRINK_WIDTH_DURATION);
+            }).removeClass("expanded"), $target.animateRotate(SHRINK_ROTATE_DEGREES / 2, SHRINK_ROTATE_DURATION / 2, void 0, function() {
+                $target.removeClass("shrink").removeClass("glyphicon-minus").addClass("expand").addClass("glyphicon-plus").animateRotate(EXPAND_ROTATE_DEGREES / 2, EXPAND_ROTATE_DURATION / 2);
+            });
+            var previousBlockPositionRight = getPrevBlock($block).position().left + getPrevBlock($block).width(), thisBlockPositionRight = $block.position().left + $block.width();
+            newScrollTop = thisBlockPositionRight > previousBlockPositionRight ? getBlockOnPrevRow($block).offset().top - $window.height() * SHRINK_SCROLL_TOP_OFFSET : getBlockOnNextRow($block).offset().top - $window.height() * SHRINK_SCROLL_TOP_OFFSET, 
+            $("html, body").animate({
+                scrollTop: newScrollTop
+            }, SHRINK_SCROLL_DURATION);
+        }
+    });
+    var navHeightInitial = $("nav").outerHeight(), navHeightFinal = 70, navPaddingInitial = 65, navPaddingFinal = 0, splashHeight = $("#splash").outerHeight(), inPreSplash = ($("#splash h1").outerHeight(), 
+    $("#splash").offset().top + splashHeight, !1), inPostSplash = !1, inPreNav = !1, inPostNav = !1;
+    $window.scroll(function() {
         var scrolled = $(this).scrollTop();
         if (console.log("scroll at", scrolled), !(0 > scrolled)) {
             var start = 0, end = start + splashHeight;
-            if (start > scrolled) $("#splash").css({
+            if (!inPreSplash && start > scrolled) console.log("preSplash"), $("#splash").css({
                 opacity: 1
             }), $("#splash h1").css({
                 opacity: 1
             }), $("#splash").css({
                 height: 600
-            }); else if (scrolled >= start && end >= scrolled) {
+            }), inPreSplash = !0; else if (scrolled >= start && end >= scrolled) {
                 var opacity = 1 - Math.min(scrolled / splashHeight, 1);
                 $("#splash").css({
                     opacity: opacity
-                });
-                var opacity = 1 - Math.min(scrolled / splashHeight, 1);
-                $("#splash h1").css({
+                }), opacity = 1 - Math.min(scrolled / splashHeight, 1), $("#splash h1").css({
                     opacity: opacity
                 });
                 var height = Math.max(splashHeight - scrolled, 0);
                 $("#splash").css({
                     height: height
-                });
-            } else scrolled > end && ($("#splash").css({
+                }), inPreSplash = !1, inPostSplash = !1;
+            } else !inPostSplash && scrolled > end && (console.log("postSplash"), $("#splash").css({
                 opacity: 0
             }), $("#splash h1").css({
                 opacity: 0
             }), $("#splash").css({
                 height: 0
-            }));
-            var start = end, end = start + navHeightInitial - navHeightFinal;
-            if (start > scrolled) $("nav").css({
+            }), inPostSplash = !0);
+            if (start = end, end = start + navHeightInitial - navHeightFinal, !inPreNav && start > scrolled) $("nav").css({
                 height: navHeightInitial
             }), $("nav").css({
                 "padding-top": navPaddingInitial
-            }); else if (scrolled >= start && end >= scrolled) {
-                var relScroll = scrolled - start, height = Math.max(navHeightInitial - relScroll, navHeightFinal);
+            }), inPreNav = !0; else if (scrolled >= start && end >= scrolled) {
+                var relScroll = scrolled - start, newHeight = Math.max(navHeightInitial - relScroll, navHeightFinal);
                 $("nav").css({
-                    height: height
+                    height: newHeight
                 });
                 var padding = Math.max(navPaddingInitial - relScroll, navPaddingFinal);
                 $("nav").css({
                     "padding-top": padding
-                });
-            } else scrolled > end && ($("nav").css({
+                }), inPreNav = !1, inPostNav = !1;
+            } else !inPostNav && scrolled > end && ($("nav").css({
                 height: navHeightFinal
             }), $("nav").css({
                 "padding-top": navPaddingFinal
-            }));
+            }), inPostNav = !0);
+            $scrollBlockAway.each(function(index, el) {
+                var $el = $(el), $target = $el.find(".scroll-away-target"), relScroll = scrolled - $el.data("start");
+                if (0 > relScroll) $target.css({
+                    height: $el.height()
+                }), $target.css({
+                    opacity: 1
+                }); else if (relScroll > $el.height()) $target.css({
+                    height: 0
+                }), $target.css({
+                    opacity: 0
+                }); else {
+                    var height = $el.height() - relScroll;
+                    $target.css({
+                        height: height
+                    });
+                    var opacity = 1 - relScroll / $el.height();
+                    $target.css({
+                        opacity: opacity
+                    });
+                }
+            }), $scrollBlockAway.each(function(index, el) {
+                var $el = $(el), start = $el.position().top + $el.height() / 2 - $window.height() / 2;
+                $el.data("start", start);
+            });
         }
     });
 });

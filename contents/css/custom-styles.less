@@ -13,21 +13,28 @@
 // @test: #0A1D31;
 // @cyan: #00FFFF;
 
+@color-primary: #5a7696;
+@background-light: saturate(lighten(@brand-primary, 50%), 75%);
+
+
+body {
+  background-color: @background-light;
+}
+
+
 @nav-content-height: 50px;
 @nav-height: 200px;
-
 nav {
   position: fixed;
   top: 0px;
   height: @nav-height;
-  // padding-top: ((@nav-height - @nav-content-height)/2);
-  // padding-bottom: ((@nav-height - @nav-content-height)/2);
   padding-top: 65px;
   width: 100%;
+  left: 50%;
+  margin-left: -50%; // half the width
   z-index: 1030;
   text-align: center;
-  background-color: @body-bg;
-  #gradient > .vertical(@body-bg, fade(@body-bg, 10%));
+  background-color: @background-light;
 
 }
 
@@ -45,7 +52,7 @@ nav {
     li {
       display: inline-block;
       padding: 4px 4px;
-      margin: 10px 5px;
+      margin: 10px 50px;
       a {
         font-weight: 400;
         color: darken(@brand-primary, 50%);
@@ -61,8 +68,8 @@ nav {
 
 .nav-center {
   position: absolute;
-  left: 25%;
-  width: 50%;
+  left: 0%;
+  width: 100%;
   //float: left;
   // margin-left: 25%;
 }
@@ -70,6 +77,13 @@ nav {
 .nav-right {
   position: absolute;
   left: 75%;
+  width: 25%;
+  // float: right;
+}
+
+.nav-left {
+  position: absolute;
+  left: 0%;
   width: 25%;
   // float: right;
 }
@@ -82,75 +96,30 @@ nav {
 }
 
 
-
-// @media (min-width: 768px) {
-//   nav {
-//     /*margin-top: 149px;
-//     margin-bottom: 99px;*/
-//     margin-top: 15vh;
-//     margin-bottom: 5vh;
-//     /*border-top: 1px solid @lightblue;
-//     border-bottom: 1px solid @lightblue;*/
-//   }
-//   .nav > li > a {
-//     padding-top: 15px;
-//     padding-bottom: 15px;
-//   }
-// }
-
-// @media (max-width: 767px) {
-//   .nav {
-//     background-color: @lightblue;
-//   }
-//   .nav > li {
-//     height: 80px;
-//     width: 32.9%;
-//     border-right: 1px solid @boldBlue;
-//     border-bottom: 1px solid @boldBlue;
-//     font-size: 1.5rem;
-//     padding-top: 20px;
-//     padding-bottom: 12px;
-//   }
-//   .nav > li:last-child {
-//     border-right: none;
-//   }
-//   .nav > li > a {
-//     color: @boldBlue;
-//   }
-// }
-
-
-
-// .img-rounded {
-//   padding-bottom: 26px;
-// }
-
 @splash-padding-top: 50px;
 @splash-height: 600px;
+
+@splash-width: 100%;
 
 #splash {
   position: fixed;
   top: 0px;
-  width: 100%;
+  width: @splash-width;
+  left: 50%;
+  margin-left: -1*@splash-width/2; // half the width
   background-color: @brand-primary;
   // background-color: desaturate(darken(@body-bg, 50%), 75%);
   height: @splash-height;
   // padding-top: @splash-padding-top;
   margin-top: @nav-height;
-  margin-bottom: @name-margin-top;
-
-  .container {
-    height: 100%;
-    .col-md-12 {
-      height: 100%;
-    }
-  }
+  margin-bottom: 0px;
+  padding: 0px 20px;
 
   h1 {
     position: absolute;
     top: 10%;
     margin: 0px;
-    color: darken(@body-bg, 10%);
+    color: darken(@background-light, 10%);
     overflow: hidden;
 
     b {
@@ -159,7 +128,7 @@ nav {
       font-style: italic;
       font-size: 48px;
       // color: darken(@brand-primary, 50%);
-      color: darken(@body-bg, 90%);
+      color: darken(@background-light, 90%);
     }
 
   }
@@ -167,7 +136,7 @@ nav {
 
 h3 {
 
-  color: darken(@body-bg, 10%);
+  color: darken(@background-light, 10%);
 
   b {
     font-family: 'Lobster Two', cursive;
@@ -180,73 +149,160 @@ h3 {
 }
 
 
+// NEW STUFF
 
-.carousel-control.right,
-.carousel-control.left {
-    background: transparent;
+// 1140
+// 940
+// 720
+//
+// not used
+// @blockBorderWidth: 1px;
+
+
+@content-margin-top: @nav-height + @splash-height + 100px;
+
+.content {
+  margin: @content-margin-top auto;
 }
 
-li.carousel-indicators-item {
-  background-color: darken(@brand-primary, 50%);
-  &.active {
-    border: 1px solid darken(@brand-primary, 50%);
+@blockMargin: 15px;
+
+.block {
+  position: relative;
+  float: left;
+  background: white;
+  margin: @blockMargin;
+
+  // .block-content {
+  //   padding: 20px;
+  // }
+  .block-preview {
+    margin: 20px;
+  }
+  .block-full {
+    margin: 20px;
+  }
+
+  .block-footer {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    height: 54px;
+
+
+    .change-size {
+      position: absolute;
+      right: 0px;
+      bottom: 0px;
+      font-size: 36px;
+      margin: 0px 12px 12px 0px;
+    }
   }
 }
 
-.section {
-  background-color: white;
-  border: 1px solid darken(@body-bg, 10%);
+@xsWidth: 100%;
+@xsNumBlocks: 1;
+@xsMargin: 0px;
+@media (max-width: @screen-xs-max) {
+  .content {
+    width: @xsWidth;
 
-  p {
-    color: darken(@brand-primary, 50%);
+    font-size: 1.25rem; font-size: 20px; 
+  }
+  .block {
+    width: @xsWidth;
+    height: auto;
+    margin: @xsMargin;
+    margin-top: @blockMargin;
+    margin-bottom: @blockMargin;
+  }
+}
+@smWidth: 720px;
+@smNumBlocks: 2;
+@smMargin: @blockMargin;
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+  .content {
+    width: @smWidth;
+  }
+  .block {
+    @width: (@smWidth / @smNumBlocks) - 2*@smMargin;
+    width: @width;
+    height: ( @smWidth / @smNumBlocks ) - 2*@smMargin;
   }
 
+}
+@mdWidth: 940px;
+@mdNumBlocks: 2;
+@mdMargin: @blockMargin;
+@media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+  .content {
+    width: @mdWidth;
+  }
+  .block {
+    width: ( @mdWidth / @mdNumBlocks ) - 2*@mdMargin;
+    height: @mdWidth / @mdNumBlocks - 2*@mdMargin;
+  }
+}
+@lgWidth: 1140px;
+@lgNumBlocks: 3;
+@lgMargin: @blockMargin;
+@media (min-width: @screen-lg-min) {
+  .content {
+    width: @lgWidth;
+  }
+  .block {
+    width: ( @lgWidth / @lgNumBlocks ) - 2*@lgMargin;
+    height: @lgWidth / @lgNumBlocks - 2*@lgMargin;
+  }
+}
 
-  // margin-top: 25vh;
-  // margin-bottom: 25vh;
 
-  padding-top: 100px;
-  padding-bottom: 100px;
-  margin-top: 200px;
-  margin-bottom: 200px;
+
+
+.block.expanded {
+  width: 100% !important;
+  height: auto; //but we should give this a max height
+  margin-left: 0px;
+  margin-right: 0px;
+
+  // min-height: 500px;
 
 }
 
-@name-margin-top: 150px;
-#name {
-  height: 560px;
-  margin-top: @nav-height + @splash-height + @name-margin-top;
+.block.transparent {
+  // opacity: 0;
+  background: transparent;
+}
+
+.block.scroll-away {
+  .scroll-away-target {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    background-color: red;
+  }
+}
+
+
+// I should have size classes for the block fulls as well
+// that way I can do multi column stuff
+#about {
+
+  .block-preview {
+
+    &.small {
+      font-size: 49px;
+    }
+    &.medium {
+      font-size: 68px;
+    }
+    &.large {
+      font-size: 52px;
+    }
+  }
+
 }
 
 
 
-// #projects {
-
-// }
-
-// .project2 {
-//   background-color: @white;
-//   margin-top: 25vh;
-//   margin-bottom: 25vh;
-//   border: 1px solid @boldLightBlue;
-// }
-
-// .project3 {
-//   background-color: @white;
-//   margin-top: 25vh;
-//   margin-bottom: 25vh;
-//   border: 1px solid @boldLightBlue;
-// }
-
-// #aim {
-//   padding-top: 10%;
-//   padding-bottom: 20%;
-//   height: 425px;
-//   background-color: @test;
-//   margin-top: 25vh;
-//   margin-bottom: 25vh;
-//   color: @red;
-// }
-
-// #aim .row {
-// }

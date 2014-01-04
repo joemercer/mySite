@@ -1,0 +1,50 @@
+{
+	"quotes": [{
+		"html": "this is the quote html",
+		"author": "Joe",
+		"work": "An essay of a thing",
+		"date": 3452343,
+		"dateFound": 2883838,
+		"context": "I found this when I was doing this thing"
+	},{
+		"html": "In short, if we adhere to the standard of perfection in all our endeavors, we are left with nothing but mathematics and the White Album.",
+		"author": "Daniel Gilbert",
+		"work": "Stumbling on Happiness",
+		"date": 3452343,
+		"dateFound": 2883838,
+		"context": "reading",
+		"page": 71
+	},{
+		"html": "The only thing more difficult than finding a needle in a haystack is finding a needle in a needlestack.",
+		"author": "Daniel Gilbert",
+		"work": "Stumbling on Happiness",
+		"date": 3452343,
+		"dateFound": 2883838,
+		"context": "reading, start of the section Stop Annoying People",
+		"page": 168
+	},{
+		"html": "In July 2004, the City Council of Monza, Italy, took the unusual step of banning goldfish bowls. They reasoned that goldfish should be kept in rectangular aquariums and not in round bowls because 'a fish kept in a bowl has a distorted view of reality and suffers because of this'.",
+		"author": "Daniel Gilbert",
+		"work": "Stumbling on Happiness",
+		"date": 3452343,
+		"dateFound": 2883838,
+		"context": "reading",
+		"page": 187
+	},{
+		"html": "If we can spend hours enjoying the memory of an experience that lasted just a few seconds, and if memories tend to overemphasize endings, then why not endure a little extra pain in order to have a memory that is a little less painful.",
+		"author": "Daniel Gilbert",
+		"work": "Stumbling on Happiness",
+		"date": 3452343,
+		"dateFound": 2883838,
+		"context": "reading",
+		"page": 225
+	},{
+		"html": "Science has given us a lot of facts about the average person, and one of the most reliable of these facts is that the average person doesn't see herself as average.",
+		"author": "Daniel Gilbert",
+		"work": "Stumbling on Happiness",
+		"date": 3452343,
+		"dateFound": 2883838,
+		"context": "reading",
+		"page": 252
+	}]
+}

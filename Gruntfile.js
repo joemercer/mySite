@@ -1,4 +1,5 @@
 module.exports = function(grunt) {
+  "use strict";
 
   // Project configuration.
   grunt.initConfig({
@@ -54,7 +55,7 @@ module.exports = function(grunt) {
         options: {
         },
         files: {
-          "contents/css/custom.css": "contents/css/custom.less"
+          'contents/css/custom.css': 'contents/css/custom.less'
         }
       },
       production: {
@@ -63,7 +64,7 @@ module.exports = function(grunt) {
           report: true
         },
         files: {
-          "contents/css/custom.min.css": "contents/css/custom.less"
+          'contents/css/custom.min.css': 'contents/css/custom.less'
         }
       }
     },
@@ -75,8 +76,15 @@ module.exports = function(grunt) {
       less: {
         files: ['contents/css/*.less'],
         tasks: ['less']
+      },
+      hint: {
+        files: ['Gruntfile.js', 'contents/js/styles.js'],
+        tasks: ['jshint']
       }
     },
+    jshint: {
+      all: ['Gruntfile.js', 'contents/js/styles.js']
+    }
   });
 
   // Load the plugin that provides the "uglify" task.
@@ -85,6 +93,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
 
   // Default task(s).
   grunt.registerTask('default', ['less', 'uglify', 'wintersmith:build']);

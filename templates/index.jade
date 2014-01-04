@@ -1,18 +1,16 @@
 extends baseLayout
 
 block body
-  - var index = contents['index.json'].metadata;
-  - var me = contents.authors['baker.json'].metadata;
   div.container
     nav(role="navigation")
       div.navbar-custom
         ul.nav-center
           li
-            a !{index.headerLinks.blog.label}
+            a index.headerLinks.blog.label}
           li
-            a !{index.headerLinks.resume.label}
+            a index.headerLinks.resume.label}
           li
-            a !{index.headerLinks.twitter.label}
+            a index.headerLinks.twitter.label}
     div#splash
       h1 Joe
     div.content
@@ -22,7 +20,7 @@ block body
           div.block-preview
             | Hey, my name is Joe Mercer.
           div.block-full.hide
-            | !{index.about.sections.main.html}
+            | index.about.sections.main.html}
         div.block-footer
           span.glyphicon.glyphicon-plus.change-size.expand
       div.block

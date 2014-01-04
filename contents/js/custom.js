@@ -1,4 +1,4 @@
-/*! mySite 2013-11-14 */
+/*! mySite 2014-01-04 */
 +function($) {
     "use strict";
     var Carousel = function(element, options) {

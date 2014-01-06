@@ -1,0 +1,308 @@
+// @white: #FFFFFF;
+// @blue: #497AAF;
+// @lightblue: #F0F7FF;
+
+// @boldBlue: darken(@blue, 50%);
+// @boldLightBlue: darken(@lightblue, 10%);
+
+
+
+// @red: #8C001E;
+// @lightRed: #FFF0F0;
+// @grey: #96A6B8;
+// @test: #0A1D31;
+// @cyan: #00FFFF;
+
+@color-primary: #5a7696;
+@background-light: saturate(lighten(@brand-primary, 50%), 75%);
+
+
+body {
+  background-color: @background-light;
+}
+
+
+@nav-content-height: 50px;
+@nav-height: 200px;
+nav {
+  position: fixed;
+  top: 0px;
+  height: @nav-height;
+  padding-top: 65px;
+  width: 100%;
+  left: 50%;
+  margin-left: -50%; // half the width
+  z-index: 1030;
+  text-align: center;
+  background-color: @background-light;
+
+}
+
+.navbar-custom {
+  width: 100%;
+  position: relative;
+  height: 70px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin: 0px;
+
+  ul {
+    padding: 0px;
+    margin: 0px;
+    li {
+      display: inline-block;
+      padding: 4px 4px;
+      margin: 10px 50px;
+      a {
+        font-weight: 400;
+        color: darken(@brand-primary, 50%);
+      }
+      a:hover,
+      a:focus {
+        text-decoration: none;
+        font-weight: 700;
+      }
+    }
+  }
+}
+
+.nav-center {
+  position: absolute;
+  left: 0%;
+  width: 100%;
+  //float: left;
+  // margin-left: 25%;
+}
+
+.nav-right {
+  position: absolute;
+  left: 75%;
+  width: 25%;
+  // float: right;
+}
+
+.nav-left {
+  position: absolute;
+  left: 0%;
+  width: 25%;
+  // float: right;
+}
+
+#index {
+  ul.nav {
+    left: auto;
+    right: 0px;
+  }
+}
+
+
+@splash-padding-top: 50px;
+@splash-height: 600px;
+
+@splash-width: 100%;
+
+#splash {
+  position: fixed;
+  top: 0px;
+  width: @splash-width;
+  left: 50%;
+  margin-left: -1*@splash-width/2; // half the width
+  background-color: @brand-primary;
+  // background-color: desaturate(darken(@body-bg, 50%), 75%);
+  height: @splash-height;
+  // padding-top: @splash-padding-top;
+  margin-top: @nav-height;
+  margin-bottom: 0px;
+  padding: 0px 20px;
+
+  h1 {
+    position: absolute;
+    top: 10%;
+    margin: 0px;
+    color: darken(@background-light, 10%);
+    overflow: hidden;
+
+    b {
+      font-family: 'Lobster Two', cursive;
+      font-weight: 700;
+      font-style: italic;
+      font-size: 48px;
+      // color: darken(@brand-primary, 50%);
+      color: darken(@background-light, 90%);
+    }
+
+  }
+}
+
+h3 {
+
+  color: darken(@background-light, 10%);
+
+  b {
+    font-family: 'Lobster Two', cursive;
+    font-weight: 700;
+    font-style: italic;
+    font-size: 48px;
+    color: darken(@brand-primary, 50%);
+  }
+
+}
+
+
+// NEW STUFF
+
+// 1140
+// 940
+// 720
+//
+// not used
+// @blockBorderWidth: 1px;
+
+
+@content-margin-top: @nav-height + @splash-height + 100px;
+
+.content {
+  margin: @content-margin-top auto;
+}
+
+@blockMargin: 15px;
+
+.block {
+  position: relative;
+  float: left;
+  background: white;
+  margin: @blockMargin;
+
+  // .block-content {
+  //   padding: 20px;
+  // }
+  .block-preview {
+    margin: 20px;
+  }
+  .block-full {
+    margin: 20px;
+  }
+
+  .block-footer {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    height: 54px;
+
+
+    .change-size {
+      position: absolute;
+      right: 0px;
+      bottom: 0px;
+      font-size: 36px;
+      margin: 0px 12px 12px 0px;
+    }
+  }
+}
+
+@xsWidth: 100%;
+@xsNumBlocks: 1;
+@xsMargin: 0px;
+@media (max-width: @screen-xs-max) {
+  .content {
+    width: @xsWidth;
+
+    font-size: 1.25rem; font-size: 20px; 
+  }
+  .block {
+    width: @xsWidth;
+    height: auto;
+    margin: @xsMargin;
+    margin-top: @blockMargin;
+    margin-bottom: @blockMargin;
+  }
+}
+@smWidth: 720px;
+@smNumBlocks: 2;
+@smMargin: @blockMargin;
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+  .content {
+    width: @smWidth;
+  }
+  .block {
+    @width: (@smWidth / @smNumBlocks) - 2*@smMargin;
+    width: @width;
+    height: ( @smWidth / @smNumBlocks ) - 2*@smMargin;
+  }
+
+}
+@mdWidth: 940px;
+@mdNumBlocks: 2;
+@mdMargin: @blockMargin;
+@media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+  .content {
+    width: @mdWidth;
+  }
+  .block {
+    width: ( @mdWidth / @mdNumBlocks ) - 2*@mdMargin;
+    height: @mdWidth / @mdNumBlocks - 2*@mdMargin;
+  }
+}
+@lgWidth: 1140px;
+@lgNumBlocks: 3;
+@lgMargin: @blockMargin;
+@media (min-width: @screen-lg-min) {
+  .content {
+    width: @lgWidth;
+  }
+  .block {
+    width: ( @lgWidth / @lgNumBlocks ) - 2*@lgMargin;
+    height: @lgWidth / @lgNumBlocks - 2*@lgMargin;
+  }
+}
+
+
+
+
+.block.expanded {
+  width: 100% !important;
+  height: auto; //but we should give this a max height
+  margin-left: 0px;
+  margin-right: 0px;
+
+  // min-height: 500px;
+
+}
+
+.block.transparent {
+  // opacity: 0;
+  background: transparent;
+}
+
+.block.scroll-away {
+  .scroll-away-target {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    background-color: red;
+  }
+}
+
+
+// I should have size classes for the block fulls as well
+// that way I can do multi column stuff
+#about {
+
+  .block-preview {
+
+    &.small {
+      font-size: 49px;
+    }
+    &.medium {
+      font-size: 68px;
+    }
+    &.large {
+      font-size: 52px;
+    }
+  }
+
+}
+
+
+
